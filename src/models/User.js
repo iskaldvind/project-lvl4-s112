@@ -35,6 +35,7 @@ export default connect => connect.define('User', {
       len: [6, 25],
     },
   },
+}, {
   getterMethods: {
     fullName: function fullName() {
       return `${this.firstName} ${this.lastName}`;
