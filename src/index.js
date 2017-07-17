@@ -14,15 +14,17 @@ import session from 'koa-generic-session';
 import flash from 'koa-flash-simple';
 import _ from 'lodash';
 import methodOverride from 'koa-methodoverride';
-import getWebPackConfig from '../webpack.config.babel';
+
+import getWebpackConfig from '../webpack.config.babel';
 import addRoutes from './controllers';
 import container from './container';
 
 export default () => {
   const app = new Koa();
-  app.keys = ['keys'];
+
+  app.keys = ['some secret hurr'];
   app.use(session(app));
-  app.use(flash);
+  app.use(flash());
   app.use(async (ctx, next) => {
     ctx.state = {
       flash: ctx.flash,
@@ -37,15 +39,17 @@ export default () => {
     }
   }));
   app.use(serve(path.join(__dirname, '..', 'public')));
+
   if (process.env.NODE_ENV !== 'test') {
     app.use(middleware({
-      config: getWebPackConfig(),
+      config: getWebpackConfig(),
     }));
   }
+
   app.use(koaLogger());
   const router = new Router();
   addRoutes(router, container);
-  app.use(router.allowedMethods);
+  app.use(router.allowedMethods());
   app.use(router.routes());
 
   const pug = new Pug({
