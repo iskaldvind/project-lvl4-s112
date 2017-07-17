@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-import encrypt from '../helpers/secure';
+import { encrypt } from '../helpers/secure';
 
 export default connect => connect.define('User', {
   email: {
@@ -7,7 +7,6 @@ export default connect => connect.define('User', {
     unique: true,
     validate: {
       isEmail: true,
-      notEmpty: true,
     },
   },
   passwordDigest: {
@@ -32,7 +31,7 @@ export default connect => connect.define('User', {
       return value;
     },
     validate: {
-      len: [6, 25],
+      len: [1, +Infinity],
     },
   },
 }, {
@@ -41,5 +40,5 @@ export default connect => connect.define('User', {
       return `${this.firstName} ${this.lastName}`;
     },
   },
-  freezeTableName: true,
+  freezeTableName: true, // Model tableName will be the same as the model name
 });

@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 
-const secret = 'secret';
+const secret = 'abcdefg';
 
-export default value => crypto.createHmac('sha256', secret)
+export const encrypt = value => crypto.createHmac('sha256', secret)
   .update(value)
   .digest('hex');

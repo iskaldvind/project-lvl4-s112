@@ -1,5 +1,5 @@
 import welcome from './welcome';
-import users from './user';
+import users from './users';
 
 const controllers = [welcome, users];
 
