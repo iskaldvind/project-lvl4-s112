@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/iskaldvind/project-lvl4-s112#readme",
   "dependencies": {
+    "autoprefixer": "*",
     "babel-cli": "*",
     "babel-core": "*",
     "babel-loader": "*",
@@ -55,20 +56,19 @@
     "koa-flash-simple": "*",
     "koa-generic-session": "*",
     "koa-logger": "*",
-    "koa-method-override": "*",
-    "koa-pug": "*",
+    "koa-methodoverride": "*",
+    "koa-pug": "^3.0.0-2",
     "koa-router": "*",
     "koa-static": "*",
     "koa-webpack": "*",
     "lodash": "*",
     "pg": "*",
+    "postcss": "*",
     "sequelize": "*",
     "sqlite3": "*",
     "style-loader": "*",
     "umzug": "*",
-    "webpack": "*",
-    "autoprefixer": "*",
-    "postcss": "*"
+    "webpack": "^3.3.0"
   },
   "devDependencies": {
     "babel-eslint": "*",
