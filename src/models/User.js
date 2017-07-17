@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-import { encrypt } from '../helpers/secure';
+import encrypt from '../helpers/secure';
 
 export default connect => connect.define('User', {
   email: {

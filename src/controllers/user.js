@@ -1,10 +1,10 @@
 import buildFormObj from '../helpers/formObjectBuilder';
 
-export default (router) => {
+export default (router, { User }) => {
   router
     .get('users', '/users', async (ctx) => {
       const users = await User.findAll();
-      ctx.render('users', {users});
+      ctx.render('users', { users });
     })
     .get('newUser', 'users/new', (ctx) => {
       const newUser = User.build();

@@ -13,7 +13,7 @@ import bodyParser from 'koa-bodyparser';
 import session from 'koa-generic-session';
 import flash from 'koa-flash-simple';
 import _ from 'lodash';
-import nethodOverride from 'koa-methodoverride';
+import methodOverride from 'koa-methodoverride';
 import getWebPackConfig from '../webpack.config.babel';
 import addRoutes from './controllers';
 import container from './container';

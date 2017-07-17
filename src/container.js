@@ -8,4 +8,4 @@ dotenv.config();
 
 const models = getModels(connect);
 
-export default { logger, ...models};
+export default { logger, ...models };
