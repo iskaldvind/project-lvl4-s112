@@ -7,7 +7,7 @@ export default (router, { User }) => {
       const data = {};
       ctx.render('sessions/new', { f: buildFormObj(data) });
     })
-    .post('session', '/sessions', async (ctx) => {
+    .post('session_enter', '/sessions', async (ctx) => {
       const { email, password } = ctx.request.body.form;
       const user = await User.findOne({
         where: {
@@ -23,7 +23,7 @@ export default (router, { User }) => {
       ctx.flash.set('email or password were wrong');
       ctx.render('sessions/new', { f: buildFormObj({ email }) });
     })
-    .delete('session', '/session', (ctx) => {
+    .delete('session_exit', '/session', (ctx) => {
       ctx.session = {};
       ctx.redirect(router.url('root'));
     });
