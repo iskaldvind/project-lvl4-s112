@@ -4,7 +4,7 @@ import webpack from 'webpack';
 export default () => ({
   entry: {
     app: ['./client'],
-    vendor: ['babel-polyfill', 'jquery', 'jquery-ujs', 'autoprefixer'],
+    vendor: ['babel-polyfill', 'jquery', 'jquery-ujs', 'autoprefixer', 'postcss'],
   },
   output: {
     path: path.join(__dirname, 'public', 'assets'),
