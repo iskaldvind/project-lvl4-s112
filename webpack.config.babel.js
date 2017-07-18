@@ -1,5 +1,5 @@
 import path from 'path';
-import webpack from 'webpack';
+import webpack from 'koa-webpack';
 
 export default () => ({
   entry: {
