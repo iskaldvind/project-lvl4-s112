@@ -10,18 +10,19 @@ html(lang="en")
                 span.navbar-toggler-icon
             a.navbar-brand(href="/") Task Manager
             .collapse.navbar-collapse
-                ul.navbar-nav.mr-auto
-                    li.nav-item.active
-                        a.nav-link(href=urlFor('users')) Users
-                ul.navbar-nav
-                    if isSignedIn()
+                if isSignedIn()
+                    ul.navbar-nav.mr-auto
+                        li.nav-item.active
+                            a.nav-link(href=urlFor('root')) Users
+                    ul.navbar-nav
                         li.nav-item
-                            a.nav-link(href=urlFor('session') data-method='delete' rel='nofollow') Sign Out
-                    else
+                            a.nav-link(href=urlFor('root') data-method='delete' rel='nofollow') Sign Out
+                else
+                    ul.navbar-nav
                         li.nav-item
-                            a.nav-link(href=urlFor('newSession')) Sign In
+                            a.nav-link(href=urlFor('root')) Sign In
                         li.nav-item
-                            a.nav-link(href=urlFor('newUser')) Sign Up
+                            a.nav-link(href=urlFor('root')) Sign Up
         .container
             - const msg = flash.get()
             if msg

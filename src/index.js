@@ -23,8 +23,11 @@ export default () => {
   const app = new Koa();
 
   app.keys = ['some secret hurr'];
+  app.use(bodyParser());
+  app.use(koaLogger());
   app.use(session(app));
   app.use(flash());
+
   app.use(async (ctx, next) => {
     ctx.state = {
       flash: ctx.flash,
@@ -32,11 +35,12 @@ export default () => {
     };
     await next();
   });
-  app.use(bodyParser());
+
   app.use(methodOverride((req) => {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-      return req.body._method;
+      return req.body['_method'];
     }
+    return '';
   }));
   app.use(serve(path.join(__dirname, '..', 'public')));
 
@@ -46,7 +50,6 @@ export default () => {
     }));
   }
 
-  app.use(koaLogger());
   const router = new Router();
   addRoutes(router, container);
   app.use(router.allowedMethods());
@@ -65,5 +68,6 @@ export default () => {
     ],
   });
   pug.use(app);
+
   return app;
 };
