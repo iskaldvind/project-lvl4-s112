@@ -1,6 +1,5 @@
 import path from 'path';
 import webpack from 'webpack';
-import autoprefixer from 'autoprefixer';
 
 export default () => ({
   entry: {
@@ -21,12 +20,9 @@ export default () => ({
       },
       {
         test: /\.css$/,
-        use: 'style-loader!css-loader!postcss-loader',
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
     ],
-  },
-  postcss() {
-    return [autoprefixer];
   },
   plugins: [
     new webpack.ProvidePlugin({
