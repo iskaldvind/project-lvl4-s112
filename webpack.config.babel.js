@@ -1,5 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
+import autoprefixer from 'autoprefixer';
 
 export default () => ({
   entry: {
@@ -20,9 +21,12 @@ export default () => ({
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'autoprefixer-loader', 'postcss-loader'],
+        use: 'style-loader!css-loader!postcss-loader',
       },
     ],
+  },
+  postcss() {
+    return [autoprefixer];
   },
   plugins: [
     new webpack.ProvidePlugin({
@@ -31,12 +35,8 @@ export default () => ({
       'window.jQuery': 'jquery',
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      // This name 'vendor' ties into the entry definition
       name: 'vendor',
-      // We don't want the default vendor.js name
       filename: 'vendor.js',
-      // Passing Infinity just creates the commons chunk, but moves no modules into it.
-      // In other words, we only put what's in the vendor entry definition in vendor-bundle.js
       minChunks: Infinity,
     }),
   ],
