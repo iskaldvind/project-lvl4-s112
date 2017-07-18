@@ -5,29 +5,24 @@ html(lang="en")
         script(src='/assets/vendor.js')
         script(src='/assets/application.js')
     body
-        nav.navbar.navbar-default.navbar-static-top
-            .container
-                .navbar-header
-                    button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar")
-                        span.sr-only Toggle navigation
-                        span.icon-bar
-                        span.icon-bar
-                        span.icon-bar
-                    a.navbar-brand(href=urlFor('root')) Project name
-                #navbar.navbar-collapse.collapse
-                    if isSignedIn()
-                        ul.nav.navbar-nav
-                            li.active
-                                a(href=urlFor('users')) Users
-                        ul.nav.navbar-nav.navbar-right
-                            li.active
-                                .a(href=urlFor('root') data-method='delete' rel='nofollow') Log out
-                    else
-                        ul.nav.navbar-nav.navbar-right
-                            li.active
-                                a(href=urlFor('root')) Log In
-                            li
-                                a(href=urlFor('root')) Sign Up
+        nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
+            button.navbar-toggler.navbar-toggler-right
+                span.navbar-toggler-icon
+            a.navbar-brand(href="/") Task Manager
+            .collapse.navbar-collapse
+                if isSignedIn()
+                    ul.navbar-nav.mr-auto
+                        li.nav-item.active
+                            a.nav-link(href=urlFor('users')) Users
+                    ul.navbar-nav
+                        li.nav-item
+                            a.nav-link(href=urlFor('session') data-method='delete' rel='nofollow') Sign Out
+                else
+                    ul.navbar-nav
+                        li.nav-item
+                            a.nav-link(href=urlFor('newSession')) Sign In
+                        li.nav-item
+                            a.nav-link(href=urlFor('newUser')) Sign Up
         .container
             - const msg = flash.get()
             if msg
