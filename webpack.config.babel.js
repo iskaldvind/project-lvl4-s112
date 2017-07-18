@@ -16,12 +16,7 @@ export default () => ({
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          query: {
-            presets: ['env', 'stage-0'],
-          },
-        },
+        use: 'babel-loader',
       },
       {
         test: /\.css$/,
@@ -39,6 +34,11 @@ export default () => ({
       name: 'vendor',
       filename: 'vendor.js',
       minChunks: Infinity,
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: false,
+      mangle: false,
+      test: /\.js$/,
     }),
   ],
 });
