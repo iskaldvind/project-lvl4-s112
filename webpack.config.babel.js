@@ -4,7 +4,7 @@ import webpack from 'webpack';
 export default () => ({
   entry: {
     app: ['./client'],
-    vendor: ['babel-polyfill', 'jquery', 'jquery-ujs', 'autoprefixer', 'postcss'],
+    vendor: ['babel-polyfill', 'jquery', 'jquery-ujs'],
   },
   output: {
     path: path.join(__dirname, 'public', 'assets'),
@@ -15,12 +15,12 @@ export default () => ({
     rules: [
       {
         test: /\.js$/,
-        // exclude: /node_modules/,
+        exclude: /node_modules/,
         use: 'babel-loader',
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader', 'autoprefixer-loader', 'postcss-loader'],
       },
     ],
   },
