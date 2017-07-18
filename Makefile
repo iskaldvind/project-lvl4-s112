@@ -32,6 +32,7 @@ publish:
 	npm publish
 
 deploy:
+	npm --no-git-tag-version version patch
 	git add .
 	git commit -m 'and again'
 	git push

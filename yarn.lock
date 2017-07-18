@@ -259,6 +259,10 @@ async@^2.1.2, async@^2.1.4:
   dependencies:
     lodash "^4.14.0"
 
+async@~0.2.7:
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/async/-/async-0.2.10.tgz#b6bbe0b0674b9d719708ca38de8c237cb526c3d1"
+
 async@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/async/-/async-1.2.1.tgz#a4816a17cd5ff516dfa2c7698a453369b9790de0"
@@ -1440,6 +1444,12 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
   dependencies:
     delayed-stream "~1.0.0"
 
+combined-stream@~0.0.4:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-0.0.7.tgz#0137e657baa5a7541c57ac37ac5fc07d73b4dc1f"
+  dependencies:
+    delayed-stream "0.0.5"
+
 commander@2.8.x:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.8.1.tgz#06be367febfda0c330aa1e2a072d3dc9762425d4"
@@ -1798,6 +1808,10 @@ del@^2.0.2:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
     rimraf "^2.2.8"
+
+delayed-stream@0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/delayed-stream/-/delayed-stream-0.0.5.tgz#d4b1f43a93e8296dfe02694f4680bc37a313c73f"
 
 delayed-stream@~1.0.0:
   version "1.0.0"
@@ -2458,6 +2472,14 @@ form-data@^2.1.1:
     asynckit "^0.4.0"
     combined-stream "^1.0.5"
     mime-types "^2.1.12"
+
+form-data@~0.0.3:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/form-data/-/form-data-0.0.10.tgz#db345a5378d86aeeb1ed5d553b869ac192d2f5ed"
+  dependencies:
+    async "~0.2.7"
+    combined-stream "~0.0.4"
+    mime "~1.2.2"
 
 form-data@~2.1.1:
   version "2.1.4"
@@ -4318,6 +4340,10 @@ mime@^1.2.11, mime@^1.3.4:
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.3.6.tgz#591d84d3653a6b0b4a3b9df8de5aa8108e72e5e0"
 
+mime@~1.2.2, mime@~1.2.7:
+  version "1.2.11"
+  resolved "https://registry.yarnpkg.com/mime/-/mime-1.2.11.tgz#58203eed86e3a5ef17aed2b7d9ebd47f0a60dd10"
+
 mimic-fn@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-1.1.0.tgz#e667783d92e89dbd342818b5230b9d62a672ad18"
@@ -5646,6 +5672,13 @@ request-ip@~2.0.1:
   dependencies:
     is_js "^0.9.0"
 
+request@2.12.0:
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/request/-/request-2.12.0.tgz#11f46f20b3d0f4848c6383991c80790af16c8e48"
+  dependencies:
+    form-data "~0.0.3"
+    mime "~1.2.7"
+
 request@^2.69.0, request@^2.79.0, request@^2.81.0:
   version "2.81.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.81.0.tgz#c6928946a0e06c5f8d6f8a9333469ffda46298a0"
@@ -6572,6 +6605,12 @@ verror@1.3.6:
   resolved "https://registry.yarnpkg.com/verror/-/verror-1.3.6.tgz#cff5df12946d297d2baaefaa2689e25be01c005c"
   dependencies:
     extsprintf "1.0.2"
+
+version@*:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/version/-/version-0.1.2.tgz#ab071b0e39c9a34e9308dd8cd7845795deeca70f"
+  dependencies:
+    request "2.12.0"
 
 vinyl-fs@^0.3.0:
   version "0.3.14"

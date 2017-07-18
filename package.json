@@ -1,6 +1,6 @@
 {
   "name": "task-manager-ultimate",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "project-lvl4-s112",
   "main": "dist/index.js",
   "bin": {
@@ -83,6 +83,7 @@
     "jest": "*",
     "jest-supertest-matchers": "*",
     "nodemon": "*",
-    "supertest": "*"
+    "supertest": "*",
+    "grunt-bump": "*"
   }
 }
