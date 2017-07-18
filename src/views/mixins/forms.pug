@@ -1,7 +1,7 @@
 - const getInputName = (f, property) => `${f.name}[${property}]`
 
-mixin formFor(f, options = {})
-    form(action=_.get(options, 'url') method=_.get(options, 'method', 'get'))
+mixin formFor(f, form_class, options = {})
+    form(action=_.get(options, 'url') class=`${form_class}` method=_.get(options, 'method', 'get'))
         block
 
 mixin input(f, property, options = { as: "text" })
