@@ -2,7 +2,7 @@ extends /layouts/application.pug
 
 block content
     .container
-        .col-lg-3
+        .col-lg-2
             +formFor(f, { url: urlFor('users'), method: 'post' })
                 +input(f, 'E-mail')
                 +input(f, 'First name')
