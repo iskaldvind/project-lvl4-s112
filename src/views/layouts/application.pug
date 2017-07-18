@@ -11,18 +11,21 @@ html(lang="en")
             a.navbar-brand(href="/") Task Manager
             .collapse.navbar-collapse
                 if isSignedIn()
-                    ul.navbar-nav.mr-auto
-                        li.nav-item.active
-                            a.nav-link(href=urlFor('root')) Users
-                    ul.navbar-nav
-                        li.nav-item
-                            a.nav-link(href=urlFor('root') data-method='delete' rel='nofollow') Sign Out
+                    .d-flex.justify-content-center
+                        ul.navbar-nav.mr-auto
+                            li.nav-item.active
+                                a.nav-link(href=urlFor('root')) Users
+                    .d-flex.justify-content-end
+                        ul.navbar-nav
+                            li.nav-item
+                                a.nav-link(href=urlFor('root') data-method='delete' rel='nofollow') Sign Out
                 else
-                    ul.navbar-nav
-                        li.nav-item
-                            a.nav-link(href=urlFor('root')) Sign In
-                        li.nav-item
-                            a.nav-link(href=urlFor('root')) Sign Up
+                    .d-flex.justify-content-end
+                        ul.navbar-nav
+                            li.nav-item
+                                a.nav-link(href=urlFor('root')) Sign In
+                            li.nav-item
+                                a.nav-link(href=urlFor('root')) Sign Up
         .container
             - const msg = flash.get()
             if msg
