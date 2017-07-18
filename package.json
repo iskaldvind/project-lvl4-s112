@@ -64,12 +64,12 @@
     "lodash": "*",
     "pg": "*",
     "postcss": "*",
+    "rollbar": "^2.1.0",
     "sequelize": "*",
     "sqlite3": "*",
     "style-loader": "*",
     "umzug": "*",
-    "webpack": "^3.3.0",
-    "rollbar": "*"
+    "webpack": "^3.3.0"
   },
   "devDependencies": {
     "babel-eslint": "*",
