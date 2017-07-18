@@ -14,7 +14,7 @@ import session from 'koa-generic-session';
 import flash from 'koa-flash-simple';
 import _ from 'lodash';
 import methodOverride from 'koa-methodoverride';
-
+import rollbar from 'rollbar';
 import getWebpackConfig from '../webpack.config.babel';
 import addRoutes from './controllers';
 import container from './container';

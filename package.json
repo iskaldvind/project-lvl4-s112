@@ -81,6 +81,7 @@
     "jest": "*",
     "jest-supertest-matchers": "*",
     "nodemon": "*",
-    "supertest": "*"
+    "supertest": "*",
+    "rollbar": "*"
   }
 }
