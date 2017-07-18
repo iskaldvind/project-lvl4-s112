@@ -1,3 +1,5 @@
+include /mixins/forms.pug
+
 doctype html
 html(lang="en")
     head
@@ -13,7 +15,7 @@ html(lang="en")
                 if isSignedIn()
                     ul.navbar-nav.mr-auto
                         li.nav-item.active
-                            a.nav-link(href=urlFor('users')) Users
+                            a.nav-link(href=urlFor('users_list')) Users
                     ul.navbar-nav
                         li.nav-item
                             a.nav-link(href=urlFor('session') data-method='delete' rel='nofollow') Sign Out
@@ -23,7 +25,7 @@ html(lang="en")
                         li.nav-item
                             a.nav-link.active(href=urlFor('newSession')) Log In
                         li.nav-item
-                            a.nav-link(href=urlFor('newUser')) Sign Up
+                            a.nav-link(href=urlFor('user_new')) Sign Up
         .container
             - const msg = flash.get()
             if msg

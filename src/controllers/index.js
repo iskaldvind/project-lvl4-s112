@@ -1,7 +1,8 @@
 import welcome from './welcome';
 import users from './users';
+import sessions from './sessions';
 
-const controllers = [welcome, users];
+const controllers = [welcome, users, sessions];
 
 export default (router, container) =>
   controllers.forEach(controller => controller(router, container));
