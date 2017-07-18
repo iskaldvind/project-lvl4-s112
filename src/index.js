@@ -70,7 +70,7 @@ export default () => {
   pug.use(app);
 
   rollbar.init(process.env.ROLLBAR_TOKEN);
-  app.use(rollbar.errorHandler(process.env.ROLLBAR_TOKEN));
+  // app.use(rollbar.errorHandler(process.env.ROLLBAR_TOKEN));
 
   return app;
 };
