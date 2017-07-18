@@ -4,7 +4,7 @@ import webpack from 'webpack';
 export default () => ({
   entry: {
     app: ['./client'],
-    vendor: ['babel-polyfill', 'jquery', 'jquery-ujs', 'bootstrap', 'autoprefixer', 'postcss'],
+    vendor: ['babel-polyfill', 'jquery', 'jquery-ujs', 'bootstrap', 'autoprefixer'],
   },
   output: {
     path: path.join(__dirname, 'public', 'assets'),
@@ -34,11 +34,6 @@ export default () => ({
       name: 'vendor',
       filename: 'vendor.js',
       minChunks: Infinity,
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: false,
-      mangle: false,
-      test: /\.js$/,
     }),
   ],
 });

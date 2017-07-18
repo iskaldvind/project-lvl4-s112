@@ -69,7 +69,8 @@
     "sqlite3": "*",
     "style-loader": "*",
     "umzug": "*",
-    "webpack": "^3.3.0"
+    "webpack": "^3.3.0",
+    "uglifyjs-webpack-plugin": "*"
   },
   "devDependencies": {
     "babel-eslint": "*",
