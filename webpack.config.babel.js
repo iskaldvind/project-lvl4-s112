@@ -16,7 +16,12 @@ export default () => ({
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: 'babel-loader?presets[]=env',
+        use: {
+          loader: 'babel-loader',
+          query: {
+            presets: ['env', 'stage-0'],
+          },
+        },
       },
       {
         test: /\.css$/,
