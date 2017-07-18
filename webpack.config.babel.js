@@ -35,5 +35,10 @@ export default () => ({
       filename: 'vendor.js',
       minChunks: Infinity,
     }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+      },
+    }),
   ],
 });
