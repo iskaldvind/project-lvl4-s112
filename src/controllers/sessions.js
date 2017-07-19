@@ -15,9 +15,11 @@ export default (router, { User }) => {
         },
       });
       if (user && user.passwordDigest === encrypt(password)) {
+        console.log('session valid');
         ctx.session.userId = user.id;
         ctx.redirect(router.url('root'));
       } else {
+        console.log('session not valid');
         ctx.flash.set('email or password were wrong');
         ctx.render('sessions/new', { f: buildFormObj({ email }) });
       }
