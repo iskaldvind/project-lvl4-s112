@@ -11,11 +11,13 @@ export default (router, { User }) => {
     .post('session_enter', '/sessions', async (ctx) => {
       console.log('session_enter');
       const { email, password } = ctx.request.body.form;
+      console.log(`email password: ${email} ${password}`);
       const user = await User.findOne({
         where: {
           email,
         },
       });
+      console.log(`user: ${user}`);
       if (user && user.passwordDigest === encrypt(password)) {
         console.log('session valid');
         ctx.session.userId = user.id;
