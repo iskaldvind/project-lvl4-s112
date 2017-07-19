@@ -2,8 +2,8 @@ extends /layouts/application.pug
 
 block content
     .container.align-content-center.justify-content-center.col-lg-6
-        h2.form-signin-heading.py-1 Log in
-            +formFor(f, { url: urlFor('session'), method: 'post' })
+        h2.form-signin-heading.py-2 Log in
+            +formFor(f, { url: urlFor('session_enter'), method: 'post' })
                 +input(f, 'E-mail')
                 +input(f, 'Password', { as: 'password' })
                 +button(f, 'Confirm')

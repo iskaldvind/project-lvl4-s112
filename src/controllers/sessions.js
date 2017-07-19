@@ -22,7 +22,7 @@ export default (router, { User }) => {
         ctx.render('sessions/new', { f: buildFormObj({ email }) });
       }
     })
-    .delete('session_exit', '/session', (ctx) => {
+    .delete('session_exit', '/sessions', (ctx) => {
       ctx.session = {};
       ctx.redirect(router.url('root'));
     });
