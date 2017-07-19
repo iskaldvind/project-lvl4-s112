@@ -15,7 +15,7 @@ import flash from 'koa-flash-simple';
 import _ from 'lodash';
 import methodOverride from 'koa-methodoverride';
 import rollbar from 'rollbar';
-import pg from 'pg';
+import dotenv from 'dotenv';
 import getWebpackConfig from '../webpack.config.babel';
 import addRoutes from './controllers';
 import container from './container';
@@ -72,6 +72,6 @@ export default () => {
 
   rollbar.init(process.env.ROLLBAR_TOKEN);
   app.use(rollbar.errorHandler(process.env.ROLLBAR_TOKEN));
-
+  dotenv.config();
   return app;
 };
