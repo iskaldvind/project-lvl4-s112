@@ -26,6 +26,24 @@ export default (router, { User }) => {
       const user = await User.findById(id);
       ctx.render('users/profile', { user });
     })
+    .get('user_edit_reg', '/users/:id/edit', async (ctx) => {
+      const id = Number(ctx.params.id);
+      const user = await User.findById(id);
+      ctx.render('users/edit', { user });
+    })
+    .patch('user_update', '/users/:id/edit', async (ctx) => {
+      const id = Number(ctx.params.id);
+      const form = ctx.request.body.form;
+      const user = await User.findById(id);
+      try {
+        await user.update(form);
+        ctx.flash.set('User profile has been updated');
+        ctx.render('users/profile', { user });
+      } catch (e) {
+        ctx.flash.set('Something bad have happened');
+        ctx.render('users/profile', { f: buildFormObj(user, e) });
+      }
+    })
     .delete('user_delete', '/users/:id', async (ctx) => {
       const id = Number(ctx.params.id);
       User.destroy({
