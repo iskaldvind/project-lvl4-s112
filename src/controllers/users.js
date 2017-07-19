@@ -7,12 +7,12 @@ export default (router, { User }) => {
       ctx.render('users', { users });
     })
     .get('user_reg', '/users/new', async (ctx) => {
-      const user = await User.create();
+      const user = await User.build();
       ctx.render('users/new', { f: buildFormObj(user) });
     })
     .post('user_save', '/users/new', async (ctx) => {
       const form = ctx.request.body.form;
-      const user = await User.create(form);
+      const user = await User.build(form);
       try {
         await user.save();
         ctx.flash.set('User has been created');
