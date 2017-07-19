@@ -21,6 +21,18 @@ export default (router, { User }) => {
         ctx.render('users/new', { f: buildFormObj(user, e) });
       }
     })
-    .get('user_profile', '/users/:id')
-    .delete('user_delete', '/users/:id');
+    .get('user_profile', '/users/:id', async (ctx) => {
+      const id = Number(ctx.params.id);
+      const user = await User.findById(id);
+      ctx.render('users/profile', { user });
+    })
+    .delete('user_delete', '/users/:id', async (ctx) => {
+      const id = Number(ctx.params.id);
+      User.destroy({
+        where: { id },
+      });
+      ctx.session = {};
+      ctx.flash.set('Account has been deleted');
+      ctx.redirect(router.url('root'));
+    });
 };

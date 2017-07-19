@@ -4,15 +4,28 @@ import encrypt from '../helpers/secure';
 export default connect => connect.define('User', {
   email: {
     type: Sequelize.STRING,
-    unique: true,
+    unique: {
+      args: true,
+      msg: 'user with this email already registered',
+    },
     validate: {
-      isEmail: true,
+      isEmail: {
+        args: true,
+        msg: 'email has invalid format',
+      },
+      notEmpty: {
+        args: true,
+        msg: 'please enter your email',
+      },
     },
   },
   passwordDigest: {
     type: Sequelize.STRING,
     validate: {
-      notEmpty: true,
+      notEmpty: {
+        args: true,
+        msg: 'password cannot be empty',
+      },
     },
   },
   firstName: {

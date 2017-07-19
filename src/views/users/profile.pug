@@ -1,3 +1,23 @@
-//
-   Created by yveter on 18.07.17.
+extends /layouts/application.pug
 
+block content
+    if isSignedIn()
+        .container
+            table.table
+                thead.thead-bordered
+                    tbody
+                        tr
+                            th(scope='row') ID
+                            td= user.id
+                        tr
+                            th(scope='row') Email
+                            td= user.email
+                        tr
+                            th(scope='row') First name
+                            td= user.firstName
+                        tr
+                            th(scope='row') Last name
+                            td= user.lastName
+
+            form(action=urlFor('user_delete', { id: user.id }) method='post')
+                button.btn(type='submit' name='_method' value='delete') Delete account
