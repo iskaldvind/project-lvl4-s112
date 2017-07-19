@@ -1,1 +1,11 @@
-include /new.pug
+extends /layouts/application.pug
+
+block content
+    .container.align-content-center.justify-content-center.col-lg-6
+        h2.form-signin-heading.py-2 Sign up
+        +formFor(f, 'form-signin', { url: urlFor('user_update'), method: 'patch' })
+            +input(f, 'email')
+            +input(f, 'firstName')
+            +input(f, 'lastName')
+            +input(f, 'password', { as: 'password' })
+            +button(f, 'Confirm')
