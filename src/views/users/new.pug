@@ -2,7 +2,7 @@ extends /layouts/application.pug
 
 block content
     .container.align-content-center.justify-content-center.col-lg-6
-        h2.form-signin-heading Sign up
+        h2.form-signin-heading.py-5 Sign up
         +formFor(f, 'form-signin', { url: urlFor('user_save'), method: 'post' })
             +input(f, 'E-mail')
             +input(f, 'First name')
