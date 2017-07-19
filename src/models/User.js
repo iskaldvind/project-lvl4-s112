@@ -31,10 +31,22 @@ export default connect => connect.define('User', {
   firstName: {
     type: Sequelize.STRING,
     field: 'first_name',
+    validate: {
+      notEmpty: {
+        args: true,
+        msg: 'first name cannot be empty',
+      },
+    },
   },
   lastName: {
     type: Sequelize.STRING,
-    field: 'last_name',
+    field: 'last name cannot be empty',
+    validate: {
+      notEmpty: {
+        args: true,
+        msg: 'password cannot be empty',
+      },
+    },
   },
   password: {
     type: Sequelize.VIRTUAL,
@@ -44,7 +56,10 @@ export default connect => connect.define('User', {
       return value;
     },
     validate: {
-      len: [1, +Infinity],
+      len: {
+        args: [3, +Infinity],
+        msg: 'password must be at least 3 symbols',
+      },
     },
   },
 }, {
