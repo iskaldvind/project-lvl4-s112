@@ -15,6 +15,7 @@ import flash from 'koa-flash-simple';
 import _ from 'lodash';
 import methodOverride from 'koa-methodoverride';
 import rollbar from 'rollbar';
+import pg from 'pg';
 import getWebpackConfig from '../webpack.config.babel';
 import addRoutes from './controllers';
 import container from './container';
@@ -48,6 +49,19 @@ export default () => {
     app.use(middleware({
       config: getWebpackConfig(),
     }));
+    app.get('/db', function (request, response) {
+      pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+        client.query('SELECT * FROM test_table', function(err, result) {
+          done();
+          if (err) {
+            console.error(err);
+            response.send(`Error ${err}`);
+          } else {
+            response.render('pages/db', {results: result.rows} );
+          }
+        });
+      });
+    });
   }
 
   const router = new Router();
