@@ -41,4 +41,6 @@ export default connect => connect.define('user', {
     },
   },
   freezeTableName: true,
+  tableName: "user",
+  timestamps:false,
 });
