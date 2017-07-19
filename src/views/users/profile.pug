@@ -18,7 +18,7 @@ block content
                         tr
                             th(scope='row') Last name
                             td= user.lastName
-            form(action=urlFor('user_edit_reg', {id: user.id}) method='get')
+            form(action=urlFor('user_reg', { user }) method='get')
                 button.btn(type='submit' name='_method' value='patch') Update account
             form(action=urlFor('user_delete', { id: user.id }) method='post')
                 button.btn.btn-danger(type='submit' name='_method' value='delete') Delete account
