@@ -4,10 +4,12 @@ import encrypt from '../helpers/secure';
 export default (router, { User }) => {
   router
     .get('session_new', '/sessions/new', async (ctx) => {
+      console.log('session_new');
       const data = {};
       ctx.render('sessions/new', { f: buildFormObj(data) });
     })
     .post('session_enter', '/sessions', async (ctx) => {
+      console.log('session_enter');
       const { email, password } = ctx.request.body.form;
       const user = await User.findOne({
         where: {
