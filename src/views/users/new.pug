@@ -4,8 +4,8 @@ block content
     .container.align-content-center.justify-content-center.col-lg-6
         h2.form-signin-heading.py-2 Sign up
         +formFor(f, 'form-signin', { url: urlFor('user_save'), method: 'post' })
-            +input(f, 'E-mail')
-            +input(f, 'First name')
-            +input(f, 'Last name')
-            +input(f, 'Password', { as: 'password' })
+            +input(f, 'email')
+            +input(f, 'firstName')
+            +input(f, 'lastName')
+            +input(f, 'password', { as: 'password' })
             +button(f, 'Confirm')
