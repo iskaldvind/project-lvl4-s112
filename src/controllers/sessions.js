@@ -25,7 +25,7 @@ export default (router, { User }) => {
       } else {
         console.log('session not valid');
         ctx.flash.set('email or password were wrong');
-        ctx.redirect('session_enter', { f: buildFormObj({ email }) });
+        ctx.redirect(router.url('session_new'));
       }
     })
     .delete('session_exit', '/sessions', (ctx) => {
