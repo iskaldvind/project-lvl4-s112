@@ -18,7 +18,6 @@ export default (router, { User }) => {
         ctx.flash.set('User has been created');
         ctx.redirect(router.url('session_new'));
       } catch (e) {
-        console.log(e);
         ctx.render('users/new', { f: buildFormObj(user, e) });
       }
     })
