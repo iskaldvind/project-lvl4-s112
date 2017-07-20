@@ -1,5 +1,3 @@
-// @flow
-
 import 'babel-polyfill';
 
 import path from 'path';
@@ -39,8 +37,8 @@ export default () => {
   });
 
   app.use(methodOverride((req) => {
-    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-      return req.body['_method'];
+    if (req.body && typeof req.body === 'object' && 'another_method' in req.body) {
+      return req.body['another_method'];
     }
     return '';
   }));
