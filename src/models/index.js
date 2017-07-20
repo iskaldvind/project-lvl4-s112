@@ -11,12 +11,12 @@ export default (connect) => {
     TaskStatus: getTaskStatus(connect),
   };
 
-  models.User.hasMany(models.Task);
-  models.Task.belongsTo(models.User);
-  models.Task.hasMany(models.Tag);
-  models.Tag.belongsToMany(models.Task);
-  models.Task.hasOne(models.TaskStatus);
-  models.TaskStatus.belongsToMany(models.Task);
+  // models.User.hasMany(models.Task);
+  // models.Task.belongsTo(models.User);
+  // models.Task.hasMany(models.Tag);
+  // models.Tag.belongsToMany(models.Task);
+  // models.Task.hasOne(models.TaskStatus);
+  // models.TaskStatus.belongsToMany(models.Task);
 
   return models;
 };
