@@ -8,7 +8,7 @@ export default connect => connect.define('TaskStatus', {
         args: true,
         msg: 'please enter your email',
       },
-      isIn: [['open', 'processing', 'testing', 'closed']]
+      isIn: [['open', 'processing', 'testing', 'closed']],
     },
   },
 }, {
