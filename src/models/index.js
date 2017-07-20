@@ -11,12 +11,12 @@ export default connect => {
     TaskStatus: getTaskStatus(connect),
   };
 
-  User.hasMany(Task);
-  Task.belongsTo(User);
-  Task.hasMany(Tag);
-  Tsg.belongsToMany(Task);
-  Task.hasOne(TaskStatus);
-  TaskStatus.belongsToMany(Task);
+  models.User.hasMany(Task);
+  models.Task.belongsTo(User);
+  models.Task.hasMany(Tag);
+  models.Tag.belongsToMany(Task);
+  models.Task.hasOne(TaskStatus);
+  models.TaskStatus.belongsToMany(Task);
   
   return models;
 };
