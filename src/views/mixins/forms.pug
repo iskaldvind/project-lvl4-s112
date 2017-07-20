@@ -7,7 +7,7 @@ mixin formFor(f, form_class, options = {})
 mixin input(f, property, options = { as: "text" })
     - const value = f.object[property] === undefined ? '' : f.object[property]
     .form-group(class=(f.errors[property] && 'has-danger'))
-        input(name=getInputName(f, property) class='form-control' type=options['as'] value=`${value}` placeholder=`${property}`)
+        input(name=getInputName(f, property) id=`${f.object}` class='form-control' type=options['as'] value=`${value}` placeholder=`${property}`)
         if f.errors[property]
             .form-control-feedback= f.errors[property].map(({ message }) => message).join('. ')
 
