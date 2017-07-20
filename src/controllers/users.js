@@ -37,22 +37,32 @@ export default (router, { User }) => {
       const id = Number(ctx.params.id);
       const form = ctx.request.body.form;
       const user = await User.findById(id);
-      try {
-        await user.update(form);
-        ctx.flash.set('User profile has been updated');
-        ctx.render('users/profile', { user });
-      } catch (e) {
-        ctx.flash.set('Something bad have happened');
-        ctx.render('users/profile', { f: buildFormObj(user, e) });
+      if (ctx.session.userId !== undefined && ctx.session.userId === id) {
+        try {
+          await user.update(form);
+          ctx.flash.set('User profile has been updated');
+          ctx.render('users/profile', { user });
+        } catch (e) {
+          ctx.flash.set('Something bad have happened');
+          ctx.render('users/profile', { f: buildFormObj(user, e) });
+        }
+      } else {
+        ctx.flash.set('You must log in as specified user to update account');
+        ctx.render('users/profile', { f: buildFormObj(user) });
       }
     })
     .delete('user_delete', '/users/:id', async (ctx) => {
       const id = Number(ctx.params.id);
-      User.destroy({
-        where: { id },
-      });
-      ctx.session = {};
-      ctx.flash.set('Account has been deleted');
-      ctx.redirect(router.url('root'));
+      if (ctx.session.userId !== undefined && ctx.session.userId === id) {
+        User.destroy({
+          where: { id },
+        });
+        ctx.session = {};
+        ctx.flash.set('Account has been deleted');
+        ctx.redirect(router.url('root'));
+      } else {
+        ctx.flash.set('You must log in as specified user to delete account');
+        ctx.redirect(router.url('root'));
+      }
     });
 };

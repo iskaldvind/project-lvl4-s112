@@ -19,6 +19,18 @@ block content
                             th(scope='row') Last name
                             td= user.lastName
             form(action=urlFor('user_edit', { id: user.id }) method='get')
-                button.btn(type='submit') Update account
+                button.btn.btn-block(type='submit') Update account
             form(action=urlFor('user_delete', { id: user.id }) method='post')
-                button.btn.btn-danger(type='submit' name='_method' value='delete') Delete account
+                button.btn.btn-block.btn-danger.pt-5(
+                type='submit'
+                name='_method'
+                data-toggle='confirmation'
+                data-btn-cancel-label="No, thanks"
+                data-btn-cancel-icon="glyphicon glyphicon-share-alt"
+                data-btn-cancel-class="btn-success"
+                data-btn-ok-label="Delete my account"
+                data-btn-ok-icon="glyphicon glyphicon-ban-circle"
+                data-btn-ok-class="btn-danger"
+                data-title="Please confirm account deletion"
+                data-content="This operation cannot be undone"
+                value='delete') Delete account

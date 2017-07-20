@@ -4,7 +4,7 @@ import webpack from 'webpack';
 export default () => ({
   entry: {
     app: ['./client'],
-    vendor: ['babel-polyfill', 'jquery', 'jquery-ujs'],
+    vendor: ['babel-polyfill', 'jquery', 'jquery-ujs', 'bootstrap-confirmation2/bootstrap-confirmation'],
   },
   output: {
     path: path.join(__dirname, 'public', 'assets'),

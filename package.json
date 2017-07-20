@@ -1,6 +1,6 @@
 {
   "name": "task-manager-ultimate",
-  "version": "0.0.66",
+  "version": "0.0.67",
   "description": "project-lvl4-s112",
   "main": "dist/index.js",
   "bin": {
@@ -44,6 +44,7 @@
     "babel-preset-flow": "*",
     "babel-preset-stage-0": "*",
     "bootstrap": "^4.0.0-alpha.6",
+    "bootstrap-confirmation2": "*",
     "css-loader": "*",
     "debug": "*",
     "dotenv": "*",
