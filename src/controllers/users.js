@@ -27,7 +27,8 @@ export default (router, { User }) => {
       ctx.render('users/profile', { user });
     })
     .get('user_edit', '/users/edit', async (ctx) => {
-      const user = User.findById(ctx.session.userId);
+      const id = ctx.session.userId;
+      const user = User.findById(id);
       ctx.render('users/edit', { f: buildFormObj(user), user });
     })
     .patch('user_update', '/users/:id', async (ctx) => {
