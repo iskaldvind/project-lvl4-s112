@@ -37,8 +37,8 @@ export default () => {
   });
 
   app.use(methodOverride((req) => {
-    if (req.body && typeof req.body === 'object' && 'another_method' in req.body) {
-      return req.body['another_method'];
+    if (req.body && typeof req.body === 'object' && 'newMethod' in req.body) {
+      return req.body.newMethod;
     }
     return '';
   }));
