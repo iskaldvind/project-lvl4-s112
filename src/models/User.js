@@ -44,7 +44,7 @@ export default connect => connect.define('User', {
     validate: {
       notEmpty: {
         args: true,
-        msg: 'password cannot be empty',
+        msg: 'last name cannot be empty',
       },
     },
   },
