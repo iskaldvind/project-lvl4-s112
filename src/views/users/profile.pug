@@ -19,6 +19,6 @@ block content
                             th(scope='row') Last name
                             td= user.lastName
             form(action=urlFor('user_edit') method='get')
-                button.btn(type='submit' name='_method' value='patch') Update account
+                button.btn(type='submit') Update account
             form(action=urlFor('user_delete', { id: user.id }) method='post')
                 button.btn.btn-danger(type='submit' name='_method' value='delete') Delete account
