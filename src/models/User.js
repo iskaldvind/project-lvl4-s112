@@ -40,7 +40,7 @@ export default connect => connect.define('User', {
   },
   lastName: {
     type: Sequelize.STRING,
-    field: 'last name cannot be empty',
+    field: 'last_name',
     validate: {
       notEmpty: {
         args: true,
