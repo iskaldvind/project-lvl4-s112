@@ -6,7 +6,7 @@ import app from '../src';
 
 describe('requests', () => {
   let server;
-  let fantom;
+  let fantom = {};
 
   beforeAll(() => {
     jasmine.addMatchers(matchers);
