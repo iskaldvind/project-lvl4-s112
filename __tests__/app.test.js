@@ -40,7 +40,7 @@ describe('requests', () => {
 
   it('Register', async () => {
     const res = await request.agent(server)
-      .post('/users')
+      .post('/users/new')
       .type('form')
       .send({
         email: fantom.email,
