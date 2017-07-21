@@ -16,4 +16,5 @@ export default connect => connect.define('Tag', {
   },
 }, {
   freezeTableName: true,
+  timestamps: false,
 });

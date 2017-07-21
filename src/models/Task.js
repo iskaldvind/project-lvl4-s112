@@ -11,29 +11,32 @@ export default connect => connect.define('Task', {
     },
   },
   description: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
   },
-  status: {
-    type: Sequelize.STRING,
-    defaultValue: 'open',
-    isIn: [['open', 'processing', 'testing', 'closed']],
-  },
-  creator: {
-    type: Sequelize.STRING,
+  statusId: {
+    type: Sequelize.INTEGER,
+    defaultValue: 1,
     validate: {
       notEmpty: true,
     },
   },
-  assignedTo: {
-    type: Sequelize.STRING,
+  creatorId: {
+    type: Sequelize.INTEGER,
+    validate: {
+      notEmpty: true,
+    },
   },
-  tags: {
-    type: Sequelize.STRING,
+  assignedToId: {
+    type: Sequelize.INTEGER,
+    validate: {
+      notEmpty: true,
+    },
   },
 }, {
   getterMethods: {
-    fullName: function fullName() {
-      return `${this.firstName} ${this.lastName}`;
+    statusName: async function statusName() {
+      const status = await this.getStatus();
+      return status.dataValues.name;
     },
   },
   freezeTableName: true,
