@@ -1,6 +1,6 @@
 import buildFormObj from '../helpers/formObjectBuilder';
 
-export default (router, { User }) => {
+export default (router, { Task }) => {
   router
     .get('tasks_list', '/tasks', async (ctx) => {
       const tasks = await Task.findAll();
