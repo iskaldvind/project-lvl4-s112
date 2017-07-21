@@ -6,6 +6,7 @@ import getTaskStatus from './TaskStatus';
 export default (connect) => {
   const models = {
     User: getUser(connect),
+    Status: getStatus(connect),
     Tag: getTag(connect),
     Task: getTask(connect),
     TaskStatus: getTaskStatus(connect),
