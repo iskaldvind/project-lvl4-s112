@@ -1,13 +1,20 @@
 import request from 'supertest';
 import matchers from 'jest-supertest-matchers';
+import faker from 'faker';
 
 import app from '../src';
 
 describe('requests', () => {
   let server;
+  let fantom;
 
   beforeAll(() => {
     jasmine.addMatchers(matchers);
+
+    fantom.email = faker.internet.email();
+    fantom.firstName = faker.name.firstName();
+    fantom.lastName = faker.name.lastName();
+    fantom.password = faker.internet.password();
   });
 
   beforeEach(() => {
@@ -29,5 +36,22 @@ describe('requests', () => {
   afterEach((done) => {
     server.close();
     done();
+  });
+
+  it('Register', async () => {
+    const res = await request.agent(server)
+      .post('/users')
+      .type('form')
+      .send({
+        email: fantom.email,
+        firstName: fantom.firstName,
+        lastName: fantom.lastName,
+        password: fantom.password,
+      })
+      .set('user-agent', faker.internet.userAgent)
+      .set('content-type', 'application/x-www-form-urlencoded')
+      .set('accept', 'text/html');
+    expect(res).toHaveHTTPStatus(302);
+    expect(res.headers.location).toBe('/sessions/new');
   });
 });

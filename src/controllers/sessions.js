@@ -21,6 +21,7 @@ export default (router, { User }) => {
       if (user && user.passwordDigest === encrypt(password)) {
         // console.log('session valid');
         ctx.session.userId = user.id;
+        ctx.session.userName = user.fullName();
         ctx.redirect(router.url('root'));
       } else {
         // console.log('session not valid');

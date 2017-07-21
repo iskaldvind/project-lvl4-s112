@@ -35,10 +35,11 @@ export default (router, { User }) => {
       const id = Number(ctx.params.id);
       const form = ctx.request.body.form;
       const user = await User.findById(id);
-      if (ctx.session.userId !== undefined && ctx.session.userId === id) {
+      if (ctx.state.signedId() !== undefined && ctx.state.signedId() === id) {
         try {
           await user.update(form);
           ctx.flash.set('User profile has been updated');
+          ctx.session.userName = user.fullName();
           ctx.render('users/profile', { user });
         } catch (e) {
           ctx.flash.set('Something bad have happened');
@@ -51,7 +52,7 @@ export default (router, { User }) => {
     })
     .delete('user_delete', '/users/:id', async (ctx) => {
       const id = Number(ctx.params.id);
-      if (ctx.session.userId !== undefined && ctx.session.userId === id) {
+      if (ctx.state.signedId() !== undefined && ctx.state.signedId() === id) {
         User.destroy({
           where: { id },
         });
