@@ -35,7 +35,7 @@ deploy:
 	npm --no-git-tag-version version patch
 	git add .
 	git commit -m 'and again'
-	git push
+	# git push
 	git push heroku master
 
 .PHONY: test
