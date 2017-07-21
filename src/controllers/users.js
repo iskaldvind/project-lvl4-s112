@@ -39,7 +39,7 @@ export default (router, { User }) => {
         try {
           await user.update(form);
           ctx.flash.set('User profile has been updated');
-          ctx.session.userName = user.fullName;
+          // ctx.session.userName = user.fullName;
           ctx.render('users/profile', { user });
         } catch (e) {
           ctx.flash.set('Something bad have happened');
