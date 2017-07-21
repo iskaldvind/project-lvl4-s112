@@ -33,11 +33,6 @@ describe('requests', () => {
     expect(res).toHaveHTTPStatus(404);
   });
 
-  afterEach((done) => {
-    server.close();
-    done();
-  });
-
   it('Register', async () => {
     const res = await request.agent(server)
       .post('/users/new')
@@ -53,5 +48,10 @@ describe('requests', () => {
       .set('accept', 'text/html');
     expect(res).toHaveHTTPStatus(302);
     expect(res.headers.location).toBe('/sessions/new');
+  });
+
+  afterEach((done) => {
+    server.close();
+    done();
   });
 });
