@@ -35,16 +35,15 @@ describe('basic requests', () => {
 
 describe('user requests', () => {
   let server;
-  const fantom = {};
+  const fantom = {
+    email: faker.internet.email(),
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    password: faker.internet.password(),
+  };
 
   beforeAll(() => {
     jasmine.addMatchers(matchers);
-
-    fantom.email = faker.internet.email();
-    fantom.firstName = faker.name.firstName();
-    fantom.lastName = faker.name.lastName();
-    fantom.password = faker.internet.password();
-
     server = app().listen();
   });
 
@@ -52,12 +51,7 @@ describe('user requests', () => {
     const res = await request.agent(server)
       .post('/users/new')
       .type('form')
-      .send({
-        email: fantom.email,
-        firstName: fantom.firstName,
-        lastName: fantom.lastName,
-        password: fantom.password,
-      })
+      .send(fantom)
       .set('user-agent', faker.internet.userAgent)
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html');
