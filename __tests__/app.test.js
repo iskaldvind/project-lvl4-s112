@@ -4,17 +4,11 @@ import faker from 'faker';
 
 import app from '../src';
 
-describe('requests', () => {
+describe('basic requests', () => {
   let server;
-  let fantom = {};
 
   beforeAll(() => {
     jasmine.addMatchers(matchers);
-
-    fantom.email = faker.internet.email();
-    fantom.firstName = faker.name.firstName();
-    fantom.lastName = faker.name.lastName();
-    fantom.password = faker.internet.password();
   });
 
   beforeEach(() => {
@@ -37,6 +31,22 @@ describe('requests', () => {
     server.close();
     done();
   });
+});
+
+describe('user requests', () => {
+  let server;
+  let fantom = {};
+
+  beforeAll(() => {
+    jasmine.addMatchers(matchers);
+
+    fantom.email = faker.internet.email();
+    fantom.firstName = faker.name.firstName();
+    fantom.lastName = faker.name.lastName();
+    fantom.password = faker.internet.password();
+
+    server = app().listen();
+  });
 
   it('Register', async () => {
     const res = await request.agent(server)
@@ -53,5 +63,10 @@ describe('requests', () => {
       .set('accept', 'text/html');
     expect(res).toHaveHTTPStatus(302);
     expect(res.headers.location).toBe('/sessions/new');
+  });
+
+  afterAll((done) => {
+    server.close();
+    done();
   });
 });
