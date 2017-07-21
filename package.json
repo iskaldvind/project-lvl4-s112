@@ -1,6 +1,6 @@
 {
   "name": "task-manager-ultimate",
-  "version": "0.0.100",
+  "version": "0.0.101",
   "description": "project-lvl4-s112",
   "main": "dist/index.js",
   "bin": {
@@ -13,7 +13,7 @@
   "scripts": {
     "gulp": "gulp",
     "nodemon": "nodemon",
-    "test": "make init && jest",
+    "test": "jest",
     "babel-node": "babel-node",
     "flow": "flow",
     "flow-typed": "flow-typed",
