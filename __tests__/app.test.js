@@ -35,7 +35,7 @@ describe('basic requests', () => {
 
 describe('user requests', () => {
   let server;
-  let fantom = {};
+  const fantom = {};
 
   beforeAll(() => {
     jasmine.addMatchers(matchers);
