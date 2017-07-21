@@ -64,7 +64,24 @@ describe('user requests', () => {
     expect(res).toHaveHTTPStatus(302);
     expect(res.headers.location).toBe('/sessions/new');
   });
-
+  /*
+  it('Log in', async () => {
+    console.log('Hi');
+    console.log(fantom);
+    const res = await request.agent(server)
+      .post('/sessions')
+      .type('form')
+      .send({
+        email: fantom.email,
+        password: fantom.password,
+      })
+      .set('user-agent', faker.internet.userAgent)
+      .set('content-type', 'application/x-www-form-urlencoded')
+      .set('accept', 'text/html');
+    expect(res).toHaveHTTPStatus(302);
+    expect(res.headers.location).toBe('/');
+  });
+  */
   afterAll((done) => {
     server.close();
     done();
