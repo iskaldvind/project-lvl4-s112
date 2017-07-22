@@ -14,6 +14,7 @@ block content
     table.table.table-stripped
         thead
             tr
+                th ID
                 th Task
                 th Created At
                 th Tags
@@ -24,6 +25,7 @@ block content
         tbody
             each task in tasks
                 tr
+                    td= task.id
                     td= task.name
                     td= dateFormat(task.createdAt)
                     td= task.tags
