@@ -30,11 +30,11 @@ export const getTaskData = async (task) => {
 };
 
 export const getUserData = (user) => {
-  const createdAtLong = user.createdAt;
+  const createdAtLong = user.dataValues.createdAt;
   const createdAtShort = dateFormat(createdAtLong, 'isoUtcDateTime');
   return {
     fullName: user.fullName,
-    email: user.email,
+    email: user.dataValues.email,
     createdAt: createdAtShort,
   };
 };
