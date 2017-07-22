@@ -10,6 +10,17 @@ block content
     .col-xs-4.py-1
         form(action=urlFor('tasks_list'))
             button.btn.btn-block.btn-outline-primary(type='submit' name='assignedToId' value=signedId()) Assigned to me
+    .row
+        form(action=urlFor('tasks_list'))
+        .form-gdata-group
+            .col-xs-4.py-1
+                select.form-control
+                    option(selected='') ts
+            .col-xs-4.py-1
+                select.form-control
+                    option(selected='') ts2
+            .col-xs-4.py-1
+                button.btn Search
 
     table.table.table-stripped
         thead
