@@ -19,8 +19,9 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     .get('task_reg', '/tasks/new', async (ctx) => {
       const task = Task.build();
       const users = await User.findAll();
-      const defaultId = ctx.state.signedId();
-      ctx.render('tasks/new', { f: buildFormObj(task), users , defaultId});
+      const creatorId = ctx.state.signedId();
+      const creator = await User.findById(creatorId);
+      ctx.render('tasks/new', { f: buildFormObj(task), users , creator, creatorId});
     })
     .post('task_save', '/tasks/new', async (ctx) => {
       const form = ctx.request.body.form;
