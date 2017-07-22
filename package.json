@@ -1,6 +1,6 @@
 {
   "name": "task-manager-ultimate",
-  "version": "0.0.115",
+  "version": "0.0.116",
   "description": "project-lvl4-s112",
   "main": "dist/index.js",
   "bin": {
@@ -50,8 +50,8 @@
     "dotenv": "*",
     "gulp": "*",
     "gulp-util": "*",
-    "jquery": "*",
-    "jquery-ujs": "*",
+    "jquery": "3.1.1",
+    "jquery-ujs": "1.2.2",
     "koa": "*",
     "koa-bodyparser": "*",
     "koa-flash-simple": "*",
