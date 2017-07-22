@@ -39,4 +39,4 @@ export const getQueryParams = query =>
       return { where: { ...acc.where }, tag: { [key]: Number(query[key]) }};
     }
     return acc;
-  }, { where: {}, tags: {}});
+  }, { where: {}, tag: {}});
