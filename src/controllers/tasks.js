@@ -29,12 +29,14 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const task = Task.build(form);
       try {
         await task.save();
+        console.log('--------------------');
         await tags.map(tag => Tag.findOne({ where: { name: tag } })
           .then(async result => (result ? task.addTag(result) :
             task.createTag({ name: tag }))));
         ctx.flash.set('Task has been created');
         ctx.redirect(router.url('tasks_list'));
       } catch (e) {
+        console.log('++++++++++++++++++++');
         ctx.render('tasks/new', { f: buildFormObj(user, e), users });
       }
     })
