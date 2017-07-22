@@ -1,0 +1,33 @@
+extends /layouts/application.pug
+
+block content
+    .col-xs-4.py-1
+        form(action=urlFor('task_reg') method='get')
+            button.btn.btn-block.btn-outline-primary(type='submit') New task
+    .col-xs-4.py-1
+        form(action=urlFor('tasks_list'))
+            button.btn.btn-block.btn-outline-primary(type='submit' name='creatorId' value=signedId()) Opened by me
+    .col-xs-4.py-1
+        form(action=urlFor('tasks_list'))
+            button.btn.btn-block.btn-outline-primary(type='submit' name='assignedToId' value=signedId()) Assigned to me
+
+    table.table.table-stripped
+        thead
+            tr
+                th Task
+                th Created At
+                th Tags
+                th Status
+                th Created By
+                th Assigned To
+                th Description
+        tbody
+            each task in tasks
+                tr
+                    td= task.name
+                    td= task.createdAt
+                    td= task.tags
+                    td= task.status
+                    td= task.creator
+                    td= task.assignedTo
+                    td= task.description

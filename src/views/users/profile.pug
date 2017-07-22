@@ -21,7 +21,4 @@ block content
             form(action=urlFor('user_edit', { id: user.id }) method='get')
                 button.btn.btn-block(type='submit') Update account
             form(action=urlFor('user_delete', { id: user.id }) method='post')
-                button.btn.btn-block.btn-danger.mt-5(
-                type='submit'
-                name='_method'
-                value='delete') Delete account
+                button.btn.btn-block.btn-danger.mt-5(type='submit' name='_method' value='delete') Delete account

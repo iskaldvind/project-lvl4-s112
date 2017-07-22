@@ -6,7 +6,7 @@ export default connect => connect.define('Task', {
     validate: {
       notEmpty: {
         args: true,
-        msg: 'please enter task name',
+        msg: 'The name of task should not be empty.',
       },
     },
   },
@@ -17,7 +17,10 @@ export default connect => connect.define('Task', {
     type: Sequelize.INTEGER,
     defaultValue: 1,
     validate: {
-      notEmpty: true,
+      notEmpty: {
+        args: true,
+        msg: 'The status should not be empty.',
+      },
     },
   },
   creatorId: {
@@ -29,15 +32,12 @@ export default connect => connect.define('Task', {
   assignedToId: {
     type: Sequelize.INTEGER,
     validate: {
-      notEmpty: true,
+      notEmpty: {
+        args: true,
+        msg: 'The assignedTo should not be empty.',
+      },
     },
   },
 }, {
-  getterMethods: {
-    statusName: async function statusName() {
-      const status = await this.getStatus();
-      return status.dataValues.name;
-    },
-  },
   freezeTableName: true,
 });

@@ -3,14 +3,11 @@ import Sequelize from 'sequelize';
 export default connect => connect.define('Tag', {
   name: {
     type: Sequelize.STRING,
-    unique: {
-      args: true,
-      msg: 'tag with this name already exists',
-    },
+    unique: true,
     validate: {
       notEmpty: {
         args: true,
-        msg: 'please enter tag name',
+        msg: 'The tag should not be empty.',
       },
     },
   },

@@ -1,4 +1,4 @@
-import buildFormObj from '../helpers/formObjectBuilder';
+import { buildFormObj } from '../helpers/dataTools';
 
 export default (router, { User }) => {
   router

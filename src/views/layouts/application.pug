@@ -16,13 +16,15 @@ html(lang="en")
                     ul.navbar-nav
                         li.nav-item.active
                             a.nav-link(href=urlFor('user_profile', { id: signedId() })) Profile
-                    ul.navbar-nav.mr-auto
-                        li.nav-item
-                            a.nav-link(href=urlFor('users_list')) Users
                     ul.navbar-nav
                         li.nav-item
-                            form(action=urlFor('session_exit') method='post')
-                                button.btn(type='submit' name='_method' value='delete') Log out
+                            a.nav-link(href=urlFor('users_list')) Users
+                    ul.navbar-nav.mr-auto
+                        li.nav-item
+                            a.nav-link(href=urlFor('tasks_list')) Tasks
+                    ul.navbar-nav
+                        li.nav-item
+                            a.nav-link(href=urlFor('session_exit') data-method='delete' rel='nofollow') Sign Out
                 else
                     ul.navbar-nav.mr-auto
                     ul.navbar-nav.navbar-right

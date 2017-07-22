@@ -24,18 +24,6 @@ export default () => {
   app.keys = ['some secret hurr'];
   app.use(bodyParser());
   app.use(koaLogger());
-  app.use(session(app));
-  app.use(flash());
-
-  app.use(async (ctx, next) => {
-    ctx.state = {
-      flash: ctx.flash,
-      isSignedIn: () => ctx.session.userId !== undefined,
-      signedId: () => ctx.session.userId,
-      signedName: () => ctx.session.userName,
-    };
-    await next();
-  });
 
   app.use(methodOverride((req) => {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -51,6 +39,19 @@ export default () => {
     }));
   }
 
+  app.use(session(app));
+  app.use(flash());
+
+  app.use(async (ctx, next) => {
+    ctx.state = {
+      flash: ctx.flash,
+      isSignedIn: () => ctx.session.userId !== undefined,
+      signedId: () => ctx.session.userId,
+      signedName: () => ctx.session.userName,
+    };
+    await next();
+  });
+  
   const router = new Router();
   addRoutes(router, container);
   app.use(router.allowedMethods());
