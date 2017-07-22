@@ -21,12 +21,14 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const users = await User.findAll();
       const creatorId = ctx.state.signedId();
       const creator = await User.findById(creatorId);
-      ctx.render('tasks/new', { f: buildFormObj(task), users , creator, creatorId});
+      ctx.render('tasks/new', { f: buildFormObj(task), users, creator, creatorId});
     })
     .post('task_save', '/tasks/new', async (ctx) => {
       const form = ctx.request.body.form;
       form.creatorId = ctx.state.signedId();
       const users = await User.findAll();
+      const creatorId = ctx.state.signedId();
+      const creator = await User.findById(creatorId);
       const filledForm = form.tags !== '' ? form : { ...form, tags: '-'};
       const tags = filledForm.tags.split(' ');
       const task = Task.build(filledForm);
@@ -38,7 +40,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         ctx.flash.set('Task has been created');
         ctx.redirect(router.url('tasks_list'));
       } catch (e) {
-        ctx.render('tasks/new', { f: buildFormObj(task, e), users });
+        ctx.render('tasks/new', { f: buildFormObj(task, e), users, creator, creatorId});
       }
     })
     .get('task', '/tasks/:id', async (ctx) => {
