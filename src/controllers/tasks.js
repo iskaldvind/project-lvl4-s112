@@ -10,7 +10,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       console.log(where);
       const t1 = await Task.findById(1);
       console.log(t1);
-      const tagggs = await t1.getTags();
+      const tagggs = t1 !== null ? await t1.getTags() : 'no tags';
       console.log('**********');
       console.log(tagggs);
       console.log('###############');
