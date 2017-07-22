@@ -14,8 +14,7 @@ export const getTaskData = async (task) => {
   const status = await task.getStatus();
   const tags = await task.getTags();
   const tagsNames = tags.map(tag => tag.name);
-  const createdAtLong = task.createdAt;
-  const createdAtShort = dateFormat(createdAtLong, 'isoUtcDateTime');
+  const createdAt = task.createdAt;
   return {
     id: task.dataValues.id,
     name: task.dataValues.name,
@@ -24,18 +23,8 @@ export const getTaskData = async (task) => {
     assignedTo: assignedTo.fullName,
     status: status.name,
     tags: tagsNames,
-    createdAt: createdAtShort,
+    createdAt,
     creatorId,
-  };
-};
-
-export const getUserData = (user) => {
-  const createdAtLong = user.dataValues.createdAt;
-  const createdAtShort = dateFormat(createdAtLong, 'isoUtcDateTime');
-  return {
-    fullName: user.fullName,
-    email: user.dataValues.email,
-    createdAt: createdAtShort,
   };
 };
 

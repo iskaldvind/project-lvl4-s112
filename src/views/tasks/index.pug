@@ -25,7 +25,7 @@ block content
             each task in tasks
                 tr
                     td= task.name
-                    td= task.createdAt
+                    td= dateFormat(task.createdAt)
                     td= task.tags
                     td= task.status
                     td= task.creator

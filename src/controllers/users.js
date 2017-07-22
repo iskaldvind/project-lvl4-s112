@@ -1,12 +1,9 @@
-import { buildFormObj, getUserData } from '../helpers/dataTools';
+import { buildFormObj } from '../helpers/dataTools';
 
 export default (router, { User }) => {
   router
     .get('users_list', '/users', async (ctx) => {
-      const usersFull = await User.findAll();
-      console.log('!!!!!');
-      console.log(usersFull);
-      const users = usersFull.map(user => getUserData(users));
+      const users = await User.findAll();
       ctx.render('users', { users });
     })
     .get('user_reg', '/users/new', async (ctx) => {

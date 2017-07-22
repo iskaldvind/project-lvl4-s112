@@ -14,6 +14,7 @@ import _ from 'lodash';
 import methodOverride from 'koa-methodoverride';
 import rollbar from 'rollbar';
 import dotenv from 'dotenv';
+import dateFormat from 'dateformat';
 import getWebpackConfig from '../webpack.config.babel';
 import addRoutes from './controllers';
 import container from './container';
@@ -67,6 +68,7 @@ export default () => {
     helperPath: [
       { _ },
       { urlFor: (...args) => router.url(...args) },
+      { dateFormat: date => dateFormat(date, 'isoUtcDateTime')}
     ],
   });
   pug.use(app);
