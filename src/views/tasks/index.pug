@@ -26,8 +26,7 @@ block content
             each task in tasks
                 tr
                     td
-                        - const formattedId = formatId(task.id);
-                            a(href=urlFor('tasks', { id: task.id }))=formattedId
+                        a(href=urlFor('tasks', { id: task.id }))=task.id
                     td= task.name
                     td= formatDate(task.createdAt)
                     td= task.tags
