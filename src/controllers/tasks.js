@@ -46,7 +46,8 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     .patch('task_update', '/tasks/:id', async (ctx) => {
       const { statusId, taskId } = ctx.request.body;
       const task = Task.findById(Number(taskId));
-      task.setTaskStatus(Number(statusId));
+      console.log(task);
+      task.setStatus(Number(statusId));
       ctx.flash.set('Task was sucessfully updated');
       ctx.redirect(router.url('tasks_list'));
       const user = await User.findById(id);
