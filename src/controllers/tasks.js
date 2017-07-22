@@ -8,8 +8,12 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const where = await getQueryParams(query);
       console.log('@@@@@@@@@@@');
       console.log(where);
-      const t1 = await  Task.findById(1);
+      const t1 = await Task.findById(1);
       console.log(t1);
+      const tagggs = await t1.getTags();
+      console.log('**********');
+      console.log(tagggs);
+      console.log('###############');
       const filteredTasks = await Task.findAll({ where });
       const tasks = await Promise.all(filteredTasks.map(async task => getTaskData(task)));
       const tags = await Tag.findAll();
