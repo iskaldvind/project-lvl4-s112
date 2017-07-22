@@ -45,4 +45,3 @@ export const getQueryParams = query =>
 
 export const filterByTag = (tasks, tagId) =>
   tasks.filter(task => task.tagsIds.indexOf(tagId) !== -1);
-

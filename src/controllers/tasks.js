@@ -25,12 +25,11 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     })
     .post('task_save', '/tasks/new', async (ctx) => {
       const form = ctx.request.body.form;
-      console.log('@@@@@@@@@@@@');
-      console.log(form);
       form.creatorId = ctx.state.signedId();
       const users = await User.findAll();
-      const tags = form.tags.split(' ');
-      const task = Task.build(form);
+      const filledForm = form.tags !== '' ? form : { ...form, tags: '   '};
+      const tags = filledForm.tags.split(' ');
+      const task = Task.build(filledForm);
       try {
         await task.save();
         await tags.map(tag => Tag.findOne({ where: { name: tag } })
