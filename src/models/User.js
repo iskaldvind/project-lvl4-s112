@@ -55,6 +55,10 @@ export default connect => connect.define('User', {
       this.setDataValue('password', value);
       return value;
     },
+    allowNull: {
+      args: false,
+      msg: 'password must not be empty',
+    },
     validate: {
       len: {
         args: [3, +Infinity],
