@@ -71,10 +71,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     .delete('task_delete', '/tasks/:id', async (ctx) => {
       const id = Number(ctx.params.id);
       if (ctx.state.signedId() !== undefined) {
-        console.log('hi');
-        console.log(id);
-        task = await Task.findById(id);
-        console.log(task);
+        const task = await Task.findById(id);
         try {
           await task.destroy({
             where: {id},
