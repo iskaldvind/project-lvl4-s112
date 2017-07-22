@@ -12,18 +12,11 @@ block content
             form(action=urlFor('tasks_list'))
                 button.btn.btn-block.btn-outline-primary(type='submit' name='assignedToId' value=signedId()) Assigned to me
         .py-1
-            form(action=urlFor('tasks_list'))
-                .form-gdata-group
-                    select.form-control.btn-block
-                        option(selected='') Has tag
-                        option(value= 111) some tag
-                    select.form-control.btn-block
-                        option(selected='') Has status
-                        option(value= 222) some status
-                    select.form-control.btn-block
-                        option(selected='') Assigned to
-                        option(value= 333) some assignee
-                    button.btn.btn-block(type='submit') Search
+            +formFor(f, '', {url: urlFor('task_list'), method: 'get'})
+                +selectTags(tags)
+                +select(statuses)
+                +select(f, 'Assignee', users)
+                +button(f, 'Confirm')
 
     table.table.table-stripped
         thead

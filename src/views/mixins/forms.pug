@@ -31,3 +31,17 @@ mixin select(f, property, users)
                 option(value= user.id)= user.fullName
         if f.errors[property]
             .form-control-feedback= f.errors[property].map(({message}) => message).join('. ')
+
+mixin selectTags(tags)
+    .form-group
+        select(class='form-control' name='tag')
+            option(selected='') Has tag
+            each tag in tags
+                option(value= tag.id)= tag.name
+
+mixin selectStatus(statuses)
+    .form-group
+        select(class='form-control' name='status')
+            option(selected='') Has status
+            each status in statuses
+                option(value= status.id)= status.name
