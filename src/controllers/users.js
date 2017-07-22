@@ -40,6 +40,8 @@ export default (router, { User }) => {
       if (ctx.state.signedId() !== undefined && ctx.state.signedId() === id) {
         try {
           await user.update(form);
+          console.log('HHHEEEEEREEEE');
+          console.log(user);
           ctx.flash.set('User profile has been updated');
           ctx.session.userName = user.fullName;
           ctx.render('users/profile', { user });
