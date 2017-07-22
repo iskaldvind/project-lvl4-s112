@@ -1,22 +1,16 @@
 import url from 'url';
-import { buildFormObj, getTaskData, getQueryParams } from '../helpers/dataTools';
+import { buildFormObj, getTaskData, getQueryParams, filterByTag } from '../helpers/dataTools';
 
 export default (router, { Task, User, Tag, TaskStatus }) => {
   router
     .get('tasks_list', '/tasks', async (ctx) => {
       const { query } = url.parse(ctx.request.url, true);
       const { where, tag } = await getQueryParams(query);
-      console.log('@@@@@@@@@@@');
-      console.log(where);
-      console.log(tag);
-      const t1 = await Task.findById(1);
-      console.log(t1);
-      const tagggs = t1 !== null ? await t1.getTags() : 'no tags';
-      console.log('**********');
-      console.log(tagggs);
-      console.log('###############');
       const filteredTasks = await Task.findAll({ where });
-      const tasks = await Promise.all(filteredTasks.map(async task => getTaskData(task)));
+      const finedTasks = await Promise.all(filteredTasks.map(async task => getTaskData(task)));
+      const tasks = Object.keys.(tag).length === 0 ?
+        finedTasks :
+        filterByTag(finedTasks, tag.tagId);
       const tags = await Tag.findAll();
       const statuses = await TaskStatus.findAll();
       const users = await User.findAll();

@@ -15,6 +15,7 @@ export const getTaskData = async (task) => {
   const status = await task.getStatus();
   const tags = await task.getTags();
   const tagsNames = tags.map(tag => tag.name);
+  const tagsIds = tags.map(tag => tag.id);
   const createdAt = task.createdAt;
   return {
     id: task.dataValues.id,
@@ -25,6 +26,7 @@ export const getTaskData = async (task) => {
     assignedTo: assignedTo.fullName,
     status: status.name,
     tags: tagsNames,
+    tagsIds,
     createdAt,
     creatorId,
   };
@@ -32,17 +34,15 @@ export const getTaskData = async (task) => {
 
 export const getQueryParams = query =>
   Object.keys(query).reduce((acc, key) => {
-    console.log(`==============> ${key}`);
     if (query[key].split(' ')[0] !== 'All' && query[key] !== '') {
-      console.log('=============> 1');
       if (key !== 'tagId') {
-        console.log('=============> U');
         return { where: {...acc.where, [key]: Number(query[key])}, tag: { ...acc.tags } };
       }
-      console.log('===============> D');
-      const fuk = { [key]: Number(query[key]) }
-      console.log(fuk);
       return { where: { ...acc.where }, tag: { [key]: Number(query[key]) }};
     }
     return acc;
   }, { where: {}, tag: {}});
+
+export const filterByTag = (tasks, tagId) =>
+  tasks.filter(task => task.tagsIds.indexOf(tagId) !== -1);
+
