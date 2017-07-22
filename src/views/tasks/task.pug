@@ -3,34 +3,41 @@ extends /layouts/application.pug
 block content
     if isSignedIn()
         .container
-            table.table
-                thead.thead-bordered
-                    tbody
-                        tr
-                            th(scope='row') ID
-                            td= task.id
-                        tr
-                            th(scope='row') Task
-                            td= task.name
-                        tr
-                            th(scope='row') Tags
-                            td= task.tags
-                        tr
-                            th(scope='row') Created At
-                            td= task.createdAt
-                        tr
-                            th(scope='row') Status
-                            td= task.status
-                        tr
-                            th(scope='row') Created By
-                            td= task.creator
-                        tr
-                            th(scope='row') Assigned To
-                            td= task.assignedTo
-                        tr
-                            th(scope='row') Description
-                            td= task.description
-            form(action=urlFor('root') method='get')
-                button.btn.btn-block(type='submit') Not implemented yet
+            +formFor(f, '', { url: urlFor('task_update'), method: 'post' })
+                table.table
+                    thead.thead-bordered
+                        tbody
+                            tr
+                                th(scope='row') ID
+                                td= task.id
+                            tr
+                                th(scope='row') Task
+                                td= task.name
+                            tr
+                                th(scope='row') Tags
+                                td= task.tags
+                            tr
+                                th(scope='row') Created At
+                                td= task.createdAt
+                            tr
+                                th(scope='row') Status
+                                td
+                                    select(name='statusId' class='form-control' value=`${value}`)
+                                        each status in statuses
+                                            option(value= status.id)= status.name
+
+                            tr
+                                th(scope='row') Created By
+                                td= task.creator
+                            tr
+                                th(scope='row') Assigned To
+                                td= task.assignedTo
+                            tr
+                                th(scope='row') Description
+                                td= task.description
+                input(type='hidden' name='_method' value='PATCH')
+                input(type='hidden' name='taskId' value= task.id)
+                button(class='btn btn-primary') Change status
+        .container
             form(action=urlFor('task_delete', { id: task.id }) method='post')
                 button.btn.btn-block.btn-danger.mt-5(type='submit' name='_method' value='delete') Delete task

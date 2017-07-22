@@ -49,7 +49,8 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const user = await User.findById(id);
       ctx.render('users/edit', { f: buildFormObj(user), id });
     })
-    .patch('user_update', '/users/:id', async (ctx) => {
+    */
+    .patch('task_update', '/tasks/:id', async (ctx) => {
       const id = Number(ctx.params.id);
       const form = ctx.request.body.form;
       const user = await User.findById(id);
@@ -67,7 +68,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         ctx.flash.set('You must log in as specified user to update account');
         ctx.render('users/profile', { f: buildFormObj(user) });
       }
-    })*/
+    })
     .delete('task_delete', '/tasks/:id', async (ctx) => {
       const id = Number(ctx.params.id);
       if (ctx.state.signedId() !== undefined) {
