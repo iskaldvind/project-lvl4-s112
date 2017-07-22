@@ -72,7 +72,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const id = Number(ctx.params.id);
       if (ctx.state.signedId() !== undefined) {
         try {
-          await Task.destroy({
+          Task.destroy({
             where: { id },
           });
           ctx.flash.set('Task has been deleted');
