@@ -18,6 +18,8 @@ export default (router, { User }) => {
         ctx.flash.set('User has been created');
         ctx.redirect(router.url('session_new'));
       } catch (e) {
+        console.log('!!!!!!!!!!!!!!!!!');
+        console.log(e);
         ctx.render('users/new', { f: buildFormObj(user, e) });
       }
     })
@@ -47,6 +49,7 @@ export default (router, { User }) => {
           ctx.render('users/profile', { user });
         } catch (e) {
           console.log('AWOOOOOO');
+          console.log(e);
           ctx.flash.set('Something bad have happened');
           ctx.render('users/profile', { f: buildFormObj(user, e), user });
         }
