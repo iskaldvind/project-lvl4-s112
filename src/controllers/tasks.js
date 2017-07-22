@@ -14,7 +14,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const tags = await Tag.findAll();
       const statuses = await TaskStatus.findAll();
       const users = await User.findAll();
-      ctx.render('tasks', { users, tasks, statuses, tags });
+      ctx.render('tasks', { users, tasks, statuses, tags , f: buildFormObj(tasks)});
     })
     .get('task_reg', '/tasks/new', async (ctx) => {
       const task = Task.build();

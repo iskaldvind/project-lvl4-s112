@@ -14,8 +14,8 @@ block content
         .py-1
             +formFor(f, '', {url: urlFor('task_list'), method: 'get'})
                 +selectTags(tags)
-                +select(statuses)
-                +select(f, 'Assignee', users)
+                +selectStatus(statuses)
+                +selectUsers(users)
                 +button(f, 'Confirm')
 
     table.table.table-stripped
