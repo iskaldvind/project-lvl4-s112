@@ -4,11 +4,12 @@ import { buildFormObj, getTaskData, getQueryParams } from '../helpers/dataTools'
 export default (router, { Task, User, Tag, TaskStatus }) => {
   router
     .get('tasks_list', '/tasks', async (ctx) => {
-      const req = url.parse(ctx.request.url, true);
-      console.log('******************');
-      console.log(req);
       const { query } = url.parse(ctx.request.url, true);
       const where = await getQueryParams(query);
+      console.log('@@@@@@@@@@@');
+      console.log(where);
+      const t1 = await  Task.findById(1);
+      console.log(t1);
       const filteredTasks = await Task.findAll({ where });
       const tasks = await Promise.all(filteredTasks.map(async task => getTaskData(task)));
       const tags = await Tag.findAll();
