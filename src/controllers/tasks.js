@@ -40,7 +40,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const taskFull = await Task.findById(taskId);
       const task = await getTaskData(taskFull);
       const tags = task.tags;
-      const statuses = await TaskStatus.findall();
+      const statuses = await TaskStatus.findAll();
       ctx.render('tasks/task', { task, tags, statuses });
     })
     /*
