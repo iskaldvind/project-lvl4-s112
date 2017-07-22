@@ -5,6 +5,8 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
   router
     .get('tasks_list', '/tasks', async (ctx) => {
       const { query } = url.parse(ctx.request.url, true);
+      console.log('@@@@@@@@@@@@@@@');
+      console.log(query);
       const { where, tag } = await getQueryParams(query);
       const filteredTasks = await Task.findAll({ where });
       const finedTasks = await Promise.all(filteredTasks.map(async task => getTaskData(task)));
