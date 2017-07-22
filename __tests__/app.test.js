@@ -47,7 +47,7 @@ describe('requests', () => {
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html');
     expect(res).toHaveHTTPStatus(302);
-    expect(res.headers.location).toBe('/');
+    expect(res.headers.location).toBe('/session/new');
   });
 
   afterEach((done) => {

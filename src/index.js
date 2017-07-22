@@ -18,7 +18,6 @@ import dateFormat from 'dateformat';
 import getWebpackConfig from '../webpack.config.babel';
 import addRoutes from './controllers';
 import container from './container';
-import { formatId } from './helpers/dataTools';
 
 export default () => {
   const app = new Koa();
@@ -29,7 +28,9 @@ export default () => {
 
   app.use(methodOverride((req) => {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+      /* eslint-disable no-alert, no-underscore-dangle*/
       return req.body._method;
+      /* eslint-disable no-alert, no-underscore-dangle*/
     }
     return '';
   }));
@@ -53,7 +54,7 @@ export default () => {
     };
     await next();
   });
-  
+
   const router = new Router();
   addRoutes(router, container);
   app.use(router.allowedMethods());
@@ -69,7 +70,7 @@ export default () => {
     helperPath: [
       { _ },
       { urlFor: (...args) => router.url(...args) },
-      { formatDate: date => dateFormat(date, 'isoUtcDateTime')},
+      { formatDate: date => dateFormat(date, 'isoUtcDateTime') },
     ],
   });
   pug.use(app);

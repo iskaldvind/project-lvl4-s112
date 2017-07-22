@@ -37,7 +37,7 @@ export default (router, { User }) => {
         ctx.redirect(router.url('user_profile', id));
       } else {
         const user = await User.findById(id);
-        ctx.render('users/edit', {f: buildFormObj(user), id});
+        ctx.render('users/edit', { f: buildFormObj(user), id });
       }
     })
     .patch('user_update', '/users/:id', async (ctx) => {
@@ -51,7 +51,7 @@ export default (router, { User }) => {
           ctx.session.userName = user.fullName;
           ctx.redirect(router.url('user_profile', id));
         } catch (e) {
-          ctx.render(`users/edit`, { f: buildFormObj(user, e), id });
+          ctx.render('users/edit', { f: buildFormObj(user, e), id });
         }
       } else {
         ctx.flash.set('You must log in as specified user to update account');

@@ -36,12 +36,12 @@ export const getQueryParams = query =>
   Object.keys(query).reduce((acc, key) => {
     if (query[key].split(' ')[0] !== 'All' && query[key] !== '') {
       if (key !== 'tagId') {
-        return { where: {...acc.where, [key]: Number(query[key])}, tag: { ...acc.tag } };
+        return { where: { ...acc.where, [key]: Number(query[key]) }, tag: { ...acc.tag } };
       }
-      return { where: { ...acc.where }, tag: { [key]: Number(query[key]) }};
+      return { where: { ...acc.where }, tag: { [key]: Number(query[key]) } };
     }
     return acc;
-  }, { where: {}, tag: {}});
+  }, { where: {}, tag: {} });
 
 export const filterByTag = (tasks, tagId) =>
   tasks.filter(task => task.tagsIds.indexOf(tagId) !== -1);

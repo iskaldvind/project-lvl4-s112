@@ -14,14 +14,14 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const tags = await Tag.findAll();
       const statuses = await TaskStatus.findAll();
       const users = await User.findAll();
-      ctx.render('tasks', { users, tasks, statuses, tags , f: buildFormObj(tasks)});
+      ctx.render('tasks', { users, tasks, statuses, tags, f: buildFormObj(tasks) });
     })
     .get('task_reg', '/tasks/new', async (ctx) => {
       const task = Task.build();
       const users = await User.findAll();
       const creatorId = ctx.state.signedId();
       const creator = await User.findById(creatorId);
-      ctx.render('tasks/new', { f: buildFormObj(task), users, creator, creatorId});
+      ctx.render('tasks/new', { f: buildFormObj(task), users, creator, creatorId });
     })
     .post('task_save', '/tasks/new', async (ctx) => {
       const form = ctx.request.body.form;
@@ -29,7 +29,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const users = await User.findAll();
       const creatorId = ctx.state.signedId();
       const creator = await User.findById(creatorId);
-      const filledForm = form.tags !== '' ? form : { ...form, tags: '-'};
+      const filledForm = form.tags !== '' ? form : { ...form, tags: '-' };
       const tags = filledForm.tags.split(' ');
       const task = Task.build(filledForm);
       try {
@@ -40,7 +40,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         ctx.flash.set('Task has been created');
         ctx.redirect(router.url('tasks_list'));
       } catch (e) {
-        ctx.render('tasks/new', { f: buildFormObj(task, e), users, creator, creatorId});
+        ctx.render('tasks/new', { f: buildFormObj(task, e), users, creator, creatorId });
       }
     })
     .get('task', '/tasks/:id', async (ctx) => {
@@ -65,16 +65,11 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     .delete('task_delete', '/tasks/:id', async (ctx) => {
       const id = Number(ctx.params.id);
       if (ctx.state.signedId() !== undefined) {
-        try {
-          Task.destroy({
-            where: { id },
-          });
-          ctx.flash.set('Task has been deleted');
-          ctx.redirect(router.url('tasks_list'));
-        } catch (e) {
-          ctx.flash.set('Task not found');
-          ctx.render('tasks/task', { f: buildFormObj(task, e) });
-        }
+        Task.destroy({
+          where: { id },
+        });
+        ctx.flash.set('Task has been deleted');
+        ctx.redirect(router.url('tasks_list'));
       } else {
         ctx.flash.set('You must log in to delete a task');
         ctx.redirect(router.url('sessions_enter'));
