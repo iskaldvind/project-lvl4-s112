@@ -32,8 +32,11 @@ export const getTaskData = async (task) => {
 
 export const getQueryParams = query =>
   Object.keys(query).reduce((acc, key) => {
-    if (query[key] !== 'All' && query[key] !== '') {
-      return { ...acc, [key]: Number(query[key]) };
+    if (query[key].split(' ')[0] !== 'All' && query[key] !== '') {
+      if (key !== 'tagId') {
+        return { where: {...acc.where, [key]: Number(query[key])}, tag: { ...acc.tags } };
+      }
+      return { where: { ...acc.where }, tag: { [key]: Number(query[key]) }};
     }
     return acc;
-  }, {});
+  }, { where: {}, tags: {}});

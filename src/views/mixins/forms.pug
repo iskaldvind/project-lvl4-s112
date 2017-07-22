@@ -39,7 +39,7 @@ mixin formSearch()
 
 mixin selectTags(tags)
     .form-group
-        select(class='form-control' name='tag')
+        select(class='form-control' name='tagId')
             option(selected='') All tags
             each tag in tags
                 option(value= tag.id)= tag.name

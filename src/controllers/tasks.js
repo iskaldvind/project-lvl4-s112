@@ -5,9 +5,10 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
   router
     .get('tasks_list', '/tasks', async (ctx) => {
       const { query } = url.parse(ctx.request.url, true);
-      const where = await getQueryParams(query);
+      const { where, tag } = await getQueryParams(query);
       console.log('@@@@@@@@@@@');
       console.log(where);
+      console.log(tag);
       const t1 = await Task.findById(1);
       console.log(t1);
       const tagggs = t1 !== null ? await t1.getTags() : 'no tags';
