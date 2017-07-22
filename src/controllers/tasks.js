@@ -1,45 +1,31 @@
 import buildFormObj from '../helpers/formObjectBuilder';
-import getTaskData from '../helpers/taskDataAssembler';
 
-export default (router, { Task, User, Tag, TaskStatus }) => {
+export default (router, { User }) => {
   router
-    .get('tasks_list', '/tasks', async (ctx) => {
-      const tasks = await Task.findAll();
-      ctx.render('tasks', { tasks });
-    })
-    .get('task_reg', '/tasks/new', async (ctx) => {
-      const task = Task.buld();
-      const users = User.findAll();
-      ctx.render('tasks/new', { f: buildFormObj(task), users });
-    })
-    .post('task_save', '/tasks/new', async (ctx) => {
-      const form = ctx.request.body.form;
-      form.creatorId = ctx.state.signedId();
+    .get('users_list', '/users', async (ctx) => {
       const users = await User.findAll();
-      const tags = form.tags.split(' ');
-      const task = Task.build(form);
+      ctx.render('users', { users });
+    })
+    .get('user_reg', '/users/new', async (ctx) => {
+      const user = User.build();
+      ctx.render('users/new', { f: buildFormObj(user) });
+    })
+    .post('user_save', '/users/new', async (ctx) => {
+      const form = ctx.request.body.form;
+      const user = User.build(form);
       try {
-        await task.save();
-        await tags.map(tag => Tag.findOne({ where: { name: tag } })
-          .then(async result => (result ? task.addTag(result) :
-            task.createTag({ name: tag }))));
-        ctx.flash.set('Task has been created');
-        ctx.redirect(router.url('tasks'));
+        await user.save();
+        ctx.flash.set('User has been created');
+        ctx.redirect(router.url('session_new'));
       } catch (e) {
-        ctx.render('tasks/new', { f: buildFormObj(user, e), users });
+        ctx.render('users/new', { f: buildFormObj(user, e) });
       }
     })
-    /*
-    .get('task', '/tasks/:id', async (ctx) => {
-      const taskId = Number(ctx.params.id);
-      const taskRaw = await Task.findById(taskId);
-      const task = await getTaskData(taskRaw);
-      const tags = task.tags;
-      const statuses = await TaskStatus.findall();
-      ctx.render('tasks/task', { task, tags, statuses });
+    .get('user_profile', '/users/:id', async (ctx) => {
+      const id = Number(ctx.params.id);
+      const user = await User.findById(id);
+      ctx.render('users/profile', { user });
     })
-
-    /*
     .get('user_edit', '/users/:id/edit', async (ctx) => {
       const id = Number(ctx.params.id);
       const user = await User.findById(id);
@@ -63,26 +49,19 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         ctx.flash.set('You must log in as specified user to update account');
         ctx.render('users/profile', { f: buildFormObj(user) });
       }
-    })*/
-    .delete('task_delete', '/tasks/:id', async (ctx) => {
+    })
+    .delete('user_delete', '/users/:id', async (ctx) => {
       const id = Number(ctx.params.id);
-      if (ctx.state.signedId() !== undefined) {
-        task = await Task.findById(id);
-        try {
-          await task.destroy({
-            where: {id},
-          });
-          ctx.flash.set('Task has been deleted');
-          ctx.redirect(router.url('task_list'));
-        } catch (e) {
-          ctx.flash.set('Task not found');
-          ctx.render('tasks/task', { f: buildFormObj(task, e) });
-        }
+      if (ctx.state.signedId() !== undefined && ctx.state.signedId() === id) {
+        User.destroy({
+          where: { id },
+        });
+        ctx.session = {};
+        ctx.flash.set('Account has been deleted');
+        ctx.redirect(router.url('root'));
       } else {
-        ctx.flash.set('You must log in to delete a task');
-        ctx.redirect(router.url('sessions_enter'));
+        ctx.flash.set('You must log in as specified user to delete account');
+        ctx.redirect(router.url('root'));
       }
     });
-    /*
-    */
 };
