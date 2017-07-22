@@ -4,6 +4,9 @@ import { buildFormObj, getTaskData, getQueryParams } from '../helpers/dataTools'
 export default (router, { Task, User, Tag, TaskStatus }) => {
   router
     .get('tasks_list', '/tasks', async (ctx) => {
+      const req = url.parse(ctx.request.url, true);
+      console.log('******************');
+      console.log(req);
       const { query } = url.parse(ctx.request.url, true);
       const where = await getQueryParams(query);
       const filteredTasks = await Task.findAll({ where });

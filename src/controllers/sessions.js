@@ -8,8 +8,6 @@ export default (router, { User }) => {
       ctx.render('sessions/new', { f: buildFormObj(data) });
     })
     .post('session_enter', '/sessions', async (ctx) => {
-      console.log(ctx.request);
-      console.log('WAT???');
       const { email, password } = ctx.request.body.form;
       const user = await User.findOne({
         where: {
@@ -26,7 +24,6 @@ export default (router, { User }) => {
       }
     })
     .delete('session_exit', '/sessions', (ctx) => {
-      console.log('HI!!!');
       ctx.session = {};
       ctx.redirect(router.url('root'));
     });
