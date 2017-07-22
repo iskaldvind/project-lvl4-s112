@@ -25,10 +25,11 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     })
     .post('task_save', '/tasks/new', async (ctx) => {
       const form = ctx.request.body.form;
+      console.log('@@@@@@@@@@@@');
+      console.log(form);
       form.creatorId = ctx.state.signedId();
       const users = await User.findAll();
-      const passedTags = form.tags.split(' ');
-      const tags = passedTags !== '' ? passedTags : '   ';
+      const tags = form.tags.split(' ');
       const task = Task.build(form);
       try {
         await task.save();
