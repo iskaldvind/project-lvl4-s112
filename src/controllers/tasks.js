@@ -19,7 +19,8 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     .get('task_reg', '/tasks/new', async (ctx) => {
       const task = Task.build();
       const users = await User.findAll();
-      ctx.render('tasks/new', { f: buildFormObj(task), users });
+      const defaultId = ctx.state.signedId();
+      ctx.render('tasks/new', { f: buildFormObj(task), users , defaultId});
     })
     .post('task_save', '/tasks/new', async (ctx) => {
       const form = ctx.request.body.form;
@@ -29,14 +30,12 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const task = Task.build(form);
       try {
         await task.save();
-        console.log('--------------------');
         await tags.map(tag => Tag.findOne({ where: { name: tag } })
           .then(async result => (result ? task.addTag(result) :
             task.createTag({ name: tag }))));
         ctx.flash.set('Task has been created');
         ctx.redirect(router.url('tasks_list'));
       } catch (e) {
-        console.log('++++++++++++++++++++');
         ctx.render('tasks/new', { f: buildFormObj(task, e), users });
       }
     })
