@@ -8,7 +8,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const { where, tag } = await getQueryParams(query);
       const filteredTasks = await Task.findAll({ where });
       const finedTasks = await Promise.all(filteredTasks.map(async task => getTaskData(task)));
-      const tasks = Object.keys.(tag).length === 0 ?
+      const tasks = Object.keys(tag).length === 0 ?
         finedTasks :
         filterByTag(finedTasks, tag.tagId);
       const tags = await Tag.findAll();
