@@ -1,28 +1,29 @@
 extends /layouts/application.pug
 
 block content
-    .col-xs-4.py-1
-        form(action=urlFor('task_reg') method='get')
-            button.btn.btn-block.btn-outline-primary(type='submit') New task
-    .col-xs-4.py-1
-        form(action=urlFor('tasks_list'))
-            button.btn.btn-block.btn-outline-primary(type='submit' name='creatorId' value=signedId()) Opened by me
-    .col-xs-4.py-1
-        form(action=urlFor('tasks_list'))
-            button.btn.btn-block.btn-outline-primary(type='submit' name='assignedToId' value=signedId()) Assigned to me
-    .col-xs-4.py-1
-        form(action=urlFor('tasks_list'))
-        .form-gdata-group
-                select.form-control.btn-block
-                    option(selected='') Has tag
-                    option(value= 111) some tag
-                select.form-control.btn-block
-                    option(selected='') Has status
-                    option(value= 222) some status
-                select.form-control.btn-block
-                    option(selected='') Assigned to
-                    option(value= 333) some assignee
-                button.btn.btn-block(type='submit') Search
+    .container.col-lg-6
+        .py-1
+            form(action=urlFor('task_reg') method='get')
+                button.btn.btn-block.btn-outline-primary(type='submit') New task
+        .py-1
+            form(action=urlFor('tasks_list'))
+                button.btn.btn-block.btn-outline-primary(type='submit' name='creatorId' value=signedId()) Opened by me
+        .py-1
+            form(action=urlFor('tasks_list'))
+                button.btn.btn-block.btn-outline-primary(type='submit' name='assignedToId' value=signedId()) Assigned to me
+        .py-1
+            form(action=urlFor('tasks_list'))
+                .form-gdata-group
+                    select.form-control.btn-block
+                        option(selected='') Has tag
+                        option(value= 111) some tag
+                    select.form-control.btn-block
+                        option(selected='') Has status
+                        option(value= 222) some status
+                    select.form-control.btn-block
+                        option(selected='') Assigned to
+                        option(value= 333) some assignee
+                    button.btn.btn-block(type='submit') Search
 
     table.table.table-stripped
         thead
