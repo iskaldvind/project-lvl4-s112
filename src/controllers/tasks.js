@@ -7,6 +7,8 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const { query } = url.parse(ctx.request.url, true);
       console.log('@@@@@@@@@@@@@@@');
       console.log(query);
+      const fog = await getQueryParams(query);
+      console.log(fog);
       const { where, tag } = await getQueryParams(query);
       const filteredTasks = await Task.findAll({ where });
       const finedTasks = await Promise.all(filteredTasks.map(async task => getTaskData(task)));

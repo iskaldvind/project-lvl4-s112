@@ -40,6 +40,9 @@ export const getQueryParams = query =>
       console.log('======== not All or empty');
       if (key !== 'tagId') {
         console.log('========== not tag ID');
+        console.log(acc);
+        const fug = { where: {...acc.where, [key]: Number(query[key])}, tag: { ...acc.tags } };
+        console.log(fug);
         return { where: {...acc.where, [key]: Number(query[key])}, tag: { ...acc.tags } };
       }
       console.log('========== tag ID');
