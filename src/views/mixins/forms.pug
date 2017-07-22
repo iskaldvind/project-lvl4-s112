@@ -32,6 +32,11 @@ mixin select(f, property, users)
         if f.errors[property]
             .form-control-feedback= f.errors[property].map(({message}) => message).join('. ')
 
+mixin formSearch()
+    form(action=urlFor('tasks_list') method='get'))
+        block
+
+
 mixin selectTags(tags)
     .form-group
         select(class='form-control' name='tag')
