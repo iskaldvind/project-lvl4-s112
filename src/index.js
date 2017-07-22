@@ -70,7 +70,6 @@ export default () => {
       { _ },
       { urlFor: (...args) => router.url(...args) },
       { formatDate: date => dateFormat(date, 'isoUtcDateTime')},
-      { formatId }
     ],
   });
   pug.use(app);

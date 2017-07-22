@@ -1,5 +1,7 @@
 import _ from 'lodash';
 
+const formatId = id => `${'0'.repeat(6 - id.toString().length)}${id}`;
+
 export const buildFormObj = (object, error = { errors: [] }) => ({
   name: 'form',
   object,
@@ -16,6 +18,7 @@ export const getTaskData = async (task) => {
   const createdAt = task.createdAt;
   return {
     id: task.dataValues.id,
+    formattedId: formatId(task.dataValues.id),
     name: task.dataValues.name,
     description: task.dataValues.description,
     creator: creator.fullName,
@@ -26,8 +29,6 @@ export const getTaskData = async (task) => {
     creatorId,
   };
 };
-
-export const formatId = id => `${'0'.repeat(6 - id.length)}${id}`;
 
 export const getQueryParams = query =>
   Object.keys(query).reduce((acc, key) => {
