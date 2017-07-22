@@ -25,9 +25,11 @@ block content
         tbody
             each task in tasks
                 tr
-                    td= task.id
+                    td
+                        - const formattedId = idFormat(task.id);
+                        a(href=urlFor('tasks', { id: task.id })) formattedId
                     td= task.name
-                    td= dateFormat(task.createdAt)
+                    td= formatDate(task.createdAt)
                     td= task.tags
                     td= task.status
                     td= task.creator

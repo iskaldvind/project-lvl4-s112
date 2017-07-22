@@ -32,15 +32,13 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         ctx.flash.set('Task has been created');
         ctx.redirect(router.url('tasks_list'));
       } catch (e) {
-        console.log('E!!! :');
-        console.log(e);
         ctx.render('tasks/new', { f: buildFormObj(user, e), users });
       }
     })
     .get('task', '/tasks/:id', async (ctx) => {
       const taskId = Number(ctx.params.id);
-      const taskRaw = await Task.findById(taskId);
-      const task = await getTaskData(taskRaw);
+      const taskFull = await Task.findById(taskId);
+      const task = await getTaskData(taskFull);
       const tags = task.tags;
       const statuses = await TaskStatus.findall();
       ctx.render('tasks/task', { task, tags, statuses });

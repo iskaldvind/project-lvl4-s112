@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import dateFormat from 'dateformat';
 
 export const buildFormObj = (object, error = { errors: [] }) => ({
   name: 'form',
@@ -27,6 +26,8 @@ export const getTaskData = async (task) => {
     creatorId,
   };
 };
+
+const taskIdFormat = id => `${'0'.repeat(6 - id.length)}${id}`;
 
 export const getQueryParams = query =>
   Object.keys(query).reduce((acc, key) => {
