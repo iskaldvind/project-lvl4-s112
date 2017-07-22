@@ -5,21 +5,12 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
   router
     .get('tasks_list', '/tasks', async (ctx) => {
       const { query } = url.parse(ctx.request.url, true);
-      console.log('@@@@@@@@@@@@@@@');
-      console.log(query);
-      const fog = await getQueryParams(query);
-      console.log(fog);
       const { where, tag } = await getQueryParams(query);
       const filteredTasks = await Task.findAll({ where });
       const finedTasks = await Promise.all(filteredTasks.map(async task => getTaskData(task)));
-      console.log('===============');
-      console.log(where);
-      console.log(finedTasks);
-      console.log(tag);
       const tasks = Object.keys(tag).length === 0 ?
         finedTasks :
         filterByTag(finedTasks, tag.tagId);
-      console.log(tasks);
       const tags = await Tag.findAll();
       const statuses = await TaskStatus.findAll();
       const users = await User.findAll();

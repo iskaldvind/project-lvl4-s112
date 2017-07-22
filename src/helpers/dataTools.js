@@ -34,21 +34,10 @@ export const getTaskData = async (task) => {
 
 export const getQueryParams = query =>
   Object.keys(query).reduce((acc, key) => {
-    console.log('&&&&&&&&&&&&&&&&&&&&&&& key:');
-    console.log(key);
     if (query[key].split(' ')[0] !== 'All' && query[key] !== '') {
-      console.log('======== not All or empty');
       if (key !== 'tagId') {
-        console.log('========== not tag ID');
-        console.log(acc);
-        const fug = { where: {...acc.where, [key]: Number(query[key])}, tag: { ...acc.tag } };
-        console.log(fug);
         return { where: {...acc.where, [key]: Number(query[key])}, tag: { ...acc.tag } };
       }
-      console.log('========== tag ID');
-      console.log(acc);
-      const fuk = { where: { ...acc.where }, tag: { [key]: Number(query[key]) }};
-      console.log(fuk);
       return { where: { ...acc.where }, tag: { [key]: Number(query[key]) }};
     }
     return acc;
