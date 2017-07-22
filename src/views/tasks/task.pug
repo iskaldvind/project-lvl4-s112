@@ -1,0 +1,48 @@
+extends /layouts/application.pug
+
+block content
+    if isSignedIn()
+        .container
+            table.table
+                thead.thead-bordered
+                    tbody
+                        tr
+                            th(scope='row') ID
+                            td= task.id
+                        tr
+                            th(scope='row') Task
+                            td= task.name
+                        tr
+                            th(scope='row') Tags
+                            td= task.tags
+                        tr
+                            th(scope='row') Created At
+                            td= task.createdAt
+                        tr
+                            th(scope='row') Status
+                            td= task.status
+                        tr
+                            th(scope='row') Created By
+                            td= task.creator
+                        tr
+                            th(scope='row') Assigned To
+                            td= task.assignedTo
+                        tr
+                            th(scope='row') Description
+                            td= task.description
+            form(action=urlFor('root') method='get')
+                button.btn.btn-block(type='submit') Not implemented yet
+            form(action=urlFor('task_delete', { id: task.id }) method='post')
+                button.btn.btn-block.btn-danger.mt-5(
+                type='submit'
+                name='newMethod'
+                data-toggle='confirmation'
+                data-btn-cancel-label="No, thanks"
+                data-btn-cancel-icon="glyphicon glyphicon-share-alt"
+                data-btn-cancel-class="btn-success"
+                data-btn-ok-label="Delete my account"
+                data-btn-ok-icon="glyphicon glyphicon-ban-circle"
+                data-btn-ok-class="btn-danger"
+                data-title="Please confirm account deletion"
+                data-content="This operation cannot be undone"
+                value='delete') Delete task

@@ -19,7 +19,7 @@ build:
 	rm -rf dist
 	npm run build
 
-test:
+test: init
 	NODE_ENV=test npm test
 
 check-types:
