@@ -29,7 +29,7 @@ export default (router, { User }) => {
         ctx.redirect(router.url('session_new'));
       }
     })
-    .delete('session_exit', '/session', (ctx) => {
+    .delete('session_exit', '/sessions', (ctx) => {
       ctx.session = {};
       ctx.redirect(router.url('root'));
     });

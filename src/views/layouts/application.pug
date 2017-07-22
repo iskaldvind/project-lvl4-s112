@@ -21,7 +21,8 @@ html(lang="en")
                             a.nav-link(href=urlFor('users_list')) Users
                     ul.navbar-nav
                         li.nav-item
-                            a.nav-link(href=urlFor('session_exit') data-method='ololo' rel='nofollow') Sign Out
+                            form(action=urlFor('session_exit') method='post')
+                                button.btn(type='submit' name='_method' value='delete') Log out
                 else
                     ul.navbar-nav.mr-auto
                     ul.navbar-nav.navbar-right
