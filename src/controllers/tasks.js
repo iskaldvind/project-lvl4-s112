@@ -71,10 +71,9 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     .delete('task_delete', '/tasks/:id', async (ctx) => {
       const id = Number(ctx.params.id);
       if (ctx.state.signedId() !== undefined) {
-        const task = await Task.findById(id);
         try {
-          await task.destroy({
-            where: {id},
+          await Task.destroy({
+            where: { id },
           });
           ctx.flash.set('Task has been deleted');
           ctx.redirect(router.url('task_list'));
