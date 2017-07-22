@@ -38,8 +38,8 @@ export default () => {
   });
 
   app.use(methodOverride((req) => {
-    if (req.body && typeof req.body === 'object' && 'newMethod' in req.body) {
-      return req.body.newMethod;
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+      return req.body._method;
     }
     return '';
   }));
