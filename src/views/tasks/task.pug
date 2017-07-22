@@ -33,4 +33,4 @@ block content
             form(action=urlFor('root') method='get')
                 button.btn.btn-block(type='submit') Not implemented yet
             form(action=urlFor('task_delete', { id: task.id }) method='post')
-                button.btn.btn-block.btn-danger.mt-5(type='submit' value='delete') Delete task
+                button.btn.btn-block.btn-danger.mt-5(type='submit' name='_method' value='delete') Delete task
