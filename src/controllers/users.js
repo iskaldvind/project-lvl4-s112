@@ -34,6 +34,8 @@ export default (router, { User }) => {
     .patch('user_update', '/users/:id', async (ctx) => {
       const id = Number(ctx.params.id);
       const form = ctx.request.body.form;
+      console.log('hey111111111');
+      console.log(form);
       const user = await User.findById(id);
       if (ctx.state.signedId() !== undefined && ctx.state.signedId() === id) {
         try {
