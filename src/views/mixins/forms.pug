@@ -22,11 +22,11 @@ mixin textarea(f, property)
         if f.errors[property]
             .form-control-feedback= f.errors[property].map(({message}) => message).join('. ')
 
-mixin select(f, property, users, defaultId)
+mixin select(f, property, users, creator, creatorId)
     - const value = f.object[property] === undefined ? '' : f.object[property]
     .form-group(class=(f.errors[property] && 'has-danger'))
         select(name=getInputName(f, property) class='form-control' value=`${value}`)
-            option(selected= defaultId) Assigned to
+            option(value= creatorId selected='selected') Assigned to
             each user in users
                 option(value= user.id)= user.fullName
         if f.errors[property]
