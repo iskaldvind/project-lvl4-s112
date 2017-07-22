@@ -9,17 +9,17 @@ export default (router, { User }) => {
       ctx.render('sessions/new', { f: buildFormObj(data) });
     })
     .post('session_enter', '/sessions', async (ctx) => {
-      // console.log('session_enter');
+      console.log('session_enter');
       const { email, password } = ctx.request.body.form;
-      // console.log(`email password: ${email} ${password}`);
+      console.log(`email password: ${email} ${password}`);
       const user = await User.findOne({
         where: {
           email,
         },
       });
-      // console.log(`user: ${user}`);
+      console.log(`user: ${user}`);
       if (user && user.passwordDigest === encrypt(password)) {
-        // console.log('session valid');
+        console.log('session valid');
         ctx.session.userId = user.id;
         ctx.session.userName = user.fullName;
         ctx.redirect(router.url('root'));
