@@ -51,7 +51,7 @@ export default (router, { User }) => {
           console.log('AWOOOOOO');
           console.log(e);
           ctx.flash.set('Something bad have happened');
-          ctx.render('users/profile', { f: buildFormObj(user, e), user });
+          ctx.render(`users/:${id}`, { f: buildFormObj(user, e), user });
         }
       } else {
         ctx.flash.set('You must log in as specified user to update account');
