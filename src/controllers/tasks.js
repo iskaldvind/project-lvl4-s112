@@ -28,7 +28,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const form = ctx.request.body.form;
       form.creatorId = ctx.state.signedId();
       const users = await User.findAll();
-      const filledForm = form.tags !== '' ? form : { ...form, tags: 'AAAA'};
+      const filledForm = form.tags !== '' ? form : { ...form, tags: '    '};
       const tags = filledForm.tags.split(' ');
       console.log(tags);
       const task = Task.build(filledForm);
