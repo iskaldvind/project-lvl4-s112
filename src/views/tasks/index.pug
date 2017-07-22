@@ -12,7 +12,7 @@ block content
             form(action=urlFor('tasks_list'))
                 button.btn.btn-block.btn-outline-primary(type='submit' name='assignedToId' value=signedId()) Assigned to me
         .py-1
-            +formFor(f, '', {url: urlFor('task_list'), method: 'get'})
+            +formFor(f, 'select_form', { url: urlFor('task_list') })
                 +selectTags(tags)
                 +selectStatus(statuses)
                 +selectUsers(users)

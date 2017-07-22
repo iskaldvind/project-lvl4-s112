@@ -35,20 +35,20 @@ mixin select(f, property, users)
 mixin selectTags(tags)
     .form-group
         select(class='form-control' name='tag')
-            option(selected='') Has tag
+            option(selected='') All tags
             each tag in tags
                 option(value= tag.id)= tag.name
 
 mixin selectStatus(statuses)
     .form-group
         select(class='form-control' name='status')
-            option(selected='') Has status
+            option(selected='') All statuses
             each status in statuses
                 option(value= status.id)= status.name
 
 mixin selectUsers(users)
     .form-group
         select(class='form-control' name='user')
-            option(selected='') Assigned to
+            option(selected='') All assignee
             each user in users
                 option(value= user.id)= user.fullName
