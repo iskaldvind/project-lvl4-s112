@@ -28,8 +28,13 @@ export default (router, { User }) => {
     })
     .get('user_edit', '/users/:id/edit', async (ctx) => {
       const id = Number(ctx.params.id);
-      const user = await User.findById(id);
-      ctx.render('users/edit', { f: buildFormObj(user), id });
+      if (id !== ctx.session.signedId()) {
+        ctx.flash.set('You are not allowed to edit others\'s profiles');
+        ctx.redirect(router.url('user_profile', id));
+      } else {
+        const user = await User.findById(id);
+        ctx.render('users/edit', {f: buildFormObj(user), id});
+      }
     })
     .patch('user_update', '/users/:id', async (ctx) => {
       const id = Number(ctx.params.id);
