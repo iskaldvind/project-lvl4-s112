@@ -34,11 +34,12 @@ block content
                 - const value = f.object[property] === undefined ? '' : f.object[property]
                 .form-group(class=(f.errors[property] && 'has-danger'))
                     select(name='statusId' class='form-control' value=`${value}`)
+                        option(selected= 1) Change status
                         each status in statuses
                             option(value= status.id)= status.name
                     input(type='hidden' name='_method' value='PATCH')
                     input(type='hidden' name='taskId' value= task.id)
-                    button.btn.btn-block.mt-5 Update
+                    button.btn.btn-block Update
 
             form(action=urlFor('task_delete', { id: task.id }) method='post')
                 button.btn.btn-block.btn-danger.mt-5(type='submit' name='_method' value='delete') Delete task
