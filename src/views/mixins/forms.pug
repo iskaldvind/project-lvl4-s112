@@ -26,7 +26,7 @@ mixin select(f, property, users)
     - const value = f.object[property] === undefined ? '' : f.object[property]
     .form-group(class=(f.errors[property] && 'has-danger'))
         select(name=getInputName(f, property) class='form-control' value=`${value}`)
-            option(selected=1) Assigned to
+            option(selected= 1) Assigned to
             each user in users
                 option(value= user.id)= user.fullName
         if f.errors[property]
@@ -46,14 +46,14 @@ mixin selectTags(tags)
 
 mixin selectStatus(statuses)
     .form-group
-        select(class='form-control' name='status')
+        select(class='form-control' name='statusId')
             option(selected='') All statuses
             each status in statuses
                 option(value= status.id)= status.name
 
 mixin selectUsers(users)
     .form-group
-        select(class='form-control' name='user')
+        select(class='form-control' name='assignedToId')
             option(selected='') All assignee
             each user in users
                 option(value= user.id)= user.fullName
