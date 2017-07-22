@@ -40,7 +40,7 @@ export default (router, { User }) => {
           await user.update(form);
           ctx.flash.set('User profile has been updated');
           ctx.session.userName = user.fullName;
-          ctx.render('users/profile', { user });
+          ctx.redirect(router.url('user_profile', id));
         } catch (e) {
           ctx.render(`users/edit`, { f: buildFormObj(user, e), id });
         }
