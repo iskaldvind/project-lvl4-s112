@@ -45,3 +45,10 @@ mixin selectStatus(statuses)
             option(selected='') Has status
             each status in statuses
                 option(value= status.id)= status.name
+
+mixin selectUsers(users)
+    .form-group
+        select(class='form-control' name='user')
+            option(selected='') Assigned to
+            each user in users
+                option(value= user.id)= user.fullName
