@@ -30,7 +30,7 @@ block content
                         tr
                             th(scope='row') Description
                             td= task.description
-            form(action=urlFor('task_update', {id: task.id}), method='post')
+            form(action=urlFor('tasks#update', {id: task.id}), method='post')
                 - const value = f.object[property] === undefined ? '' : f.object[property]
                 .form-group(class=(f.errors[property] && 'has-danger'))
                     select(name='statusId' class='form-control' value=`${value}`)
@@ -41,5 +41,5 @@ block content
                     input(type='hidden' name='taskId' value= task.id)
                     button.btn.btn-block Update
 
-            form(action=urlFor('task_delete', { id: task.id }) method='post')
+            form(action=urlFor('tasks#destroy', { id: task.id }) method='post')
                 button.btn.btn-block.btn-danger.mt-5(type='submit' name='_method' value='delete') Delete task

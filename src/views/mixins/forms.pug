@@ -33,7 +33,7 @@ mixin select(f, property, users, creator, creatorId)
             .form-control-feedback= f.errors[property].map(({message}) => message).join('. ')
 
 mixin formSearch()
-    form(action=urlFor('tasks_list') method='get')
+    form(action=urlFor('tasks#index') method='get')
         block
 
 
