@@ -43,7 +43,10 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const statuses = await TaskStatus.findAll();
       console.log('!!!!!!');
       console.log(statuses);
-      ctx.render('tasks/task', { task, tags, statuses });
+      console.log(' === === ==');
+      console.log(statuses[0]);
+      console.log(statuses[0].id);
+      ctx.render('tasks/task', { f: buildFormObj(task), task, tags, statuses });
     })
     /*
     .get('user_edit', '/users/:id/edit', async (ctx) => {
