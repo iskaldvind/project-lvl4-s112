@@ -14,9 +14,11 @@ block content
         form(action=urlFor('tasks_list'))
         .form-gdata-group
                 select.form-control.btn-block
-                    option(selected='') ts
+                    option(selected='') Has tag
                 select.form-control.btn-block
-                    option(selected='') ts2
+                    option(selected='') Has status
+                select.form-control.btn-block
+                    option(selected='') Assigned to
                 button.btn.btn-block Search
 
     table.table.table-stripped
