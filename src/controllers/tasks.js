@@ -41,38 +41,15 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const task = await getTaskData(taskFull);
       const tags = task.tags;
       const statuses = await TaskStatus.findAll();
-      console.log('!!!!!!');
-      console.log(statuses);
-      console.log(' === === ==');
-      console.log(statuses[0]);
-      console.log(statuses[0].id);
       ctx.render('tasks/task', { f: buildFormObj(task), task, tags, statuses });
     })
-    /*
-    .get('user_edit', '/users/:id/edit', async (ctx) => {
-      const id = Number(ctx.params.id);
-      const user = await User.findById(id);
-      ctx.render('users/edit', { f: buildFormObj(user), id });
-    })
-    */
     .patch('task_update', '/tasks/:id', async (ctx) => {
-      const id = Number(ctx.params.id);
-      const form = ctx.request.body.form;
+      const { statusId, taskId } = ctx.request.body;
+      const task = Task.findById(Number(taskId));
+      task.setStatus(Number(statusId));
+      ctx.flash.set('Task was sucessfully updated');
+      ctx.redirect(router.url('tasks_list'));
       const user = await User.findById(id);
-      if (ctx.state.signedId() !== undefined && ctx.state.signedId() === id) {
-        try {
-          await user.update(form);
-          ctx.flash.set('User profile has been updated');
-          ctx.session.userName = user.fullName();
-          ctx.render('users/profile', { user });
-        } catch (e) {
-          ctx.flash.set('Something bad have happened');
-          ctx.render('users/profile', { f: buildFormObj(user, e) });
-        }
-      } else {
-        ctx.flash.set('You must log in as specified user to update account');
-        ctx.render('users/profile', { f: buildFormObj(user) });
-      }
     })
     .delete('task_delete', '/tasks/:id', async (ctx) => {
       const id = Number(ctx.params.id);
