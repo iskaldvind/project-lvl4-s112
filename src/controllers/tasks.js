@@ -37,7 +37,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         ctx.redirect(router.url('tasks_list'));
       } catch (e) {
         console.log('++++++++++++++++++++');
-        ctx.render('tasks/new', { f: buildFormObj(user, e), users });
+        ctx.render('tasks/new', { f: buildFormObj(task, e), users });
       }
     })
     .get('task', '/tasks/:id', async (ctx) => {
