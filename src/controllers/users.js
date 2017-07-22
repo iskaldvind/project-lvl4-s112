@@ -18,8 +18,6 @@ export default (router, { User }) => {
         ctx.flash.set('User has been created');
         ctx.redirect(router.url('session_new'));
       } catch (e) {
-        console.log('!!!!!!!!!!!!!!!!!');
-        console.log(e);
         ctx.render('users/new', { f: buildFormObj(user, e) });
       }
     })
@@ -36,21 +34,14 @@ export default (router, { User }) => {
     .patch('user_update', '/users/:id', async (ctx) => {
       const id = Number(ctx.params.id);
       const form = ctx.request.body.form;
-      console.log('hey111111111');
-      console.log(form);
       const user = await User.findById(id);
       if (ctx.state.signedId() !== undefined && ctx.state.signedId() === id) {
         try {
           await user.update(form);
-          console.log('HHHEEEEEREEEE');
-          console.log(user);
           ctx.flash.set('User profile has been updated');
           ctx.session.userName = user.fullName;
           ctx.render('users/profile', { user });
         } catch (e) {
-          console.log('AWOOOOOO');
-          console.log(e);
-          ctx.flash.set('Something bad have happened');
           ctx.render(`users/edit`, { f: buildFormObj(user, e), id });
         }
       } else {
