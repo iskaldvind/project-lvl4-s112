@@ -65,11 +65,11 @@ export default (router, { User }) => {
           where: { id },
         });
         ctx.session = {};
-        ctx.flash.set('Account has been deleted');
+        ctx.flash.set('Your account has been deleted');
         ctx.redirect(router.url('root'));
       } else {
-        ctx.flash.set('You must log in as specified user to delete account');
-        ctx.redirect(router.url('root'));
+        ctx.flash.set('You are not allowed to delete other\'s profiles');
+        ctx.redirect(router.url('user_profile', id));
       }
     });
 };
