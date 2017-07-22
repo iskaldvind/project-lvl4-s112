@@ -24,7 +24,6 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       ctx.render('tasks/new', { f: buildFormObj(task), users , creator, creatorId});
     })
     .post('task_save', '/tasks/new', async (ctx) => {
-      console.log('hui ============================');
       const form = ctx.request.body.form;
       form.creatorId = ctx.state.signedId();
       const users = await User.findAll();
