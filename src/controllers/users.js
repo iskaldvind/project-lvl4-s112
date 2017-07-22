@@ -4,7 +4,7 @@ export default (router, { User }) => {
   router
     .get('users_list', '/users', async (ctx) => {
       const usersFull = await User.findAll();
-      const users = getUserData(usersFull);
+      const users = usersFull.map(user => getUserData(users));
       ctx.render('users', { users });
     })
     .get('user_reg', '/users/new', async (ctx) => {
