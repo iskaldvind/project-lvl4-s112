@@ -45,13 +45,10 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     })
     .patch('task_update', '/tasks/:id', async (ctx) => {
       const { statusId, taskId } = ctx.request.body;
-      const task = Task.findById(Number(taskId));
-      console.log('@@@@@');
-      console.log(task);
+      const task = await Task.findById(Number(taskId));
       task.setStatus(Number(statusId));
       ctx.flash.set('Task was sucessfully updated');
       ctx.redirect(router.url('tasks_list'));
-      const user = await User.findById(id);
     })
     .delete('task_delete', '/tasks/:id', async (ctx) => {
       const id = Number(ctx.params.id);
