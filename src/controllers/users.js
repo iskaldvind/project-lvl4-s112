@@ -28,7 +28,7 @@ export default (router, { User }) => {
     })
     .get('user_edit', '/users/:id/edit', async (ctx) => {
       const id = Number(ctx.params.id);
-      if (id !== ctx.session.signedId()) {
+      if (id !== ctx.state.signedId()) {
         ctx.flash.set('You are not allowed to edit others\'s profiles');
         ctx.redirect(router.url('user_profile', id));
       } else {
