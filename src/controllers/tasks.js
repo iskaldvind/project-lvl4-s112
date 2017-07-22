@@ -41,10 +41,14 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     .get('task', '/tasks/:id', async (ctx) => {
       const taskId = Number(ctx.params.id);
       const taskFull = await Task.findById(taskId);
-      const task = await getTaskData(taskFull);
-      const tags = task.tags;
-      const statuses = await TaskStatus.findAll();
-      ctx.render('tasks/task', { f: buildFormObj(task), task, tags, statuses });
+      if (taskFull === null || taskFull.createdAt === undefined) {
+        ctx.redirect(router.url('404'));
+      } else {
+        const task = await getTaskData(taskFull);
+        const tags = task.tags;
+        const statuses = await TaskStatus.findAll();
+        ctx.render('tasks/task', { f: buildFormObj(task), task, tags, statuses });
+      }
     })
     .patch('task_update', '/tasks/:id', async (ctx) => {
       const { statusId, taskId } = ctx.request.body;

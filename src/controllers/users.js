@@ -24,7 +24,11 @@ export default (router, { User }) => {
     .get('user_profile', '/users/:id', async (ctx) => {
       const id = Number(ctx.params.id);
       const user = await User.findById(id);
-      ctx.render('users/profile', { user });
+      if (user === null || user.email === undefined) {
+        ctx.redirect(router.url('404'));
+      } else {
+        ctx.render('users/profile', { user });
+      }
     })
     .get('user_edit', '/users/:id/edit', async (ctx) => {
       const id = Number(ctx.params.id);
