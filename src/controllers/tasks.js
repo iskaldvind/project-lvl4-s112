@@ -76,7 +76,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
             where: { id },
           });
           ctx.flash.set('Task has been deleted');
-          ctx.redirect(router.url('task_list'));
+          ctx.redirect(router.url('tasks_list'));
         } catch (e) {
           ctx.flash.set('Task not found');
           ctx.render('tasks/task', { f: buildFormObj(task, e) });
@@ -86,6 +86,4 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         ctx.redirect(router.url('sessions_enter'));
       }
     });
-    /*
-    */
 };
