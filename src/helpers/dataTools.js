@@ -29,6 +29,16 @@ export const getTaskData = async (task) => {
   };
 };
 
+export const getUserData = (user) => {
+  const createdAtLong = user.createdAt;
+  const createdAtShort = dateFormat(createdAtLong, 'isoUtcDateTime');
+  return {
+    fullName: user.fullName,
+    email: user.email,
+    createdAt: createdAtShort,
+  };
+};
+
 export const getQueryParams = query =>
   Object.keys(query).reduce((acc, key) => {
     if (query[key] !== 'All' && query[key] !== '') {
