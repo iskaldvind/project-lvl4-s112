@@ -18,7 +18,7 @@ import dateFormat from 'dateformat';
 import getWebpackConfig from '../webpack.config.babel';
 import addRoutes from './controllers';
 import container from './container';
-import idFormat from './helpers/dataTools';
+import { formatId } from './helpers/dataTools';
 
 export default () => {
   const app = new Koa();
@@ -70,7 +70,7 @@ export default () => {
       { _ },
       { urlFor: (...args) => router.url(...args) },
       { formatDate: date => dateFormat(date, 'isoUtcDateTime')},
-      { formatId: id => idFormat(id) }
+      { formatId }
     ],
   });
   pug.use(app);

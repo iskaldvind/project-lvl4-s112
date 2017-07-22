@@ -27,7 +27,7 @@ export const getTaskData = async (task) => {
   };
 };
 
-const taskIdFormat = id => `${'0'.repeat(6 - id.length)}${id}`;
+export const formatId = id => `${'0'.repeat(6 - id.length)}${id}`;
 
 export const getQueryParams = query =>
   Object.keys(query).reduce((acc, key) => {
