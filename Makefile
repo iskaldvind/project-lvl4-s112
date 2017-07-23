@@ -34,7 +34,7 @@ publish:
 deploy:
 	npm --no-git-tag-version version patch
 	git add .
-	git commit -m 'good commit'
+	git commit
 	git push
 	git push heroku master
 
