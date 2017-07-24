@@ -49,7 +49,8 @@ const filterByTag = (tasks, tagId) =>
 export const filterTasks = async (Task, query = {}) => {
   const { where, tag } = getFilterParams(query);
   const tasksFilteredByWhere = await Task.findAll({ where });
-  const formattedTasksData = await Promise.all(tasksFilteredByWhere.map(async task => getTaskData(task)));
+  const formattedTasksData =
+    await Promise.all(tasksFilteredByWhere.map(async task => getTaskData(task)));
   return Object.keys(tag).length === 0 ?
     formattedTasksData :
     filterByTag(formattedTasksData, tag.tagId);
