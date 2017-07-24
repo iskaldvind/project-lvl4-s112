@@ -48,6 +48,18 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         ctx.render('tasks/task', { f: buildFormObj(task), task, tags, statuses });
       }
     })
+    .get('tasks#edit', '/tasks/:id/edit', async (ctx) => {
+      const taskId = Number(ctx.params.id);
+      const requestedTask = await Task.findById(taskId);
+      if (!isExist(requestedTask)) {
+        ctx.redirect(router.url('404'));
+      } else {
+        const task = await getTaskData(requestedTask);
+        const tags = (task.tags).split(',').filter(tag => tag !== '-').join(' ');
+        const users = await User.findAll();
+        ctx.render('tasks/edit', { f: buildFormObj(task), task, tags, users });
+      }
+    })
     .patch('tasks#update', '/tasks/:id', async (ctx) => {
       const { statusId, taskId } = ctx.request.body;
       const task = await Task.findById(Number(taskId));

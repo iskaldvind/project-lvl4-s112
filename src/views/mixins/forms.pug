@@ -57,3 +57,20 @@ mixin selectUsers(users)
             option(selected='') All assignee
             each user in users
                 option(value= user.id)= user.fullName
+
+mixin inputTags(tags, e)
+    - const value = tags
+    .form-group(class=('tags' && 'has-danger'))
+        input(name='form[tags]' class='form-control' type='text' value=`${value}` placeholder=`${tags}`)
+        if e
+            .form-control-feedback= e.message
+
+mixin reselect(f, property, users)
+    - const value = f.object[property] === undefined ? '' : f.object[property]
+    .form-group(class=(f.errors[property] && 'has-danger'))
+        select(name=getInputName(f, property) class='form-control' value=`${value}`)
+            option(value= f.object[assignedToID] selected='selected')= f.object[assignedTo]
+            each user in users
+                option(value= user.id)= user.fullName
+        if f.errors[property]
+            .form-control-feedback= f.errors[property].map(({message}) => message).join('. ')

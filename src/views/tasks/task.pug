@@ -39,7 +39,9 @@ block content
                             option(value= status.id)= status.name
                     input(type='hidden' name='_method' value='PATCH')
                     input(type='hidden' name='taskId' value= task.id)
-                    button.btn.btn-block Update
+                    button.btn.btn-block Update Status
+            form(action=urlFor('tasks#edit', {id: task.id}) method='get')
+                button.btn.btn-block(type='submit') Edit task
 
             form(action=urlFor('tasks#destroy', { id: task.id }) method='post')
                 button.btn.btn-block.btn-danger.mt-5(type='submit' name='_method' value='delete') Delete task
