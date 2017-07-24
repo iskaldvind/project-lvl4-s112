@@ -49,15 +49,15 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       }
     })
     .get('tasks#edit', '/tasks/:id/edit', async (ctx) => {
-      const taskId = Number(ctx.params.id);
-      const requestedTask = await Task.findById(taskId);
+      const id = Number(ctx.params.id);
+      const requestedTask = await Task.findById(id);
       if (!isExist(requestedTask)) {
         ctx.redirect(router.url('404'));
       } else {
         const task = await getTaskData(requestedTask);
         const tags = (task.tags).filter(tag => tag !== '-').join(' ');
         const users = await User.findAll();
-        ctx.render('tasks/edit', { f: buildFormObj(task), task, tags, users });
+        ctx.render('tasks/edit', { f: buildFormObj(task), task, tags, users, id });
       }
     })
     .patch('tasks#update', '/tasks/:id', async (ctx) => {
