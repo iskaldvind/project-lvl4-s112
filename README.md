@@ -10,4 +10,4 @@ make install
 https://murmuring-earth-80718.herokuapp.com/
 
 ### To Do:
-- Split current "Task wiew & edit" to "Task wiew" and improved "Task edit"
+- Split current "Task view & edit" to "Task view" and improved "Task edit"
