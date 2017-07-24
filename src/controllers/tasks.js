@@ -57,6 +57,9 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         const task = await getTaskData(requestedTask);
         const tags = (task.tags).filter(tag => tag !== '-').join(' ');
         const users = await User.findAll();
+        console.log('***********');
+        const k = buildFormObj(task);
+        console.log(k.object.assignedToId);
         ctx.render('tasks/edit', { f: buildFormObj(task), task, tags, users, id });
       }
     })

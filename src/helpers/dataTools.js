@@ -29,7 +29,7 @@ export const getTaskData = async (task) => {
     tagsIds,
     createdAt,
     creatorId,
-    assignedToID,
+    assignedToId,
     assignedTo,
   };
 };
