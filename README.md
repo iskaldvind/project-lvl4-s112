@@ -12,3 +12,5 @@ https://murmuring-earth-80718.herokuapp.com/
 ### To Do:
 - Split current "Task view & edit" to "Task view" and improved "Task edit"
 - Make forms with labels instead of placeholders
+- Check for unnecesarry data passed in routes
+- Bring more coffee to work
