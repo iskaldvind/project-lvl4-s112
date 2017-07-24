@@ -53,7 +53,7 @@ export const filterTasks = async (Task, query = {}) => {
   console.log(tag);
   const tasksFilteredByWhere = await Task.findAll({ where });
   console.log(tasksFilteredByWhere);
-  const formattedTasksData = await getTaskData(tasksFilteredByWhere);
+  const formattedTasksData = await Promise.all(tasksFilteredByWhere.map(async task => getTaskData(task)));
   console.log(formattedTasksData);
   console.log(filterByTag(formattedTasksData, tag.tagId));
   console.log('***********');
