@@ -5,7 +5,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
   router
     .get('tasks#index', '/tasks', async (ctx) => {
       const { query } = url.parse(ctx.request.url, true);
-      const tasks = filterTasks(Task, query);
+      const tasks = await filterTasks(Task, query);
       const tags = await Tag.findAll();
       const statuses = await TaskStatus.findAll();
       const users = await User.findAll();
