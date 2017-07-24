@@ -7,6 +7,6 @@ block content
             +input(f, 'name')
             +input(f, 'tags')
             +textarea(f, 'description')
-            +reselect(f, 'assignedToId', users)
+            +reselect(f, 'assignedToId', users, f.object[assignedTo], f.object[assignedToId])
             input(type='hidden', name='_method' value='patch')
             +button(f, 'Save')
