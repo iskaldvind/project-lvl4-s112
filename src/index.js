@@ -12,7 +12,7 @@ import session from 'koa-generic-session';
 import flash from 'koa-flash-simple';
 import _ from 'lodash';
 import methodOverride from 'koa-methodoverride';
-import rollbar from 'rollbar';
+import Rollbar from 'rollbar';
 import dotenv from 'dotenv';
 import dateFormat from 'dateformat';
 import getWebpackConfig from '../webpack.config.babel';
@@ -75,8 +75,8 @@ export default () => {
   });
   pug.use(app);
 
-  rollbar.init(process.env.ROLLBAR_TOKEN);
-  app.use(rollbar.errorHandler(process.env.ROLLBAR_TOKEN));
+  const rollbar = new Rollbar(process.env.ROLLBAR_TOKEN);
+  app.use(rollbar.errorHandler());
   dotenv.config();
   return app;
 };
