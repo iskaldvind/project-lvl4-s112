@@ -11,7 +11,7 @@ export const buildFormObj = (object, error = { errors: [] }) => ({
 export const getTaskData = async (task) => {
   const creator = await task.getCreator();
   const creatorId = creator.id;
-  const assignedToID = await task.getAssignedTo();
+  const assignedToId = await task.getAssignedTo();
   const assignedTo = assignedToID.fullName;
   const status = await task.getStatus();
   const tags = await task.getTags();
