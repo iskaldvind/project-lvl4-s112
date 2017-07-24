@@ -25,6 +25,7 @@ export const getTaskData = async (task) => {
     description: task.dataValues.description,
     creator: creator.fullName,
     status: status.name,
+    statusId: status.id,
     tags: tagsNames,
     tagsIds,
     createdAt,

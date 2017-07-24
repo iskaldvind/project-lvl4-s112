@@ -10,4 +10,5 @@ block content
             +reselect(f, 'assignedToId', users, f.object.assignedTo, f.object.assignedToId)
             input(type='hidden', name='_method' value='patch')
             input(type='hidden' name='taskId' value= f.object.id)
+            input(type='hidden' name='statusId' value= f.object.statusId)
             +button(f, 'Save')
