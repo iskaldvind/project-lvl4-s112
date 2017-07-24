@@ -32,7 +32,7 @@ export const getTaskData = async (task) => {
   };
 };
 
-export const getQueryParams = query =>
+const getFilterParams = query =>
   Object.keys(query).reduce((acc, key) => {
     if (query[key].split(' ')[0] !== 'All' && query[key] !== '') {
       if (key !== 'tagId') {
@@ -43,5 +43,22 @@ export const getQueryParams = query =>
     return acc;
   }, { where: {}, tag: {} });
 
-export const filterByTag = (tasks, tagId) =>
+const filterByTag = (tasks, tagId) =>
   tasks.filter(task => task.tagsIds.indexOf(tagId) !== -1);
+
+export const filterTasks = async (Task, query = {}) => {
+  const { where, tag } = getFilterParams(query);
+  const tasksFilteredByWhere = await Task.findAll({ where });
+  const formattedTasksData = getTaskData(tasksFilteredByWhere);
+  return Object.keys(tag).length === 0 ?
+    formattedTasksData :
+    filterByTag(formattedTasksData, tag.tagId);
+};
+
+export const createTags = async (tags, Tag, task) => {
+  await tags.map(tag => Tag.findOne({ where: { name: tag } })
+    .then(async result => (result ? task.addTag(result) :
+      task.createTag({ name: tag }))));
+};
+
+export const isExist = entity => !(entity === null || entity.createdAt === undefined);
