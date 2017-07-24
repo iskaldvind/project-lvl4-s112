@@ -55,7 +55,10 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         ctx.redirect(router.url('404'));
       } else {
         const task = await getTaskData(requestedTask);
-        const tags = (task.tags).split(',').filter(tag => tag !== '-').join(' ');
+        const tagos = (task.tags);
+        console.log('**********');
+        console.log(tagos);
+        const tags = tagos.split(',').filter(tag => tag !== '-').join(' ');
         const users = await User.findAll();
         ctx.render('tasks/edit', { f: buildFormObj(task), task, tags, users });
       }
