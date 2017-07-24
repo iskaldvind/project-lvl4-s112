@@ -66,13 +66,17 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       }
     })
     .patch('tasks#update', '/tasks/:id', async (ctx) => {
-      const { statusId, taskId } = ctx.request.body;
-      console.log('**********************');
-      console.log(ctx.request.body);
+      const { statusId, taskId, form } = ctx.request.body;
       const task = await Task.findById(Number(taskId));
-      task.setStatus(Number(statusId));
-      ctx.flash.set('Task was sucessfully updated');
-      ctx.redirect(router.url('tasks#index'));
+      try {
+        task.setStatus(Number(statusId));
+        await task.update(form);
+        ctx.flash.set('Task was sucessfully updated');
+        ctx.redirect(router.url('tasks#index'));
+      } catch (e) {
+        const users = await User.findAll();
+        ctx.render('tasks/edit', { f: buildFormObj(user, e), task, tags, users, id });
+      }
     })
     .delete('tasks#destroy', '/tasks/:id', async (ctx) => {
       const id = Number(ctx.params.id);
