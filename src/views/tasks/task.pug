@@ -17,7 +17,7 @@ block content
                             td= task.tags
                         tr
                             th(scope='row') Created At
-                            td= task.createdAt
+                            td= formatDate(task.createdAt)
                         tr
                             th(scope='row') Status
                             td= task.status
