@@ -67,9 +67,10 @@ mixin inputTags(tags, e)
 
 mixin reselect(f, property, users)
     - const value = f.object[property] === undefined ? '' : f.object[property]
+    - const defaultVal = f.object[assignedTo]
     .form-group(class=(f.errors[property] && 'has-danger'))
         select(name=getInputName(f, property) class='form-control' value=`${value}`)
-            option(value= f.object[assignedToID] selected='selected')= f.object[assignedTo]
+            option(value= f.object[assignedToID] selected='selected')= defaultVal
             each user in users
                 option(value= user.id)= user.fullName
         if f.errors[property]

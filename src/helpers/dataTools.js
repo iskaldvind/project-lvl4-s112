@@ -12,6 +12,7 @@ export const getTaskData = async (task) => {
   const creator = await task.getCreator();
   const creatorId = creator.id;
   const assignedToID = await task.getAssignedTo();
+  const assignedTo = assignedToID.fullName;
   const status = await task.getStatus();
   const tags = await task.getTags();
   const tagsNames = tags.map(tag => tag.name);
@@ -23,13 +24,13 @@ export const getTaskData = async (task) => {
     name: task.dataValues.name,
     description: task.dataValues.description,
     creator: creator.fullName,
-    assignedTo: assignedToID.fullName,
     status: status.name,
     tags: tagsNames,
     tagsIds,
     createdAt,
     creatorId,
     assignedToID,
+    assignedTo,
   };
 };
 
