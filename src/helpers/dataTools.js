@@ -48,15 +48,8 @@ const filterByTag = (tasks, tagId) =>
 
 export const filterTasks = async (Task, query = {}) => {
   const { where, tag } = getFilterParams(query);
-  console.log('###################');
-  console.log(where);
-  console.log(tag);
   const tasksFilteredByWhere = await Task.findAll({ where });
-  console.log(tasksFilteredByWhere);
   const formattedTasksData = await Promise.all(tasksFilteredByWhere.map(async task => getTaskData(task)));
-  console.log(formattedTasksData);
-  console.log(filterByTag(formattedTasksData, tag.tagId));
-  console.log('***********');
   return Object.keys(tag).length === 0 ?
     formattedTasksData :
     filterByTag(formattedTasksData, tag.tagId);
