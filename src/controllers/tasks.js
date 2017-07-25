@@ -25,11 +25,11 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const formWithCreatorId = { ...requestForm, creatorId };
       const users = await User.findAll();
       const form = formWithCreatorId.tags !== '' ? formWithCreatorId : { ...formWithCreatorId, tags: '-' };
-      // const tags = form.tags.split(' ');
+      const tags = form.tags.split(' ');
       const task = Task.build(form);
       try {
         await task.save();
-        await updateTags(form.tags, Tag, task);
+        await updateTags(tags, Tag, task);
         ctx.flash.set('Task has been created');
         ctx.redirect(router.url('tasks#index'));
       } catch (e) {
