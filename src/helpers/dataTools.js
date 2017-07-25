@@ -105,7 +105,7 @@ export const updateTags = async (tags, Tag, task) => {
       const allTags = await Tag.findAll();
       console.log('EEEEEEEEEEEEEE all tags after deletion from task');
       console.log(allTags);
-      const obsoleteTag = await Tag.findOne({ where: { name: result } });
+      const obsoleteTag = await Tag.findOne({ where: { name: result.name } });
       console.log('MMMMMMMMMMMMMMMMMMMM obsolete tag:');
       console.log(obsoleteTag);
       const id = obsoleteTag.id;
