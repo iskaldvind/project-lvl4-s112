@@ -1,5 +1,5 @@
 import url from 'url';
-import { buildFormObj, getTaskData, filterTasks, updateTags, isExist, deleteObsoleteTags } from '../helpers/dataTools';
+import { buildFormObj, getTaskData, filterTasks, updateTags, isExist } from '../helpers/dataTools';
 
 export default (router, { Task, User, Tag, TaskStatus }) => {
   router
@@ -63,6 +63,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     .patch('tasks#update', '/tasks/:id', async (ctx) => {
       const { statusId, taskId, form } = ctx.request.body;
       const task = await Task.findById(Number(taskId));
+      const id = ctx.params.id;
       try {
         task.setStatus(Number(statusId));
         const updatedForm = form.tags !== '' ? form : { ...form, tags: '-' };
@@ -73,7 +74,8 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         ctx.redirect(router.url('tasks#index'));
       } catch (e) {
         const users = await User.findAll();
-        ctx.render('tasks/edit', { f: buildFormObj(user, e), task, tags, users, id });
+        const tags = await Tag.findAll();
+        ctx.render('tasks/edit', { f: buildFormObj(task, e), task, tags, users, id });
       }
     })
     .delete('tasks#destroy', '/tasks/:id', async (ctx) => {
