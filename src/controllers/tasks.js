@@ -25,11 +25,11 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const formWithCreatorId = { ...requestForm, creatorId };
       const users = await User.findAll();
       const form = formWithCreatorId.tags !== '' ? formWithCreatorId : { ...formWithCreatorId, tags: '-' };
-      const tags = form.tags.split(' ');
+      // const tags = form.tags.split(' ');
       const task = Task.build(form);
       try {
         await task.save();
-        await updateTags(tags, Tag, task);
+        await updateTags(form.tags, Tag, task);
         ctx.flash.set('Task has been created');
         ctx.redirect(router.url('tasks#index'));
       } catch (e) {
@@ -72,7 +72,9 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       console.log(form);
       try {
         task.setStatus(Number(statusId));
-        await task.update(form);
+        const updatedForm = form.tags !== '' ? form : { ...form, tags: '-' };
+        await task.update(updatedForm);
+        await updateTags(updatedForm.tags, Tag, task);
         ctx.flash.set('Task was sucessfully updated');
         ctx.redirect(router.url('tasks#index'));
       } catch (e) {
