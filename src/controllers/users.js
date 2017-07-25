@@ -25,7 +25,8 @@ export default (router, { User }) => {
       const id = Number(ctx.params.id);
       const user = await User.findById(id);
       if (!isExist(user)) {
-        ctx.redirect(router.url('404'));
+        ctx.status = 404;
+        ctx.render('errors/notFound');
       } else {
         ctx.render('users/profile', { user });
       }
