@@ -76,7 +76,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         await task.update(updatedForm);
         const tags = updatedForm.tags.split(' ');
         await updateTags(tags, Tag, task);
-        await deleteObsoleteTags(Tag);
+        // await deleteObsoleteTags(Tag);
         ctx.flash.set('Task was sucessfully updated');
         ctx.redirect(router.url('tasks#index'));
       } catch (e) {
