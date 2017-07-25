@@ -114,7 +114,9 @@ export const updateTags = async (tags, Tag, task) => {
         Tag.destroy({ where: { id } });
       }
     }));
-  console.log('FFFFFFFFFFFFFFFF');
+  const nowTags = await Tag.findAll();
+  console.log('FFFFFFFFFFFFFFFF now tags:');
+  console.log(nowTags);
 };
 
 export const isExist = entity => !(entity === null || entity.createdAt === undefined);
