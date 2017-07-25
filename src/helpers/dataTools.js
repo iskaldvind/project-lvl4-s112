@@ -94,8 +94,10 @@ export const updateTags = async (tags, Tag, task) => {
   await tags.map(tag => Tag.findOne({ where: { name: tag } })
     .then(async result => (result ? task.addTag(result) :
       task.createTag({ name: tag }))));
-  await tags.map(tag => Tag.findOne({ where: { name: tag } })
+  await deletedTags.map(tag => Tag.findOne({ where: { name: tag } })
     .then(async result => {
+      console.log('TTTTTTTTTTTTTTTTTTT removing tag:');
+      console.log(result);
       await task.removeTag(result);
       const tasksStillWithTag = await result.getTasks();
       const obsoleteTag = Tag.findOne({ where: { name: result } });
