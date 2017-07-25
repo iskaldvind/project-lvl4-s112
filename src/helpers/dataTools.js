@@ -63,12 +63,16 @@ export const filterTasks = async (Task, query = {}) => {
 
 export const deleteObsoleteTags = async (Tag) => {
   const tags = await Tag.findAll();
-  console.log('RRRRRRRRRRRRRRRRRR');
+  console.log('RRRRRRRRRRRRRRRRRR all tags:');
   console.log(tags);
   await tags.forEach( async (tag) => {
+    console.log('QQQQQQQQQQQQQQ current tag');
+    console.log(tag);
     const tasks = await tag.getTasks();
+    console.log('OOOOOOOOOOOOOOOOO tag tasks');
     console.log(tasks);
     if (tasks.length === 0) {
+      console.log('PPPPPPPPPPPPPPP tasks length:');
       console.log(tasks.length);
       console.log('AAAAAAAAAAAAAA');
       await tag.destroy();
