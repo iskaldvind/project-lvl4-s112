@@ -114,6 +114,8 @@ export const updateTags = async (tags, Tag, task) => {
       console.log(tasksStillWithTag);
       if (tasksStillWithTag.length === 0) {
         await Tag.destroy({ where: { id } });
+        const allTagsNow = await Tag.findAll();
+        console.log(allTagsNow);
       }
     }));
   const nowTags = await Tag.findAll();
