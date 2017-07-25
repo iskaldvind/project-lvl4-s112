@@ -1,5 +1,5 @@
 import url from 'url';
-import { buildFormObj, getTaskData, filterTasks, createTags, isExist } from '../helpers/dataTools';
+import { buildFormObj, getTaskData, filterTasks, updateTags, isExist } from '../helpers/dataTools';
 
 export default (router, { Task, User, Tag, TaskStatus }) => {
   router
@@ -29,7 +29,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const task = Task.build(form);
       try {
         await task.save();
-        await createTags(tags, Tag, task);
+        await updateTags(tags, Tag, task);
         ctx.flash.set('Task has been created');
         ctx.redirect(router.url('tasks#index'));
       } catch (e) {
@@ -68,6 +68,8 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     .patch('tasks#update', '/tasks/:id', async (ctx) => {
       const { statusId, taskId, form } = ctx.request.body;
       const task = await Task.findById(Number(taskId));
+      console.log(')))))))))))))))))))))))))))))))))))))))');
+      console.log(form);
       try {
         task.setStatus(Number(statusId));
         await task.update(form);

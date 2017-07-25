@@ -28,6 +28,7 @@ export const getTaskData = async (task) => {
     status: status.name,
     statusId: status.id,
     tags: tagsNames,
+    // make tags as string option
     tagsIds,
     createdAt,
     creatorId,
@@ -60,10 +61,21 @@ export const filterTasks = async (Task, query = {}) => {
     filterByTag(formattedTasksData, tag.tagId);
 };
 
-export const createTags = async (tags, Tag, task) => {
+export const deleteObsoleteTags = async (Tag) => {
+  const tags = await Tag.findAll();
+  await tags.forEach( async (tag) => {
+    const tasks = await tag.getTasks();
+    if (tasks.length === 0) {
+      await tag.destroy();
+    }
+  });
+};
+
+export const updateTags = async (tags, Tag, task) => {
   await tags.map(tag => Tag.findOne({ where: { name: tag } })
     .then(async result => (result ? task.addTag(result) :
       task.createTag({ name: tag }))));
+  await deleteObsoleteTags(Tag);
 };
 
 export const isExist = entity => !(entity === null || entity.createdAt === undefined);
