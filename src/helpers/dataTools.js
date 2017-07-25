@@ -86,6 +86,10 @@ export const updateTags = async (tags, Tag, task) => {
   console.log(tags);
   console.log('IIIIIIIIIIIII task:');
   console.log(task);
+  const currentTaskTags = task.tags;
+  const deletedTags = currentTaskTags.filter(currentTag => tags.indexOf(currentTag) === 1);
+  console.log('KKKKKKKKKKKKKKKKKKk deleted tags:');
+  console.log(deletedTags);
   await tags.map(tag => Tag.findOne({ where: { name: tag } })
     .then(async result => (result ? task.addTag(result) :
       task.createTag({ name: tag }))));
