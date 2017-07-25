@@ -74,7 +74,8 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         task.setStatus(Number(statusId));
         const updatedForm = form.tags !== '' ? form : { ...form, tags: '-' };
         await task.update(updatedForm);
-        await updateTags(updatedForm.tags, Tag, task);
+        const tags = updatedForm.tags.split(' ');
+        await updateTags(tags, Tag, task);
         ctx.flash.set('Task was sucessfully updated');
         ctx.redirect(router.url('tasks#index'));
       } catch (e) {
