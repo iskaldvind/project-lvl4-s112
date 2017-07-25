@@ -82,9 +82,14 @@ export const deleteObsoleteTags = async (Tag) => {
 };
 
 export const updateTags = async (tags, Tag, task) => {
+  console.log('YYYYYYYYYYYY tags:');
+  console.log(tags);
+  console.log('IIIIIIIIIIIII task:');
+  console.log(task);
   await tags.map(tag => Tag.findOne({ where: { name: tag } })
     .then(async result => (result ? task.addTag(result) :
       task.createTag({ name: tag }))));
+  console.log('FFFFFFFFFFFFFFFF');
 };
 
 export const isExist = entity => !(entity === null || entity.createdAt === undefined);
