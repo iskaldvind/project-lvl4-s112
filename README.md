@@ -10,7 +10,7 @@ make install
 https://murmuring-earth-80718.herokuapp.com/
 
 ### To Do:
-- Split current "Task view & edit" to "Task view" and improved "Task edit"
 - Make forms with labels instead of placeholders
 - Check for unnecesarry data passed in routes
+- Rename nonsensical constants to make more sense
 - Bring more coffee to work
