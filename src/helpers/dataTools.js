@@ -86,7 +86,7 @@ export const updateTags = async (tags, Tag, task) => {
   console.log(tags);
   console.log('IIIIIIIIIIIII task:');
   console.log(task);
-  const currentTaskTags = await task.getTags();
+  const currentTaskTags = task.tags;
   // const deletedTags = await currentTaskTags.filter(currentTag => tags.indexOf(currentTag) === 1);
   console.log('KKKKKKKKKKKKKKKKKKk deleted tags:');
   console.log(currentTaskTags);
