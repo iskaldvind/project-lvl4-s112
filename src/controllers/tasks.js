@@ -57,26 +57,18 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         const task = await getTaskData(requestedTask);
         const tags = (task.tags).filter(tag => tag !== '-').join(' ');
         const users = await User.findAll();
-        const k = buildFormObj(task);
-        console.log('&&&&&&&&&');
-        console.log(k.object.description);
-        console.log(k.object.assignedTo);
-        console.log(k.object.assignedToId);
         ctx.render('tasks/edit', { f: buildFormObj(task), task, tags, users, id });
       }
     })
     .patch('tasks#update', '/tasks/:id', async (ctx) => {
       const { statusId, taskId, form } = ctx.request.body;
       const task = await Task.findById(Number(taskId));
-      console.log(')))))))))))))))))))))))))))))))))))))))');
-      console.log(form);
       try {
         task.setStatus(Number(statusId));
         const updatedForm = form.tags !== '' ? form : { ...form, tags: '-' };
         await task.update(updatedForm);
         const tags = updatedForm.tags.split(' ');
         await updateTags(tags, Tag, task);
-        // await deleteObsoleteTags(Tag);
         ctx.flash.set('Task was sucessfully updated');
         ctx.redirect(router.url('tasks#index'));
       } catch (e) {

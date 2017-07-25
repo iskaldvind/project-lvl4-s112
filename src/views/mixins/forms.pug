@@ -17,8 +17,6 @@ mixin button(f, button_label = 'Ok', type = 'submit')
 
 mixin textarea(f, property)
     - const value = f.object[property] === undefined ? '' : f.object[property]
-    - console.log('#############$$$$$$$$$$');
-    - console.log(value);
     .form-group(class=(f.errors[property] && 'has-danger'))
         textarea(name=getInputName(f, property) class='form-control' type='text' placeholder=`${property}`)= value
         if f.errors[property]
