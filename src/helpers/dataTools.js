@@ -98,8 +98,10 @@ export const updateTags = async (tags, Tag, task) => {
     .then(async result => {
       await task.removeTag(result);
       const tasksStillWithTag = await result.getTasks();
+      const obsoleteTag = Tag.findOne({ where: { name: result } });
+      const id = obsoleteTag.id;
       if (tasksStillWithTag.length === 0) {
-        Tag.destroy({ where: { name: result} });
+        Tag.destroy({ where: { id } });
       }
     }));
   console.log('FFFFFFFFFFFFFFFF');
