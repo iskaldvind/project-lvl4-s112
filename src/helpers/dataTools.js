@@ -61,20 +61,21 @@ export const filterTasks = async (Task, query = {}) => {
     filterByTag(formattedTasksData, tag.tagId);
 };
 
-export const updateTags = async (tags, Tag, task) => {
-  const currentTaskTags = await task.getTags();
-  const removingTagNames = currentTaskTags.map(tag => tag.name);
-  const deletedTags = removingTagNames.filter(currentTag => tags.indexOf(currentTag) === -1);
-  await tags.map(tag => Tag.findOne({ where: { name: tag } })
-    .then(async result => (result ? task.addTag(result) :
-      task.createTag({ name: tag }))));
-  await deletedTags.map(tag => Tag.findOne({ where: { name: tag } })
-    .then(async (result) => {
-      task.removeTag(result);
-      const tasksStillWithTag = await result.getTasks();
-      const obsoleteTag = await Tag.findOne({ where: { name: result.name } });
-      const id = obsoleteTag.id;
-      if (tasksStillWithTag.length === 0) {
+export const updateTags = async (newTagsNames, Tag, taskObj) => {
+  const oldTags = await taskObj.getTags();
+  const oldTagsNames = oldTags.map(tagObj => tagObj.name);
+  const tagsToDeleteNames = oldTagsNames
+    .filter(eachOldTagName => newTagsNames.indexOf(eachOldTagName) === -1);
+  await newTagsNames.map(newTagName => Tag.findOne({ where: { name: newTagName } })
+    .then(async nextTagObj => (nextTagObj ? taskObj.addTag(nextTagObj) :
+      taskObj.createTag({ name: newTagName }))));
+  await tagsToDeleteNames.map(deleteTagName => Tag.findOne({ where: { name: deleteTagName } })
+    .then(async (nextTagObj) => {
+      taskObj.removeTag(nextTagObj);
+      const tasksOfDeletedTag = await nextTagObj.getTasks();
+      const obsoleteTagObj = await Tag.findOne({ where: { name: nextTagObj.name } });
+      const id = obsoleteTagObj.id;
+      if (tasksOfDeletedTag.length === 0) {
         await Tag.destroy({ where: { id } });
       }
     }));
