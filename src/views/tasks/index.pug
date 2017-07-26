@@ -23,3 +23,6 @@ block content
         .row
             .col-1
                 a(href=urlFor('tasks#show', { id: task.id }))= customId
+            .col= task.name
+        .row
+            .col.mb-2= task.description
