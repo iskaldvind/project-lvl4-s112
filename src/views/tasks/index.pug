@@ -18,11 +18,26 @@ block content
                 +selectUsers(users)
                 +button(f, 'Confirm')
 
-    each task in tasks
-        - const customId = `#${task.formattedId}`
-        .row
-            .col-1
-                a(href=urlFor('tasks#show', { id: task.id }))= customId
-            .col= task.name
-        .row
-            .col.mb-4= task.description
+    table.table.table-stripped
+        thead
+            tr
+                th ID
+                th Task
+                th Created At
+                th Tags
+                th Status
+                th Created By
+                th Assigned To
+                th Description
+        tbody
+            each task in tasks
+                tr
+                    td
+                        a(href=urlFor('tasks#show', { id: task.id }))= task.formattedId
+                    td= task.name
+                    td= formatDate(task.createdAt)
+                    td= task.tags
+                    td= task.status
+                    td= task.creator
+                    td= task.assignedTo
+                    td= task.description
