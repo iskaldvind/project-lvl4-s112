@@ -49,7 +49,7 @@ block content
                         td.small
                             row
                                 each tag in task.tags
-                                    span.bg-success.p-2.m-2= tag
+                                    span.bg-info.py-2.px-1.m-1= tag
                         td.small= task.creator
                         td.small= task.assignedTo
                         - const description = task.description.length < 31 ? task.description : `${task.description.slice(0,27)}...`
