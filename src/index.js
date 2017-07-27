@@ -70,7 +70,7 @@ export default () => {
     helperPath: [
       { _ },
       { urlFor: (...args) => router.url(...args) },
-      { formatDate: date => dateFormat(date, 'isoUtcDateTime') },
+      { formatDate: date => dateFormat(date, 'isoUtcDateTime').replace(/[T]/, ' ').slice(0, -1) },
     ],
   });
   pug.use(app);
