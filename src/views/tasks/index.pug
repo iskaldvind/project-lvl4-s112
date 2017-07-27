@@ -18,27 +18,27 @@ block content
                 +selectUsers(users)
                 +button(f, 'Confirm')
 
-    .container.col-lg-10
-        table.table-striped
+    .container.col-lg-12
+        table.table.table-striped
             thead
                 tr
-                    th ID
-                    th Task
-                    th Created At
-                    th Tags
-                    th Status
-                    th Created By
-                    th Assigned To
-                    th Description
+                    th.col-lg-1 ID
+                    th.col-lg Created At
+                    th.col-lg-1 Status
+                    th.col-lg Task
+                    th.col-lg Tags
+                    th.col-lg Created By
+                    th.col-lg Assigned To
+                    th.col-lg-4 Description
             tbody
                 each task in tasks
                     tr
                         td
                             a(href=urlFor('tasks#show', { id: task.id }))= task.formattedId
-                        td= task.name
                         td= formatDate(task.createdAt)
-                        td= task.tags
                         td= task.status
+                        td= task.name
+                        td= task.tags
                         td= task.creator
                         td= task.assignedTo
                         td= task.description
