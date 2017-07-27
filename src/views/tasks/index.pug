@@ -46,7 +46,7 @@ block content
                         td.small= formatDate(task.createdAt)
                         td.small=task.status
                         td.small= task.name
-                        td.small= task.tags
+                        td.small= task.tags.replace(/,/, ' ')
                         td.small= task.creator
                         td.small= task.assignedTo
                         td.small= task.description
