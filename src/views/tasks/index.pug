@@ -18,34 +18,35 @@ block content
                 +selectUsers(users)
                 +button(f, 'Confirm')
 
-    table.table.table-striped
-        thead
-            tr
-                th.col-xs-1.small
-                    b ID
-                th.col-xs-1.small
-                    b Created At
-                th.col-xs-1.small
-                    b Status
-                th.col-xs-2.small
-                    b Task
-                th.col-xs-1.small
-                    b Tags
-                th.col-xs-2.small
-                    b Created By
-                th.col-xs-2.small
-                    b Assigned To
-                th.col-xs-2.small
-                    b Description
-        tbody
-            each task in tasks
+    .container.col-lg-10
+        table.table.table-striped
+            thead
                 tr
-                    td.small
-                            a(href=urlFor('tasks#show', { id: task.id }))= task.formattedId
-                    td.small= formatDate(task.createdAt)
-                    td.small=task.status
-                    td.small= task.name
-                    td.small= task.tags
-                    td.small= task.creator
-                    td.small= task.assignedTo
-                    td.small= task.description
+                    th.col-xs-1.small
+                        b ID
+                    th.col-xs-1.small
+                        b Created At
+                    th.col-xs-1.small
+                        b Status
+                    th.col-xs-2.small
+                        b Task
+                    th.col-xs-1.small
+                        b Tags
+                    th.col-xs-2.small
+                        b Created By
+                    th.col-xs-2.small
+                        b Assigned To
+                    th.col-xs-2.small
+                        b Description
+            tbody
+                each task in tasks
+                    tr
+                        td.small
+                                a(href=urlFor('tasks#show', { id: task.id }))= task.formattedId
+                        td.small= formatDate(task.createdAt)
+                        td.small=task.status
+                        td.small= task.name
+                        td.small= task.tags
+                        td.small= task.creator
+                        td.small= task.assignedTo
+                        td.small= task.description
