@@ -19,34 +19,34 @@ block content
                 +button(f, 'Confirm')
 
     .container.col-lg-10
-        table.table.table-striped
-            thead
+    table.table.table-striped
+        thead
+            tr
+                th.col-md-2.small
+                    b ID
+                th.small
+                    b Created At
+                th.small
+                    b Status
+                th.small
+                    b Task
+                th.small
+                    b Tags
+                th.small
+                    b Created By
+                th.small
+                    b Assigned To
+                th.small
+                    b Description
+        tbody
+            each task in tasks
                 tr
-                    th.col-md-2.small
-                        b ID
-                    th.small
-                        b Created At
-                    th.small
-                        b Status
-                    th.small
-                        b Task
-                    th.small
-                        b Tags
-                    th.small
-                        b Created By
-                    th.small
-                        b Assigned To
-                    th.small
-                        b Description
-            tbody
-                each task in tasks
-                    tr
-                        td.small
-                                a(href=urlFor('tasks#show', { id: task.id }))= task.formattedId
-                        td.small= formatDate(task.createdAt)
-                        td.small=task.status
-                        td.small= task.name
-                        td.small= task.tags
-                        td.small= task.creator
-                        td.small= task.assignedTo
-                        td.small= task.description
+                    td.small
+                            a(href=urlFor('tasks#show', { id: task.id }))= task.formattedId
+                    td.small= formatDate(task.createdAt)
+                    td.small=task.status
+                    td.small= task.name
+                    td.small= task.tags
+                    td.small= task.creator
+                    td.small= task.assignedTo
+                    td.small= task.description
