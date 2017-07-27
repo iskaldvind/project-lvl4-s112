@@ -22,31 +22,31 @@ block content
     table.table.table-striped
         thead
             tr
-                th.col-md-2.small
+                th.col-md-1.small
                     b ID
-                th.small
+                th.col-md-1.small
                     b Created At
-                th.small
+                th.col-md-1.small
                     b Status
-                th.small
+                th.col-md-2.small
                     b Task
-                th.small
+                th.col-md-1.small
                     b Tags
-                th.small
+                th.col-md-2.small
                     b Created By
-                th.small
+                th.col-md-2.small
                     b Assigned To
-                th.small
+                th.col-md-2.small
                     b Description
         tbody
             each task in tasks
                 tr
-                    td.small
+                    td.col-md-1.small
                             a(href=urlFor('tasks#show', { id: task.id }))= task.formattedId
-                    td.small= formatDate(task.createdAt)
-                    td.small=task.status
-                    td.small= task.name
-                    td.small= task.tags
-                    td.small= task.creator
-                    td.small= task.assignedTo
-                    td.small= task.description
+                    td.col-md-1.small= formatDate(task.createdAt)
+                    td.col-md-1.small=task.status
+                    td.col-md-2.small= task.name
+                    td.col-md-1.small= task.tags
+                    td.col-md-2.small= task.creator
+                    td.col-md-2.small= task.assignedTo
+                    td.col-md-2.small= task.description
