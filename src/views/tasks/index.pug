@@ -18,7 +18,6 @@ block content
                 +selectUsers(users)
                 +button(f, 'Confirm')
 
-    .container.col-lg-10
     table.table.table-striped
         thead
             tr
@@ -41,12 +40,12 @@ block content
         tbody
             each task in tasks
                 tr
-                    td.col-md-1.small
+                    td.small
                             a(href=urlFor('tasks#show', { id: task.id }))= task.formattedId
-                    td.col-md-1.small= formatDate(task.createdAt)
-                    td.col-md-1.small=task.status
-                    td.col-md-2.small= task.name
-                    td.col-md-1.small= task.tags
-                    td.col-md-2.small= task.creator
-                    td.col-md-2.small= task.assignedTo
-                    td.col-md-2.small= task.description
+                    td.small= formatDate(task.createdAt)
+                    td.small=task.status
+                    td.small= task.name
+                    td.small= task.tags
+                    td.small= task.creator
+                    td.small= task.assignedTo
+                    td.small= task.description
