@@ -22,8 +22,9 @@ block content
         table.table.table-striped
             thead
                 tr
-                    th.small.strong ID
-                    th.small.strong Created At
+                    th.small
+                        b ID
+                    th.small.b Created At
                     th.small.strong Status
                     th.small.strong Task
                     th.small.strong Tags
@@ -33,20 +34,12 @@ block content
             tbody
                 each task in tasks
                     tr
-                        td
-                            .small
+                        td.small
                                 a(href=urlFor('tasks#show', { id: task.id }))= task.formattedId
-                        td
-                            .small= formatDate(task.createdAt)
-                        td
-                            .small=task.status
-                        td
-                            .small= task.name
-                        td
-                            .small= task.tags
-                        td
-                            .small= task.creator
-                        td
-                            .small= task.assignedTo
-                        td
-                            .small= task.description
+                        td.small= formatDate(task.createdAt)
+                        td.small=task.status
+                        td.small= task.name
+                        td.small= task.tags
+                        td.small= task.creator
+                        td.small= task.assignedTo
+                        td.small= task.description
