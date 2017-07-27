@@ -21,17 +21,15 @@ block content
     .container.col-lg-10
         table.table.table-striped
             thead
-                .small
-                    .strong
-                        tr
-                            th ID
-                            th.col-lg-2 Created At
-                            th.col-lg-1 Status
-                            th.col-lg-2 Task
-                            th.col-lg-1 Tags
-                            th.col-lg-1 Created By
-                            th.col-lg-1 Assigned To
-                            th.col-lg Description
+                tr
+                    th.small.strong ID
+                    th.col-lg-1 Created At
+                    th.col-lg-1 Status
+                    th.col-lg-1 Task
+                    th.col-lg-1 Tags
+                    th.col-lg-1 Created By
+                    th.col-lg-1 Assigned To
+                    th.col-lg-1 Description
             tbody
                 each task in tasks
                     tr
