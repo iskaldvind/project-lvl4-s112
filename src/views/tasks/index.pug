@@ -22,23 +22,39 @@ block content
         table.table.table-striped
             thead
                 tr
-                    th.col-lg-1 ID
-                    th.col-lg Created At
-                    th.col-lg-1 Status
-                    th.col-lg Task
-                    th.col-lg Tags
-                    th.col-lg Created By
-                    th.col-lg Assigned To
-                    th.col-lg-4 Description
+                    th.col-lg-1
+                        .small ID
+                    th.col-lg-2
+                        .small Created At
+                    th.col-lg-1
+                        .small Status
+                    th.col-lg-2
+                        .small Task
+                    th.col-lg-1
+                        .small Tags
+                    th.col-lg-1
+                        .small Created By
+                    th.col-lg-1
+                        .small Assigned To
+                    th.col-lg
+                        .small Description
             tbody
                 each task in tasks
                     tr
                         td
-                            a(href=urlFor('tasks#show', { id: task.id }))= task.formattedId
-                        td= formatDate(task.createdAt)
-                        td= task.status
-                        td= task.name
-                        td= task.tags
-                        td= task.creator
-                        td= task.assignedTo
-                        td= task.description
+                            .small
+                                a(href=urlFor('tasks#show', { id: task.id }))= task.formattedId
+                        td
+                            .small= formatDate(task.createdAt)
+                        td
+                            .small=task.status
+                        td
+                            .small= task.name
+                        td
+                            .small= task.tags
+                        td
+                            .small= task.creator
+                        td
+                            .small= task.assignedTo
+                        td
+                            .small= task.description
