@@ -44,9 +44,12 @@ block content
                         td.small
                                 a(href=urlFor('tasks#show', { id: task.id }))= task.formattedId
                         td.small= formatDate(task.createdAt)
-                        td.small=task.status
+                        td.small= task.status
                         td.small= task.name
-                        td.small= task.tags.join(' ')
+                        td.small
+                            row
+                                each tag in task.tags
+                                    .btn-outline-info= tag
                         td.small= task.creator
                         td.small= task.assignedTo
                         td.small= task.description
