@@ -22,21 +22,21 @@ block content
         table.table.table-striped
             thead
                 tr
-                    th.col-xs-1.small
+                    th.col-xs-1.col-md-1.small.text-nowrap
                         b ID
-                    th.col-xs-1.small
+                    th.col-xs-1.col-md-1.small.text-nowrap
                         b Created At
-                    th.col-xs-1.small
+                    th.col-xs-1.col-md-1.small.text-nowrap
                         b Status
-                    th.col-xs-2.small
+                    th.col-xs-2.col-md-2.small.text-nowrap
                         b Task
-                    th.col-xs-1.small
+                    th.col-xs-1.col-md-1.small.text-nowrap
                         b Tags
-                    th.col-xs-2.small
+                    th.col-xs-2.col-md-2.small.text-nowrap
                         b Created By
-                    th.col-xs-2.small
+                    th.col-xs-2.col-md-2.small.text-nowrap
                         b Assigned To
-                    th.col-xs-2.small
+                    th.col-xs-2.col-md-2.small.text-nowrap
                         b Description
             tbody
                 each task in tasks
@@ -49,7 +49,7 @@ block content
                         td.small
                             row
                                 each tag in task.tags
-                                    .d-inline.bg-info.rounded.p-1.m-1= tag
+                                    .d-inline.bg-info.rounded.p-1.mx-1.my-2= tag
                         td.small= task.creator
                         td.small= task.assignedTo
                         - const description = task.description.length < 51 ? task.description : `${task.description.slice(0,47)}...`
