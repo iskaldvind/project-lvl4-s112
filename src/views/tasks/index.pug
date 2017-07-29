@@ -22,11 +22,11 @@ block content
         table.table.table-striped
             thead
                 tr
-                    th.col-xs-1.small.text-center
+                    th.col-xs-1.small
                         b ID
-                    th.col-xs-1.small.text-center
+                    th.col-xs-1.small
                         b Created At
-                    th.col-xs-1.small.text-center
+                    th.col-xs-1.small
                         b Status
                     th.col-xs-2.small
                         b Task
@@ -52,5 +52,5 @@ block content
                                     span.bg-info.p-1.m-1= tag
                         td.small= task.creator
                         td.small= task.assignedTo
-                        - const description = task.description.length < 31 ? task.description : `${task.description.slice(0,27)}...`
+                        - const description = task.description.length < 51 ? task.description : `${task.description.slice(0,47)}...`
                         td.small= description
