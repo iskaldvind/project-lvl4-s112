@@ -23,12 +23,13 @@ export default (router, { User }) => {
     })
     .get('users#show', '/users/:id', async (ctx) => {
       const id = Number(ctx.params.id);
+      const isOwner = id === ctx.state.signedId();
       const user = await User.findById(id);
       if (!isExist(user)) {
         ctx.status = 404;
         ctx.render('errors/notFound');
       } else {
-        ctx.render('users/profile', { user });
+        ctx.render('users/profile', { user, isOwner });
       }
     })
     .get('users#edit', '/users/:id/edit', async (ctx) => {

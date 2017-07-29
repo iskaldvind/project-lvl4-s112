@@ -18,7 +18,8 @@ block content
                         tr
                             th(scope='row') Last name
                             td= user.lastName
-            form(action=urlFor('users#edit', { id: user.id }) method='get')
-                button.btn.btn-block(type='submit') Update account
-            form(action=urlFor('users#destroy', { id: user.id }) method='post')
-                button.btn.btn-block.btn-danger.mt-5(type='submit' name='_method' value='delete') Delete account
+            if isOwner
+                form(action=urlFor('users#edit', { id: user.id }) method='get')
+                    button.btn.btn-block(type='submit') Update account
+                form(action=urlFor('users#destroy', { id: user.id }) method='post')
+                    button.btn.btn-block.btn-danger.mt-5(type='submit' name='_method' value='delete') Delete account
