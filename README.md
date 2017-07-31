@@ -13,4 +13,5 @@ https://murmuring-earth-80718.herokuapp.com/
 - Make forms with labels instead of placeholders
 - Check for unnecesarry data passed in routes
 - Rename nonsensical constants to make more sense
-- Bring more coffee to work
+- Increase headers top margin
+- Fix spelling error in description
