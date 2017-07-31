@@ -47,9 +47,8 @@ block content
                         td.small= task.status
                         td.small= task.name
                         td.small
-                            .
-                                each tag in task.tags
-                                    span.label.label-info= tag
+                            each tag in task.tags
+                                span.label.label-info= tag
                         td.small= task.creator
                         td.small= task.assignedTo
                         - const description = task.description.length < 51 ? task.description : `${task.description.slice(0,47)}...`
