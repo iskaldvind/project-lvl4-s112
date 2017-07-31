@@ -19,10 +19,12 @@ mixin button(f, button_label = 'Ok', type = 'submit')
 
 mixin textarea(f, property)
     - const value = f.object[property] === undefined ? '' : f.object[property]
-    .form-group(class=(f.errors[property] && 'has-danger'))
-        textarea(name=getInputName(f, property) class='form-control' type='text' placeholder=`${property}`)= value
-        if f.errors[property]
-            .form-control-feedback= f.errors[property].map(({message}) => message).join('. ')
+    .form-group.row
+        label.col-2.col-form-label(for=options['label'])= options['label']
+        .col-10(class=(f.errors[property] && 'has-danger'))
+            textarea(name=getInputName(f, property) class='form-control' type='text')= value
+            if f.errors[property]
+                .form-control-feedback= f.errors[property].map(({message}) => message).join('. ')
 
 mixin select(f, property, users, creator, creatorId)
     - const value = f.object[property] === undefined ? '' : f.object[property]
