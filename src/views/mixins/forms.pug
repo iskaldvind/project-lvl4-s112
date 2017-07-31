@@ -17,7 +17,7 @@ mixin button(f, button_label = 'Ok', type = 'submit')
     .form-group
         input(class='btn btn-block' type=`${type}` value=`${button_label}`)
 
-mixin textarea(f, property)
+mixin textarea(f, property, options = { label: "" })
     - const value = f.object[property] === undefined ? '' : f.object[property]
     .form-group.row
         label.col-2.col-form-label(for=options['label'])= options['label']

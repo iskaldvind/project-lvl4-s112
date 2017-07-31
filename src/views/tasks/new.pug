@@ -4,8 +4,8 @@ block content
     .container.align-content-center.justify-content-center.col-lg-6
         h2.form-signin-heading.py-2 New Task
         +formFor(f, 'form-signin', { url: urlFor('tasks#create'), method: 'post' })
-            +input(f, 'name')
-            +input(f, 'tags')
-            +textarea(f, 'description')
+            +input(f, 'name', { label: 'Title' })
+            +input(f, 'tags', { label: 'Tags' })
+            +textarea(f, 'description', { label: 'Descroption' })
             +select(f, 'assignedToId', users, creator, creatorId)
             +button(f, 'Confirm')
