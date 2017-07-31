@@ -6,6 +6,6 @@ block content
         +formFor(f, 'form-signin', { url: urlFor('tasks#create'), method: 'post' })
             +input(f, 'name', { label: 'Title' })
             +input(f, 'tags', { label: 'Tags' })
-            +textarea(f, 'description', { label: 'Descroption' })
-            +select(f, 'assignedToId', users, creator, creatorId)
+            +textarea(f, 'description', { label: 'Description' })
+            +select(f, 'assignedToId', { users, creator, creatorId, label: 'Assigned to' })
             +button(f, 'Confirm')
