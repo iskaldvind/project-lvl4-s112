@@ -51,7 +51,7 @@ block content
                                 each tag in task.tags
                                     .d-inline
                                         span
-                                            kbd.py-0= tag
+                                            kbd.py-0.my-1= tag
                         td.small= task.creator
                         td.small= task.assignedTo
                         - const description = task.description.length < 51 ? task.description : `${task.description.slice(0,47)}...`
