@@ -7,10 +7,11 @@ mixin formFor(f, form_class, options = {})
 mixin input(f, property, options = { as: "text", label: "" })
     - const value = f.object[property] === undefined ? '' : f.object[property]
     .form-group(class=(f.errors[property] && 'has-danger'))
-        label(for=options['label'])= options['label']
-        input(name=getInputName(f, property) class='form-control' type=options['as'] id=options['label'] value=`${value}` placeholder=`${property}`)
-        if f.errors[property]
-            .form-control-feedback= f.errors[property].map(({ message }) => message).join('. ')
+        label.col-2(for=options['label'])= options['label']
+        .col-6
+            input(name=getInputName(f, property) class='form-control' type=options['as'] id=options['label'] value=`${value}` placeholder=`${property}`)
+            if f.errors[property]
+                .form-control-feedback= f.errors[property].map(({ message }) => message).join('. ')
 
 mixin button(f, button_label = 'Ok', type = 'submit')
     .form-group
