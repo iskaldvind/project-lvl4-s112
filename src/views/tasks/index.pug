@@ -49,7 +49,7 @@ block content
                         td.small
                             row
                                 each tag in task.tags
-                                    .btn.btn-outline-info.p-2.m-2.disabled(style='cursor:default')= tag
+                                    .inline.rounded.px-1.bg-info= tag
                         td.small= task.creator
                         td.small= task.assignedTo
                         - const description = task.description.length < 51 ? task.description : `${task.description.slice(0,47)}...`
