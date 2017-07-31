@@ -19,7 +19,7 @@ block content
                 +button(f, 'Confirm')
 
     .container.col-lg-10
-        table.table
+        table.table.table-striped
             thead
                 tr
                     th.col-xs-1.small.text-nowrap
@@ -50,7 +50,7 @@ block content
                             row
                                 each tag in task.tags
                                     .d-inline
-                                        span.label.label-info= tag
+                                        span.rounded.bg-info= tag
                         td.small= task.creator
                         td.small= task.assignedTo
                         - const description = task.description.length < 51 ? task.description : `${task.description.slice(0,47)}...`
