@@ -50,7 +50,8 @@ block content
                             row
                                 each tag in task.tags
                                     .d-inline
-                                        span.rounded.bg-info= tag
+                                        span
+                                            kbd= tag
                         td.small= task.creator
                         td.small= task.assignedTo
                         - const description = task.description.length < 51 ? task.description : `${task.description.slice(0,47)}...`
