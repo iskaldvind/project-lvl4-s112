@@ -43,7 +43,7 @@ block content
                     tr
                         td.small
                                 a(href=urlFor('tasks#show', { id: task.id }))= task.formattedId
-                        td.small= formatDate(task.createdAt)
+                        td.small.text-nowrap= formatDate(task.createdAt)
                         td.small= task.status
                         td.small= task.name
                         td.small
@@ -51,7 +51,7 @@ block content
                                 each tag in task.tags
                                     .d-inline
                                         span
-                                            kbd= tag
+                                            kbd.py-0= tag
                         td.small= task.creator
                         td.small= task.assignedTo
                         - const description = task.description.length < 51 ? task.description : `${task.description.slice(0,47)}...`
