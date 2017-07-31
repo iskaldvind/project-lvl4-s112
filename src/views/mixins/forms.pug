@@ -22,19 +22,19 @@ mixin textarea(f, property, options = { label: "" })
     .form-group.row
         label.col-2.col-form-label(for=options['label'])= options['label']
         .col-10(class=(f.errors[property] && 'has-danger'))
-            textarea(name=getInputName(f, property) class='form-control' type='text')= value
+            textarea(name=getInputName(f, property) id=options['label'] class='form-control' type='text')= value
             if f.errors[property]
                 .form-control-feedback= f.errors[property].map(({message}) => message).join('. ')
 
 mixin select(f, property, options = { users: [], creator: "", creatorId: "", label: ""})
     - const value = f.object[property] === undefined ? '' : f.object[property]
-    .form-group(class=(f.errors[property] && 'has-danger'))
-        select(name=getInputName(f, property) class='form-control' value=`${value}`)
-            option(value= options['creatorId'] selected='selected')= options['creator'].fullName
-            each user in options['users']
-                option(value= user.id)= user.fullName
-        if f.errors[property]
-            .form-control-feedback= f.errors[property].map(({message}) => message).join('. ')
+    .form-group.row
+        label.col-2.col-form-label(for=options['label'])= options['label']
+        .col-10
+            select(name=getInputName(f, property) id=options['label'] class='form-control' value=`${value}`)
+                option(value= options['creatorId'] selected='selected')= options['creator'].fullName
+                each user in options['users']
+                    option(value= user.id)= user.fullName
 
 mixin formSearch()
     form(action=urlFor('tasks#index') method='get')
