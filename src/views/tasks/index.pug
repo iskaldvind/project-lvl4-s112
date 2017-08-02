@@ -1,13 +1,13 @@
 extends /layouts/application.pug
 
 block content
-    .container.col-lg-10
+    .container.col-lg-10.mt-6
         .py-1
             .form-group.row
                 label.col-md-1.col-form-label.text-nowrap
                     b My tasks
-                .col-md-3
-                    button.btn.btn-block.btn-primary.col-md-3(type='submit' formaction=urlFor('tasks#new') formmethod='get') New task
+                .col-md-2
+                    button.btn.btn-block.btn-primary(type='submit' formaction=urlFor('tasks#new') formmethod='get') New task
         .py-1
             form(action=urlFor('tasks#index'))
                 button.btn.btn-block.btn-outline-primary(type='submit' name='creatorId' value=signedId()) Opened by me
