@@ -13,8 +13,8 @@ block content
                 .col-md-2
                     button.btn.btn-block.btn-warning(type='submit' name='assignedToId' value=signedId() formaction=urlFor('tasks#index') formmethod='get') Assigned to me
 
-        .py-1.mt-2
-            +formSearch()
+        .py-1.mt-2.mb-6
+            form(action=urlFor('tasks#index') method='get')
                 .form-group.row
                     label.col-md-1.col-form-label.text-nowrap
                         b Filter by
