@@ -14,8 +14,8 @@ mixin input(f, property, options = { as: "text", label: "" })
                 .form-control-feedback.has-danger= f.errors[property].map(({ message }) => message).join('. ')
 
 mixin button(f, button_label = 'Ok', type = 'submit')
-    .form-group
-        input(class='btn btn-block' type=`${type}` value=`${button_label}`)
+    .form-group.row
+        input(class='btn col-2 outline-info' type=`${type}` value=`${button_label}`)
 
 mixin textarea(f, property, options = { label: "" })
     - const value = f.object[property] === undefined ? '' : f.object[property]
