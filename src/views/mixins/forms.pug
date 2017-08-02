@@ -7,7 +7,7 @@ mixin formFor(f, form_class, options = {})
 mixin input(f, property, options = { as: "text", label: "" })
     - const value = f.object[property] === undefined ? '' : f.object[property]
     .form-group.row
-        label.col-2.col-md-offset-2.col-form-label.text-black(for=options['label'])= options['label']
+        label.col-2.col-md-offset-6.col-form-label.text-black(for=options['label'])= options['label']
         .col-6(class=(f.errors[property] && 'has-danger'))
             input(name=getInputName(f, property) class='form-control' type=options['as'] id=options['label'] value=`${value}`)
             if f.errors[property]
