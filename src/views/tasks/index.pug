@@ -1,7 +1,7 @@
 extends /layouts/application.pug
 
 block content
-    .container.col-lg-10
+    .container.col-lg-10.mb-5
         .py-1.mt-5
             .form-group.row
                 label.col-md-1.col-form-label.text-nowrap
@@ -13,7 +13,7 @@ block content
                 .col-md-2
                     button.btn.btn-block.btn-warning(type='submit' name='assignedToId' value=signedId() formaction=urlFor('tasks#index') formmethod='get') Assigned to me
 
-        .py-1.mt-2.mb-6
+        .py-1.mt-2
             form(action=urlFor('tasks#index') method='get')
                 .form-group.row
                     label.col-md-1.col-form-label.text-nowrap
@@ -36,7 +36,7 @@ block content
                     .col-md-2
                         button.btn.btn-block.btn-warning.text-nowrap(type='submit') Filter
 
-    .container.col-lg-10.mt-6
+    .container.col-lg-10
         table.table.table-striped
             thead
                 tr
