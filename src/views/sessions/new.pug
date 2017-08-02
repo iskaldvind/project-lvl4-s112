@@ -1,7 +1,7 @@
 extends /layouts/application.pug
 
 block content
-    .container.align-content-center.justify-content-center.col-lg-6
+    .container.align-content-center.justify-content-center.col-4
         h2.form-signin-heading.py-4 Log in
         +formFor(f, 'form-signin', { url: urlFor('sessions#create'), method: 'post' })
             +input(f, 'email', { label: 'E-mail' })
