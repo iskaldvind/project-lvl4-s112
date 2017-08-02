@@ -13,14 +13,28 @@ block content
                 .col-md-2
                     button.btn.btn-block.btn-warning(type='submit' name='assignedToId' value=signedId() formaction=urlFor('tasks#index') formmethod='get') Assigned to me
 
-        .py-1.mt-5
+        .py-1.mt-2
             +formSearch()
                 .form-group.row
-                +filterLabel
-                +filterTags(tags)
-                +filterStatus(statuses)
-                +filterUsers(users)
-                +button(f, 'Search')
+                    label.col-md-1.col-form-label.text-nowrap
+                        b Filter by
+                    .col-md-2
+                        select(class='form-control' name='tagId')
+                            option(selected='') All tags
+                            each tag in tags
+                                option(value= tag.id)= tag.name
+                    .col-md-2
+                        select(class='form-control' name='statusId')
+                            option(selected='') All statuses
+                            each status in statuses
+                                option(value= status.id)= status.name
+                    .col-md-2
+                        select(class='form-control' name='assignedToId')
+                            option(selected='') All assignee
+                            each user in users
+                                option(value= user.id)= user.fullName
+                    .col-md-2
+                        button.btn.btn-block.btn-warning.text-nowrap(type='submit') Filter
 
     .container.col-lg-10
         table.table.table-striped
