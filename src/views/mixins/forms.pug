@@ -41,6 +41,11 @@ mixin formSearch()
     form(action=urlFor('tasks#index') method='get')
         block
 
+mixin filterLabel
+    .form-group.row
+        label.col-md-1.col-form-label.text-nowrap
+            b Filter by
+
 
 mixin filterTags(tags)
     .form-group
