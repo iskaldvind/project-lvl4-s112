@@ -14,4 +14,5 @@ https://murmuring-earth-80718.herokuapp.com/
 - Check for unnecesarry data passed in routes
 - Rename nonsensical constants to make more sense
 - Increase headers top margin
-- Fix spelling error in description
+- Profile / Users / Tasks - make switch active state
+- Button label on create task - confrirm -> create
