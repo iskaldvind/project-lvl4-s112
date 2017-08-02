@@ -13,10 +13,10 @@ mixin input(f, property, options = { as: "text", label: "" })
             if f.errors[property]
                 .form-control-feedback.has-danger= f.errors[property].map(({ message }) => message).join('. ')
 
-mixin button(f, button_label = 'Ok', type = 'submit', options = { style: "" })
+mixin button(f, button_label = 'Ok', options = { style: "" })
     .form-group.row
         - const styling = options['style'] === "" ? "" : ` ${options['style']}`
-        input(class=`btn col-md-3 btn-success text-nowrap${styling}` type=`${type}` value=`${button_label}`)
+        input(class=`btn col-md-3 btn-success text-nowrap${styling}` type='submit' value=`${button_label}`)
 
 mixin textarea(f, property, options = { label: "" })
     - const value = f.object[property] === undefined ? '' : f.object[property]
