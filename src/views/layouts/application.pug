@@ -32,9 +32,8 @@ html(lang="en")
                             a.nav-link.active(href=urlFor('sessions#new')) Log In
                         li.nav-item
                             a.nav-link(href=urlFor('users#new')) Sign Up
-        .container.col-12.align-content-center(style='position: absolute; top: 0')
-            .col-12
-                - const msg = flash.get()
-                if msg
-                    .alert.alert-info.col-md-8.col-md-offset-2= msg
+        .container(style='z-index: 2000')
+            - const msg = flash.get()
+            if msg
+                .alert.alert-info= msg
         block content
