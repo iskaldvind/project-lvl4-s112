@@ -73,7 +73,7 @@ export default () => {
       { _ },
       { urlFor: (...args) => router.url(...args) },
       { formatDate: date => dateFormat(date, 'isoUtcDateTime').replace(/[T]/, ' ').slice(0, -1) },
-      { hideAlert: () => hideAlert = () => window.setTimeout(function () {$(".alert-success").fadeTo(500, 0).slideUp(500, function () {$(this).remove();});}, 5000)},
+      { hideAlert: () => window.setTimeout(function () {$(".alert-success").fadeTo(500, 0).slideUp(500, function () {$(this).remove();});}, 5000)},
     ],
   });
   pug.use(app);
