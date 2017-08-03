@@ -10,9 +10,11 @@ block content
                     form(action=urlFor('tasks#new') method='get')
                         button.btn.btn-block.btn-primary(type='submit') New task
                 .col-md-2
-                    button.btn.btn-block.btn-warning(type='submit' name='creatorId' value=signedId() formaction=urlFor('tasks#index') formmethod='get') Opened by me
+                    form(action=urlFor('tasks#index') method='get')
+                        button.btn.btn-block.btn-warning(type='submit' name='creatorId' value=signedId()) Opened by me
                 .col-md-2
-                    button.btn.btn-block.btn-warning(type='submit' name='assignedToId' value=signedId() formaction=urlFor('tasks#index') formmethod='get') Assigned to me
+                    form(action=urlFor('tasks#index') method='get')
+                        button.btn.btn-block.btn-warning(type='submit' name='assignedToId' value=signedId()) Assigned to me
 
         .py-1.mt-2
             form(action=urlFor('tasks#index') method='get')
