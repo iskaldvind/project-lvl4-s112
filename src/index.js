@@ -61,7 +61,6 @@ export default () => {
   app.use(router.allowedMethods());
   app.use(router.routes());
 
-  const window = new Window();
   const pug = new Pug({
     viewPath: path.join(__dirname, 'views'),
     debug: true,
@@ -73,7 +72,10 @@ export default () => {
       { _ },
       { urlFor: (...args) => router.url(...args) },
       { formatDate: date => dateFormat(date, 'isoUtcDateTime').replace(/[T]/, ' ').slice(0, -1) },
-      { hideAlert: () => window.setTimeout(function () {$(".alert-success").fadeTo(500, 0).slideUp(500, function () {$(this).remove();});}, 5000)},
+      { hideAlert: () => {
+        // const window = new Window();
+        return window.setTimeout(function () {$(".alert-success").fadeTo(500, 0).slideUp(500, function () {$(this).remove();});}, 5000);
+      }},
     ],
   });
   pug.use(app);
