@@ -35,5 +35,5 @@ html(lang="en")
         .container
             - const msg = flash.get()
             if msg
-                .alert.alert-info.m-3= msg
+                .alert.alert-info.m-3.col-8.popover-top= msg
         block content
