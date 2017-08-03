@@ -3,36 +3,24 @@ extends /layouts/application.pug
 block content
     if isSignedIn()
         .container.col-6.mt-4
-            .row.p-3.border-left-0.border-right-0
+            .row.p-3
                 .col-6.text-nowrap
                     b Full Name
                 .col-6.text-nowrap= user.fullName
-            .row.p-3.border-left-0.border-right-0
-                .col-6.text-nowrap
-                    b ID
-                .col-6.text-nowrap= formatId(user.id)
-            .row.p-3.border-left-0.border-right-0
+            .row.p-3
                 .col-6.text-nowrap
                     b E-mail
                 .col-6.text-nowrap= user.email
+            .row.p-3
+                .col-6.text-nowrap
+                    b ID
+                .col-6.text-nowrap= formatId(user.id)
 
-            table.table
-                thead.thead-bordered
-                    tbody
-                        tr
-                            th(scope='row') ID
-                            td= user.id
-                        tr
-                            th(scope='row') Email
-                            td= user.email
-                        tr
-                            th(scope='row') First name
-                            td= user.firstName
-                        tr
-                            th(scope='row') Last name
-                            td= user.lastName
             if isOwner
-                form(action=urlFor('users#edit', { id: user.id }) method='get')
-                    button.btn.btn-block(type='submit') Update account
-                form(action=urlFor('users#destroy', { id: user.id }) method='post')
-                    button.btn.btn-block.btn-danger.mt-5(type='submit' name='_method' value='delete') Delete account
+            .row.form-group.mt-3
+                .col-md-6
+                    form(action=urlFor('users#edit', { id: user.id }) method='get')
+                        button.btn.btn-warning(type='submit') Update account
+                .col-md-6
+                    form(action=urlFor('users#destroy', { id: user.id }) method='post')
+                        button.btn.btn-danger(type='submit' name='_method' value='delete') Delete account
