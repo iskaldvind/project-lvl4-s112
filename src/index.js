@@ -15,6 +15,7 @@ import methodOverride from 'koa-methodoverride';
 import Rollbar from 'rollbar';
 import dotenv from 'dotenv';
 import dateFormat from 'dateformat';
+import Window from 'window';
 import getWebpackConfig from '../webpack.config.babel';
 import addRoutes from './controllers';
 import container from './container';
@@ -60,6 +61,7 @@ export default () => {
   app.use(router.allowedMethods());
   app.use(router.routes());
 
+  const window = new Window();
   const pug = new Pug({
     viewPath: path.join(__dirname, 'views'),
     debug: true,
@@ -71,6 +73,7 @@ export default () => {
       { _ },
       { urlFor: (...args) => router.url(...args) },
       { formatDate: date => dateFormat(date, 'isoUtcDateTime').replace(/[T]/, ' ').slice(0, -1) },
+      { hideAlert: () => hideAlert = () => window.setTimeout(function () {$(".alert-success").fadeTo(500, 0).slideUp(500, function () {$(this).remove();});}, 5000)},
     ],
   });
   pug.use(app);
