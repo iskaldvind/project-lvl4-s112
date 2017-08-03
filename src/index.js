@@ -76,7 +76,7 @@ export default () => {
         // const window = new Window();
         return window.setTimeout(function () {$(".alert-success").fadeTo(500, 0).slideUp(500, function () {$(this).remove();});}, 5000);
       } },
-      { formatId: (id) => `${'0'.repeat(6 - id.toString().length)}${id}` },
+      { formatId: (id) => `${'0'.repeat(3 - id.toString().length)}${id}` },
     ],
   });
   pug.use(app);
