@@ -32,8 +32,9 @@ html(lang="en")
                             a.nav-link.active(href=urlFor('sessions#new')) Log In
                         li.nav-item
                             a.nav-link(href=urlFor('users#new')) Sign Up
-        .container.col-8(style='z-index: 2000')
-            - const msg = flash.get()
-            if msg
-                .alert.alert-info= msg
+        .container(style='position: absolute; top: 0')
+            .col-8
+                - const msg = flash.get()
+                if msg
+                    .alert.alert-info= msg
         block content
