@@ -32,8 +32,8 @@ html(lang="en")
                             a.nav-link.active(href=urlFor('sessions#new')) Log In
                         li.nav-item
                             a.nav-link(href=urlFor('users#new')) Sign Up
-        .container
+        .container.align-content-center
             - const msg = flash.get()
             if msg
-                .alert.alert-info.m-3.col-8.popover-top= msg
+                .alert.alert-info.col-md-8.popover-top= msg
         block content
