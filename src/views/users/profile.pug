@@ -2,16 +2,16 @@ extends /layouts/application.pug
 
 block content
     if isSignedIn()
-        .container.col-4.mt-4
-            .row
+        .container.col-6.mt-4
+            .row.p-2
                 .col-6.text-nowrap
                     b Full Name
                 .col-6.text-nowrap= user.fullName
-            .row
+            .row.p-2
                 .col-6.text-nowrap
                     b ID
                 .col-6.text-nowrap= formatId(user.id)
-            .row
+            .row.p-2
                 .col-6.text-nowrap
                     b E-mail
                 .col-6.text-nowrap= user.email
