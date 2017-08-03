@@ -36,5 +36,5 @@ html(lang="en")
             .col-12
                 - const msg = flash.get()
                 if msg
-                    .alert.alert-info.col-md-8= msg
+                    .alert.alert-info.col-md-8.col-md-offset-2= msg
         block content
