@@ -32,7 +32,7 @@ html(lang="en")
                             a.nav-link.active(href=urlFor('sessions#new')) Log In
                         li.nav-item
                             a.nav-link(href=urlFor('users#new')) Sign Up
-        .container.col-6
+        .container.col-6(style="position: fixed; top: 0")
             - const msg = flash.get()
             if msg
                 .alert.alert-info= msg
