@@ -1,11 +1,11 @@
 extends /layouts/application.pug
 
 block content
-    .container.align-content-center.justify-content-center.col-lg-6
-        h2.form-signin-heading.py-4.col-md-offset-2 New Task
+    .container.align-content-center.justify-content-center.col-4
+        h2.form-signin-heading.py-4 New Task
         +formFor(f, 'form-signin', { url: urlFor('tasks#create'), method: 'post' })
             +input(f, 'name', { label: 'Title' })
             +input(f, 'tags', { label: 'Tags' })
             +textarea(f, 'description', { label: 'Description' })
             +select(f, 'assignedToId', { users, creator, creatorId, label: 'Assigned to' })
-            +button(f, 'Confirm')
+            +button(f, 'Create', { style: 'btn-success' })
