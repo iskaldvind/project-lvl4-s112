@@ -4,17 +4,17 @@ block content
     if isSignedIn()
         .container.col-4.mt-4
             .row
-                .col-2.text-nowrap
+                .col-6.text-nowrap
                     b Full Name
-                .col-2.text-nowrap= user.fullName
+                .col-6.text-nowrap= user.fullName
             .row
-                .col-2.text-nowrap
+                .col-6.text-nowrap
                     b ID
-                .col-2.text-nowrap= formatId(user.id)
+                .col-6.text-nowrap= formatId(user.id)
             .row
-                .col-2.text-nowrap
+                .col-6.text-nowrap
                     b E-mail
-                .col-2.text-nowrap= user.email
+                .col-6.text-nowrap= user.email
 
             table.table
                 thead.thead-bordered
