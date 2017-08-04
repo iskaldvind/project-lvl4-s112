@@ -21,10 +21,10 @@ block content
                 .col-6.text-nowrap= formatId(user.id)
 
             if isOwner
-            .row.form-group.mt-5
-                .col-md-6
-                    form(action=urlFor('users#edit', { id: user.id }) method='get')
-                        button.btn.btn-block.btn-warning(type='submit') Edit profile
-                .col-md-6
-                    form(action=urlFor('users#destroy', { id: user.id }) method='post')
-                        button.btn.btn-block.btn-danger(type='submit' name='_method' value='delete') Delete account
+                .row.form-group.mt-5
+                    .col-md-6
+                        form(action=urlFor('users#edit', { id: user.id }) method='get')
+                            button.btn.btn-block.btn-warning(type='submit') Edit profile
+                    .col-md-6
+                        form(action=urlFor('users#destroy', { id: user.id }) method='post')
+                            button.btn.btn-block.btn-danger(type='submit' name='_method' value='delete') Delete account
