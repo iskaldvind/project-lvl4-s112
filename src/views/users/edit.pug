@@ -1,8 +1,8 @@
 extends /layouts/application.pug
 
 block content
-    .container.align-content-center.justify-content-center.col-lg-6
-        h2.form-signin-heading.py-2 Edit Profile
+    .container.align-content-center.justify-content-center.col-4
+        h2.form-signin-heading.py-4.text-center Edit Profile
         +formFor(f, 'form-signin', { url: urlFor('users#update', { id }), method: 'post' })
             +input(f, 'email', { label: 'E-mail' })
             +input(f, 'firstName', { label: 'First name' })
