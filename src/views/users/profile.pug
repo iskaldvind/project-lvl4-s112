@@ -10,15 +10,15 @@ block content
             .row.p-3
                 .col-6.text-nowrap
                     b Full Name
-                .col-6.text-nowrap.rounded= user.fullName
+                .col-6.text-nowrap.rounded.btn-outline-primary= user.fullName
             .row.p-3
                 .col-6.text-nowrap
                     b E-mail
-                .col-6.text-nowrap.rounded= user.email
+                .col-6.text-nowrap= user.email
             .row.p-3
                 .col-6.text-nowrap
                     b ID
-                .col-6.text-nowrap.rounded= formatId(user.id)
+                .col-6.text-nowrap= formatId(user.id)
 
             if isOwner
                 .row.form-group.mt-5
