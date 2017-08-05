@@ -4,10 +4,10 @@ block content
     .container.align-content-center.justify-content-center.col-4
         h2.form-signin-heading.py-4.text-center Edit Task
         +formFor(f, 'form-signin', { url: urlFor('tasks#update', { id }), method: 'post' })
-            +input(f, 'name')
-            +input(f, 'tags')
-            +textarea(f, 'description')
-            +reselect(f, 'assignedToId', users, f.object.assignedTo, f.object.assignedToId)
+            +input(f, 'name', { label: 'Title' })
+            +input(f, 'tags', { label: 'Tags', isCollection: true })
+            +textarea(f, 'description', { label: 'Description' })
+            +select(f, 'assignedToId', { users, assignee: f.object.assignedTo, assigneeId: f.object.assignedToId, label: 'Assigned to' })
             input(type='hidden', name='_method' value='patch')
             input(type='hidden' name='taskId' value= f.object.id)
             input(type='hidden' name='statusId' value= f.object.statusId)

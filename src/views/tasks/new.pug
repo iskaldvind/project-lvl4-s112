@@ -7,5 +7,5 @@ block content
             +input(f, 'name', { label: 'Title' })
             +input(f, 'tags', { label: 'Tags' })
             +textarea(f, 'description', { label: 'Description' })
-            +select(f, 'assignedToId', { users, creator, creatorId, label: 'Assigned to' })
+            +select(f, 'assignedToId', { users, assignee: creator, assigneeId: creatorId, label: 'Assigned to' })
             +confirmButton(f, 'Create')

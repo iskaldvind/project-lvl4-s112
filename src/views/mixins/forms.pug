@@ -4,8 +4,9 @@ mixin formFor(f, form_class, options = {})
     form(action=_.get(options, 'url') class=`${form_class}` method=_.get(options, 'method', 'get'))
         block
 
-mixin input(f, property, options = { as: "text", label: "" })
-    - const value = f.object[property] === undefined ? '' : f.object[property]
+mixin input(f, property, options = { as: "text", label: "", isCollection: false })
+    - const rawValue = f.object[property] === undefined ? '' : f.object[property]
+    - const value = options['isCollection'] ? rawValue.filter(val => val !== '-').join(' ') : rawValue
     .form-group.row
         label.col-3.col-form-label.text-nowrap(for=options['label'])= options['label']
         .col-9(class=(f.errors[property] && 'has-danger'))
@@ -18,12 +19,12 @@ mixin confirmButton(f, button_label = 'Ok')
         input(class=`btn col-md-3 btn-success text-nowrap` type='submit' value=`${button_label}`)
 
 mixin editButton(options = { target: '', id: 0, label: '' })
-    .col-md-6
+    .col-6
         form(action=urlFor(`${options['target']}s#edit`, {id: options['id']}) method='get')
             button.btn.btn-block.btn-warning(type='submit')= options['label']
 
 mixin deleteButton(options = { target: '', id: 0, label: '' })
-    .col-md-6
+    .col-6
         form(action=urlFor(`${options['target']}s#destroy`, {id: options['id']}) method='post')
             button.btn.btn-block.btn-danger(type='submit' name='_method' value='delete')= options['label']
 
@@ -36,18 +37,18 @@ mixin textarea(f, property, options = { label: "" })
             if f.errors[property]
                 .form-control-feedback= f.errors[property].map(({message}) => message).join('. ')
 
-mixin select(f, property, options = { users: [], creator: "", creatorId: "", label: ""})
+mixin select(f, property, options = { users: [], assignee: "", assigneeId: 0, label: ""})
     - const value = f.object[property] === undefined ? '' : f.object[property]
     .form-group.row
         label.col-3.col-form-label.text-nowrap(for=options['label'])= options['label']
         .col-9
             select(name=getInputName(f, property) id=options['label'] class='form-control' value=`${value}`)
-                option(value= options['creatorId'] selected='selected')= options['creator'].fullName
+                option(value= options['assigneeId'] selected='selected')= options['assignee'].fullName
                 each user in options['users']
                     option(value= user.id)= user.fullName
 
 mixin filterSelect(options = { name: "", defaultLabel: "", collection: [], property: "" })
-    .col-md-2
+    .col-2
         select(class='form-control' name=options['name'])
             option(selected='')= options['defaultLabel']
             each item in options['collection']
@@ -60,9 +61,17 @@ mixin inputTags(tags, e)
         if e
             .form-control-feedback= e.message
 
-mixin reselect(f, property, users, assingnedTo, assignedToId)
+mixin reselect(f, property, options = { users: [], assignedTo: '', assignedToId: 0, label: '' })
     - const value = f.object[property] === undefined ? '' : f.object[property]
-    .form-group(class=(f.errors[property] && 'has-danger'))
+    .form-group.row
+        select(name=getInputName(f, property) id=options['label'] class='form-control' value=`${value}`)
+            option(value= options['creatorId'] selected='selected')= options['creator'].fullName
+            each user in options['users']
+                option(value= user.id)= user.fullName
+
+
+
+            (class=(f.errors[property] && 'has-danger'))
         select(name=getInputName(f, property) class='form-control' value=`${value}`)
             option(value= assignedToId selected='selected')= assingnedTo
             each user in users
