@@ -15,7 +15,6 @@ mixin input(f, property, options = { as: "text", label: "" })
 
 mixin confirmButton(f, button_label = 'Ok')
     .form-group.row
-        - const styling = options['style'] === "" ? "" : ` ${options['style']}`
         input(class=`btn col-md-3 btn-success text-nowrap` type='submit' value=`${button_label}`)
 
 mixin editButton(options = { target: '', id: 0, label: '' })
