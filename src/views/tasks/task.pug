@@ -6,12 +6,12 @@ block content
             h2.text-center Task details
     .container.col-4
         +smallField({ label: 'Task ID', value: formatId(task.id, 6) })
-        +smallField({ label: 'Status', value: task.status })
+        +smallField({ label: 'Status', value: task.getStatus().name })
         +smallField({ label: 'Title', value: task.name })
-        +smallField({ label: 'Tags', value: formatTags(task.tags) })
+        +smallField({ label: 'Tags', value: formatTags(task.getTags().map(tag => tag.name)) })
         +smallField({ label: 'Created at', value: formatDate(task.createdAt) })
-        +smallField({ label: 'Created by', value: task.creator })
-        +smallField({ label: 'Assigned to', value: task.assignedTo })
+        +smallField({ label: 'Created by', value: task.getCreator().fullName })
+        +smallField({ label: 'Assigned to', value: task.getAssignedTo().fullName })
         +bigField({ label: 'Description', value: task.description })
         .row.form-group.mt-5
             +returnButton({ path: 'tasks#index', label: 'Back' })

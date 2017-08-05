@@ -38,15 +38,13 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     })
     .get('tasks#show', '/tasks/:id', async (ctx) => {
       const taskId = Number(ctx.params.id);
-      const requestedTask = await Task.findById(taskId);
-      if (!isExist(requestedTask)) {
-        ctx.redirect(router.url('404'));
+      const task = await Task.findById(taskId);
+      if (!isExist(task)) {
+        ctx.status = 404;
+        ctx.render('errors/notFound');
       } else {
-        // HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        const task = await getTaskData(requestedTask);
-        const tags = task.tags;
-        // const statuses = await TaskStatus.findAll();
-        ctx.render('tasks/task', { f: buildFormObj(task), task, tags });
+        const tags = await task.getTags().map(tag => tag.name);
+        ctx.render('tasks/task', { task, tags });
       }
     })
     .get('tasks#edit', '/tasks/:id/edit', async (ctx) => {
