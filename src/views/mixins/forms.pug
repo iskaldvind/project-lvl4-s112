@@ -37,13 +37,15 @@ mixin textarea(f, property, options = { label: "" })
             if f.errors[property]
                 .form-control-feedback= f.errors[property].map(({message}) => message).join('. ')
 
-mixin select(f, property, options = { collection: [], defaultOption: "", defaultID: "", label: "", property: ""})
+mixin select(f, property, options = { collection: [], defaultOption: "", defaultId: "", label: "", property: ""})
     - const value = f.object[property] === undefined ? '' : f.object[property]
     .form-group.row
         label.col-3.col-form-label.text-nowrap(for=options['label'])= options['label']
         .col-9
+            - console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+            - console.log(options['defaultId'])
             select(name=getInputName(f, property) id=options['label'] class='form-control' value=`${value}`)
-                option(value=options['defaultID'] selected='selected')= options['defaultOption'][options['property']]
+                option(value=options['defaultId'] selected='selected')= options['defaultOption'][options['property']]
                 each item in options['collection']
                     option(value= item.id)= item[options['property']]
 
