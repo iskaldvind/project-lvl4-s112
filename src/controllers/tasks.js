@@ -52,13 +52,12 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     })
     .get('tasks#edit', '/tasks/:id/edit', async (ctx) => {
       const id = Number(ctx.params.id);
-      const requestedTask = await Task.findById(id);
+      const task = await Task.findById(id);
       if (!isExist(requestedTask)) {
-        ctx.redirect(router.url('404'));
+        ctx.status = 404;
+        ctx.render('errors/notFound');
       } else {
-        // HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        const task = await getTaskData(requestedTask);
-        const tags = (task.tags).filter(tag => tag !== '-').join(' ');
+        const tags = await task.getTags().map(tag => tag.name).filter(tag => tag !== '-').join(' ');
         const users = await User.findAll();
         const statuses = await TaskStatus.findAll();
         ctx.render('tasks/edit', { f: buildFormObj(task), task, tags, users, id, statuses });
