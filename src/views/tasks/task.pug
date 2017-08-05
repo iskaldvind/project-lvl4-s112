@@ -13,41 +13,6 @@ block content
         +smallField({ label: 'Created by', value: task.creator })
         +smallField({ label: 'Assigned to', value: task.assignedTo })
         +bigField({ label: 'Description', value: task.description })
-        
-        .row
-            .col-4.text-nowrap.py-2
-                b Task ID
-            .col-8.text-nowrap.card.card-outline-secondary.py-2= formatId(task.id, 6)
-        .row
-            .col-4.text-nowrap.py-2
-                b Status
-            .col-8.text-nowrap.card.card-outline-secondary.py-2= task.status
-        .row
-            .col-4.text-nowrap.py-2
-                b Title
-            .col-8.text-nowrap.card.card-outline-secondary.py-2= task.name
-        .row
-            .col-4.text-nowrap.py-2
-                b Tags
-            .col-8.text-nowrap.card.card-outline-secondary.py-2= task.tags
-        .row
-            .col-4.text-nowrap.py-2
-                b Created at
-            .col-8.text-nowrap.card.card-outline-secondary.py-2= formatDate(task.createdAt)
-        .row
-            .col-4.text-nowrap.py-2
-                b Created by
-            .col-8.text-nowrap.card.card-outline-secondary.py-2= task.creator
-        .row
-            .col-4.text-nowrap.py-2
-                b Assigned to
-            .col-8.text-nowrap.card.card-outline-secondary.py-2= task.assignedTo
-        .row
-            .col-4.text-nowrap.py-2
-                b Description
-            .col-8.card.card-outline-secondary.py-2= task.description
-
-
         .row.form-group.mt-5
             .col-md-4
                 form(action=urlFor('task#edit', {id: task.id}) method='get')
@@ -55,47 +20,14 @@ block content
             .col-md-4
                 form(action=urlFor('task#destroy', {id: task.id}) method='post')
                     button.btn.btn-block.btn-danger(type='submit' name='_method' value='delete') Delete task
-    if isSignedIn()
-        .container
-            table.table
-                thead.thead-bordered
-                    tbody
-                        tr
-                            th(scope='row') ID
-                            td= task.id
-                        tr
-                            th(scope='row') Task
-                            td= task.name
-                        tr
-                            th(scope='row') Tags
-                            td= task.tags
-                        tr
-                            th(scope='row') Created At
-                            td= formatDate(task.createdAt)
-                        tr
-                            th(scope='row') Status
-                            td= task.status
-                        tr
-                            th(scope='row') Created By
-                            td= task.creator
-                        tr
-                            th(scope='row') Assigned To
-                            td= task.assignedTo
-                        tr
-                            th(scope='row') Description
-                            td= task.description
-            form(action=urlFor('tasks#update', {id: task.id}), method='post')
-                - const value = f.object[property] === undefined ? '' : f.object[property]
-                .form-group(class=(f.errors[property] && 'has-danger'))
-                    select(name='statusId' class='form-control' value=`${value}`)
-                        option(selected= 1) Change status
-                        each status in statuses
-                            option(value= status.id)= status.name
-                    input(type='hidden' name='_method' value='PATCH')
-                    input(type='hidden' name='taskId' value= task.id)
-                    button.btn.btn-block Update Status
-            form(action=urlFor('tasks#edit', {id: task.id}) method='get')
-                button.btn.btn-block(type='submit') Edit task
 
-            form(action=urlFor('tasks#destroy', { id: task.id }) method='post')
-                button.btn.btn-block.btn-danger.mt-5(type='submit' name='_method' value='delete') Delete task
+    form(action=urlFor('tasks#update', {id: task.id}), method='post')
+        - const value = f.object[property] === undefined ? '' : f.object[property]
+        .form-group(class=(f.errors[property] && 'has-danger'))
+            select(name='statusId' class='form-control' value=`${value}`)
+                option(selected= 1) Change status
+                each status in statuses
+                    option(value= status.id)= status.name
+            input(type='hidden' name='_method' value='PATCH')
+            input(type='hidden' name='taskId' value= task.id)
+            button.btn.btn-block Update Status
