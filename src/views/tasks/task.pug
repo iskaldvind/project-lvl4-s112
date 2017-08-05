@@ -8,7 +8,7 @@ block content
         +smallField({ label: 'Task ID', value: formatId(task.id, 6) })
         +smallField({ label: 'Status', value: task.status })
         +smallField({ label: 'Title', value: task.name })
-        +smallField({ label: 'Tags', value: task.tags.filter(tag => tag !== '-').join(' ') })
+        +smallField({ label: 'Tags', value: formatTags(task.tags) })
         +smallField({ label: 'Created at', value: formatDate(task.createdAt) })
         +smallField({ label: 'Created by', value: task.creator })
         +smallField({ label: 'Assigned to', value: task.assignedTo })

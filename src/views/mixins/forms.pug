@@ -4,9 +4,9 @@ mixin formFor(f, form_class, options = {})
     form(action=_.get(options, 'url') class=`${form_class}` method=_.get(options, 'method', 'get'))
         block
 
-mixin input(f, property, options = { as: "text", label: "", isCollection: false })
+mixin input(f, property, options = { as: "text", label: "", valueFormatter: null })
     - const rawValue = f.object[property] === undefined ? '' : f.object[property]
-    - const value = options['isCollection'] ? rawValue.filter(val => val !== '-').join(' ') : rawValue
+    - const value = options['valueFormatter'] ? options['valueFormetter'](rawValue) : rawValue
     .form-group.row
         label.col-3.col-form-label.text-nowrap(for=options['label'])= options['label']
         .col-9(class=(f.errors[property] && 'has-danger'))

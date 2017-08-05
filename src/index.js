@@ -77,6 +77,7 @@ export default () => {
         return window.setTimeout(function () {$(".alert-success").fadeTo(500, 0).slideUp(500, function () {$(this).remove();});}, 5000);
       } },
       { formatId: (id, digits = 0) => `${'0'.repeat(digits - id.toString().length)}${id}` },
+      { formatTags: tags => tags.filter(tag => tag !== '-').join(' ') },
     ],
   });
   pug.use(app);
