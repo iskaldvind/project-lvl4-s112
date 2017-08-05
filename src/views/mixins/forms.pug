@@ -71,10 +71,4 @@ mixin reselect(f, property, options = { users: [], assignedTo: '', assignedToId:
 
 
 
-            (class=(f.errors[property] && 'has-danger'))
-        select(name=getInputName(f, property) class='form-control' value=`${value}`)
-            option(value= assignedToId selected='selected')= assingnedTo
-            each user in users
-                option(value= user.id)= user.fullName
-        if f.errors[property]
-            .form-control-feedback= f.errors[property].map(({message}) => message).join('. ')
+    
