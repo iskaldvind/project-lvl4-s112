@@ -16,7 +16,7 @@ block content
                 each user in users
                     tr
                         td
-                            a(href=urlFor('users#show', { id: user.id }))= formatId(user.id)
+                            a(href=urlFor('users#show', { id: user.id }))= formatId(user.id, 3)
                         td.text-nowrap= user.fullName
                         td.text-nowrap= user.email
                         td.text-nowrap= formatDate(user.createdAt)
