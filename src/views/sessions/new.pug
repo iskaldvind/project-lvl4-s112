@@ -6,4 +6,5 @@ block content
         +formFor(f, 'form-signin', { url: urlFor('sessions#create'), method: 'post' })
             +input(f, 'email', { label: 'E-mail' })
             +input(f, 'password', { as: 'password', label: 'Password' })
-            +confirmButton(f, 'Confirm')
+            .row.form-group.mt-5
+                +confirmButton(f, 'Confirm')
