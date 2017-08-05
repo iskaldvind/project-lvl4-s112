@@ -8,7 +8,6 @@ block content
             +input(f, 'firstName', { label: 'First name' })
             +input(f, 'lastName', { label: 'Last name' })
             +input(f, 'password', { as: 'password', label: 'Password' })
-            // input(type='hidden', name='_method' value='patch')
             .row.form-group.mt-5
                 +returnButton({ path: 'users#show', id, label: 'Cancel', isOverride: true })
                 +confirmButton(f, 'Save', { method: 'patch' })
