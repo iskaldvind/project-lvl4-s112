@@ -15,4 +15,5 @@ block content
               property: 'fullName'
             })
             .row.form-group.mt-5
-                +confirmButton(f, 'Create')
+                +returnButton({ path: 'tasks#index', label: 'Cancel' })
+                +confirmButton(f, 'Create', { method: 'post' })

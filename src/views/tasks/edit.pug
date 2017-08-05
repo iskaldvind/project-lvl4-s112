@@ -21,7 +21,7 @@ block content
               property: 'fullName'
             })
             +textarea(f, 'description', { label: 'Description' })
-            input(type='hidden', name='_method' value='patch')
             input(type='hidden' name='taskId' value= f.object.id)
             .row.form-group.mt-5
-                +confirmButton(f, 'Save')
+                +returnButton({path: 'tasks#show', id, label: 'Cancel'})
+                +confirmButton(f, 'Save', { method: 'patch' })
