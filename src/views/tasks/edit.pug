@@ -6,7 +6,7 @@ block content
         +formFor(f, 'form-signin', { url: urlFor('tasks#update', { id }), method: 'post' })
             +input(f, 'name', { label: 'Title' })
             +input(f, 'tags', { label: 'Tags', valueFormatter: formatTags })
-            +select(f, 'statusID', {
+            +select(f, 'statusId', {
               collection: statuses,
               defaultOption: f.object.statusO,
               defaultId: f.object.statusId,
