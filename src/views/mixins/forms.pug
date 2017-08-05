@@ -33,6 +33,7 @@ mixin returnButton(options = { path: '', id: null, label: '' })
     .col-4
         - const link = options['id'] ? urlFor(options['path'], {id: options['id']}) : urlFor(options['path'])
         form(action=link method='get')
+            input(type='hidden', name='_method' value='get')
             button.btn.btn-block.btn-primary(type='submit')= options['label']
 
 mixin textarea(f, property, options = { label: "" })

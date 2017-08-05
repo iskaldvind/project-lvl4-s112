@@ -14,5 +14,6 @@ block content
         +smallField({ label: 'Assigned to', value: task.assignedTo })
         +bigField({ label: 'Description', value: task.description })
         .row.form-group.mt-5
+            +returnButton({path: 'tasks#index', label: 'Back'})
             +editButton({target: 'task', id: task.id, label: 'Edit task'})
             +deleteButton({target: 'task', id: task.id, label: 'Delete task'})

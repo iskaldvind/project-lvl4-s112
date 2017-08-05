@@ -10,5 +10,5 @@ block content
             +input(f, 'password', { as: 'password', label: 'Password' })
             input(type='hidden', name='_method' value='patch')
             .row.form-group.mt-5
-                +returnButton({ path: 'users#show', id })
+                +returnButton({ path: 'users#show', id, label: 'Cancel' })
                 +confirmButton(f, 'Save')
