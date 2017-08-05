@@ -6,7 +6,7 @@ mixin formFor(f, form_class, options = {})
 
 mixin input(f, property, options = { as: "text", label: "", valueFormatter: null })
     - const rawValue = f.object[property] === undefined ? '' : f.object[property]
-    - const value = options['valueFormatter'] ? options['valueFormetter'](rawValue) : rawValue
+    - const value = options['valueFormatter'] ? options['valueFormatter'](rawValue) : rawValue
     .form-group.row
         label.col-3.col-form-label.text-nowrap(for=options['label'])= options['label']
         .col-9(class=(f.errors[property] && 'has-danger'))
