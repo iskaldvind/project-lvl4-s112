@@ -1,52 +1,53 @@
 extends /layouts/application.pug
 
 block content
-    if isSignedIn()
-        .container.align-content-center.justify-content-center
-            .py-4
-                h2.text-center Task details
-        .container.col-6.mt-4
-            .row.p-2
-                .col-4.text-nowrap
-                    b Task ID
-                .col-8.text-nowrap.well= formatId(task.id)
-            .row.p-2
-                .col-4.text-nowrap
-                    b Status
-                .col-8.text-nowrap.well-white= task.status
-            .row.p-2
-                .col-4.text-nowrap
-                    b Title
-                .col-8.text-nowrap.well-white= task.name
-            .row.p-2
-                .col-4.text-nowrap
-                    b Tags
-                .col-8.text-nowrap.well-white= task.tags
-            .row.p-2
-                .col-4.text-nowrap
-                    b Created at
-                .col-8.text-nowrap.well-white= formatDate(task.createdAt)
-            .row.p-2
-                .col-4.text-nowrap
-                    b Created by
-                .col-8.text-nowrap.well-white= task.creator
-            .row.p-2
-                .col-4.text-nowrap
-                    b Assigned to
-                .col-8.text-nowrap.well-white= task.assignedTo
-            .row.p-2
-                .col-4.text-nowrap
-                    b Description
-                .col-8.well-white= task.description
+    .container.align-content-center.justify-content-center
+        .py-4
+            h2.text-center Task details
+    .container.col-6.mt-4
+        .well
+            h2 hi
+        .row.p-2
+            .col-4.text-nowrap
+                b Task ID
+            .col-8.text-nowrap.well= formatId(task.id)
+        .row.p-2
+            .col-4.text-nowrap
+                b Status
+            .col-8.text-nowrap.well-white= task.status
+        .row.p-2
+            .col-4.text-nowrap
+                b Title
+            .col-8.text-nowrap.well-white= task.name
+        .row.p-2
+            .col-4.text-nowrap
+                b Tags
+            .col-8.text-nowrap.well-white= task.tags
+        .row.p-2
+            .col-4.text-nowrap
+                b Created at
+            .col-8.text-nowrap.well-white= formatDate(task.createdAt)
+        .row.p-2
+            .col-4.text-nowrap
+                b Created by
+            .col-8.text-nowrap.well-white= task.creator
+        .row.p-2
+            .col-4.text-nowrap
+                b Assigned to
+            .col-8.text-nowrap.well-white= task.assignedTo
+        .row.p-2
+            .col-4.text-nowrap
+                b Description
+            .col-8.well-white= task.description
 
 
-            .row.form-group.mt-5
-                .col-md-4
-                    form(action=urlFor('task#edit', {id: task.id}) method='get')
-                        button.btn.btn-block.btn-warning(type='submit') Edit task
-                .col-md-4
-                    form(action=urlFor('task#destroy', {id: task.id}) method='post')
-                        button.btn.btn-block.btn-danger(type='submit' name='_method' value='delete') Delete task
+        .row.form-group.mt-5
+            .col-md-4
+                form(action=urlFor('task#edit', {id: task.id}) method='get')
+                    button.btn.btn-block.btn-warning(type='submit') Edit task
+            .col-md-4
+                form(action=urlFor('task#destroy', {id: task.id}) method='post')
+                    button.btn.btn-block.btn-danger(type='submit' name='_method' value='delete') Delete task
     if isSignedIn()
         .container
             table.table
