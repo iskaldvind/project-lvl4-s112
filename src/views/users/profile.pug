@@ -6,23 +6,10 @@ block content
             .py-4
                 - const usersProfileTitle = `${user.fullName}'s profile`
                 h2.text-center= usersProfileTitle
-        .container.col-6.mt-4
+        .container.col-4.mt-4
             +smallField({ label: 'Full name', value: user.fullName })
             +smallField({ label: 'E-mail', value: user.email })
             +smallField({ label: 'ID', value: formatId(user.id, 3) })
-            .row.p-3
-                .col-6.text-nowrap
-                    b Full Name
-                .col-6.text-nowrap= user.fullName
-            .row.p-3
-                .col-6.text-nowrap
-                    b E-mail
-                .col-6.text-nowrap= user.email
-            .row.p-3
-                .col-6.text-nowrap
-                    b ID
-                .col-6.text-nowrap= formatId(user.id, 3)
-
             if isOwner
                 .row.form-group.mt-5
                     .col-md-6

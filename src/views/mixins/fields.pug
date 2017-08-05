@@ -1,11 +1,12 @@
 mixin smallField(options = { label: "", value: "" })
     .row.my-2
-        .col-4.text-nowrap.py-2
+        .col-3.text-nowrap.py-2
             b=options['label']
-        .col-8.text-nowrap.card.card-outline-secondary.py-2= options['value']
+        .col-9.text-nowrap.card.card-outline-secondary.py-2= options['value']
 
 mixin bigField(options = { label: "", value: "" })
-    .row.my-2
-        .col-4.text-nowrap.py-2
+    .row.mt-2
+        .col-3.text-nowrap.py-2
             b=options['label']
-        .col-8.card.card-outline-secondary.py-2= options['value']
+    .row
+        .col-12.card.card-outline-secondary.py-2= options['value']

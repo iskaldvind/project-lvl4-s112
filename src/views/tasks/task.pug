@@ -4,7 +4,7 @@ block content
     .container.align-content-center.justify-content-center
         .py-4
             h2.text-center Task details
-    .container.col-6.mt-4
+    .container.col-4.mt-4
         +smallField({ label: 'Task ID', value: formatId(task.id, 6) })
         +smallField({ label: 'Status', value: task.status })
         +smallField({ label: 'Title', value: task.name })
@@ -14,10 +14,10 @@ block content
         +smallField({ label: 'Assigned to', value: task.assignedTo })
         +bigField({ label: 'Description', value: task.description })
         .row.form-group.mt-5
-            .col-md-4
+            .col-6
                 form(action=urlFor('task#edit', {id: task.id}) method='get')
                     button.btn.btn-block.btn-warning(type='submit') Edit task
-            .col-md-4
+            .col-6
                 form(action=urlFor('task#destroy', {id: task.id}) method='post')
                     button.btn.btn-block.btn-danger(type='submit' name='_method' value='delete') Delete task
 
