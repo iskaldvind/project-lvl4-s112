@@ -5,11 +5,11 @@ block content
         .container.align-content-center.justify-content-center
             .py-4
                 h2.text-center Task details
-        .container.col-4.mt-4
+        .container.col-6.mt-4
             .row.p-2
                 .col-4.text-nowrap
                     b Task ID
-                .col-8.text-nowrap.well-white= formatId(task.id)
+                .col-8.text-nowrap.well= formatId(task.id)
             .row.p-2
                 .col-4.text-nowrap
                     b Status
@@ -41,10 +41,10 @@ block content
 
 
             .row.form-group.mt-5
-                .col-md-6
+                .col-md-4
                     form(action=urlFor('task#edit', {id: task.id}) method='get')
                         button.btn.btn-block.btn-warning(type='submit') Edit task
-                .col-md-6
+                .col-md-4
                     form(action=urlFor('task#destroy', {id: task.id}) method='post')
                         button.btn.btn-block.btn-danger(type='submit' name='_method' value='delete') Delete task
     if isSignedIn()
