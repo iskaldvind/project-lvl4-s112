@@ -15,7 +15,6 @@ import methodOverride from 'koa-methodoverride';
 import Rollbar from 'rollbar';
 import dotenv from 'dotenv';
 import dateFormat from 'dateformat';
-// import Window from 'window';
 import getWebpackConfig from '../webpack.config.babel';
 import addRoutes from './controllers';
 import container from './container';
@@ -72,11 +71,6 @@ export default () => {
       { _ },
       { urlFor: (...args) => router.url(...args) },
       { formatDate: date => dateFormat(date, 'isoUtcDateTime').replace(/[T]/, ' ').slice(0, -1) },
-      /* { hideAlert: () => {
-        // const window = new Window();
-        return window.setTimeout(function () {$(".alert-success").fadeTo(500, 0)
-        .slideUp(500, function () {$(this).remove();});}, 5000);
-      } }, */
       { formatId: (id, digits = 0) => `${'0'.repeat(digits - id.toString().length)}${id}` },
       { formatTags: tags => tags.filter(tag => tag !== '-').join(' ') },
     ],

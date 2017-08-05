@@ -15,7 +15,9 @@ mixin input(f, property, options = { as: "text", label: "", valueFormatter: null
             if f.errors[property]
                 .form-control-feedback.has-danger= f.errors[property].map(({ message }) => message).join('. ')
 
-mixin confirmButton(f, button_label = 'Ok')
+mixin confirmButton(f, button_label = 'Ok', options: { overrife: null })
+    if override
+        newMethod = options['override']
     .col-4
         input(class=`btn btn-block btn-success text-nowrap` type='submit' value=`${button_label}`)
 
@@ -33,7 +35,6 @@ mixin returnButton(options = { path: '', id: null, label: '' })
     .col-4
         - const link = options['id'] ? urlFor(options['path'], {id: options['id']}) : urlFor(options['path'])
         form(action=link method='get')
-            input(type='hidden', name='_method' value='get')
             button.btn.btn-block.btn-primary(type='submit')= options['label']
 
 mixin textarea(f, property, options = { label: "" })

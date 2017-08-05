@@ -1,6 +1,6 @@
 {
   "name": "task-manager-ultimate",
-  "version": "0.0.525",
+  "version": "0.0.526",
   "description": "project-lvl4-s112",
   "main": "dist/index.js",
   "bin": {
@@ -72,8 +72,7 @@
     "umzug": "*",
     "webpack": "^3.3.0",
     "uglifyjs-webpack-plugin": "*",
-    "dateformat": "*",
-    "window": "*"
+    "dateformat": "*"
   },
   "devDependencies": {
     "babel-eslint": "*",
