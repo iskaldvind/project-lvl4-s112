@@ -15,20 +15,20 @@ html(lang="en")
             .collapse.navbar-collapse
                 if isSignedIn()
                     ul.navbar-nav.mr-auto
-                        li.nav-item.active
+                        li.nav-item
                             a.nav-link(href=urlFor('users#show', { id: signedId() })) Profile
                         li.nav-item
                             a.nav-link(href=urlFor('users#index')) Users
                         li.nav-item
                             a.nav-link(href=urlFor('tasks#index')) Tasks
-                    ul.nav.justify-content-end
+                    ul.navbar-nav
                         li.nav-item
                             a.nav-link(href=urlFor('sessions#destroy') data-method='delete' rel='nofollow') Sign Out
                 else
                     ul.navbar-nav.mr-auto
                     ul.navbar-nav.navbar-right
                         li.nav-item
-                            a.nav-link.active(href=urlFor('sessions#new')) Log In
+                            a.nav-link(href=urlFor('sessions#new')) Log In
                         li.nav-item
                             a.nav-link(href=urlFor('users#new')) Sign Up
 
