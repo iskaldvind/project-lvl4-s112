@@ -10,9 +10,8 @@ make install
 https://murmuring-earth-80718.herokuapp.com/
 
 ### To Do:
-- Make forms with labels instead of placeholders
 - Check for unnecesarry data passed in routes
-- Rename nonsensical constants to make more sense
-- Increase headers top margin
 - Profile / Users / Tasks - make switch active state
-- Button label on create task - confrirm -> create
+- Switch to pure objects in routes
+- Write tests
+- Write log in condition to all routes
