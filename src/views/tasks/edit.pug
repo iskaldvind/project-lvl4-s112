@@ -8,7 +8,7 @@ block content
             +input(f, 'tags', { label: 'Tags', valueFormatter: formatTags })
             +select(f, 'statusID', {
               collection: statuses,
-              defaultOption: f.object.status,
+              defaultOption: f.object.statusO,
               defaultId: f.object.statusId,
               label: 'Status',
               property: 'name'
