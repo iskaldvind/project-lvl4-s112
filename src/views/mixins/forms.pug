@@ -46,36 +46,12 @@ mixin select(f, property, options = { users: [], creator: "", creatorId: "", lab
                 each user in options['users']
                     option(value= user.id)= user.fullName
 
-mixin formSearch()
-    form(action=urlFor('tasks#index') method='get')
-        block
-
-mixin filterLabel
-    .form-group.row
-        label.col-md-1.col-form-label.text-nowrap
-            b Filter by
-
-
-mixin filterTags(tags)
-    .form-group
-        select(class='form-control col-md-2' name='tagId')
-            option(selected='') All tags
-            each tag in tags
-                option(value= tag.id)= tag.name
-
-mixin filterStatus(statuses)
-    .form-group
-        select(class='form-control col-md-2' name='statusId')
-            option(selected='') All statuses
-            each status in statuses
-                option(value= status.id)= status.name
-
-mixin filterUsers(users)
-    .form-group
-        select(class='form-control col-md-2' name='assignedToId')
-            option(selected='') All assignee
-            each user in users
-                option(value= user.id)= user.fullName
+mixin filterSelect(options = { name: "", defaultLabel: "", collection: [], property: "" })
+    .col-md-2
+        select(class='form-control' name=options['name'])
+            option(selected='')= options['defaultLabel']
+            each item in options['collection']
+                option(value= item.id)= item[`${options['property']}`]
 
 mixin inputTags(tags, e)
     - const value = tags

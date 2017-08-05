@@ -13,11 +13,4 @@ block content
             if isOwner
                 .row.form-group.mt-5
                     +editButton({ target: 'user', id: user.id, label: 'Edit profile' })
-                    +deleteButton({ target: 'user', id: user.id, label: 'Edit profile' })
-                .row.form-group.mt-5
-                    .col-md-6
-                        form(action=urlFor('users#edit', { id: user.id }) method='get')
-                            button.btn.btn-block.btn-warning(type='submit') Edit profile
-                    .col-md-6
-                        form(action=urlFor('users#destroy', { id: user.id }) method='post')
-                            button.btn.btn-block.btn-danger(type='submit' name='_method' value='delete') Delete account
+                    +deleteButton({ target: 'user', id: user.id, label: 'Delete account' })

@@ -14,12 +14,8 @@ block content
         +smallField({ label: 'Assigned to', value: task.assignedTo })
         +bigField({ label: 'Description', value: task.description })
         .row.form-group.mt-5
-            .col-6
-                form(action=urlFor('task#edit', {id: task.id}) method='get')
-                    button.btn.btn-block.btn-warning(type='submit') Edit task
-            .col-6
-                form(action=urlFor('task#destroy', {id: task.id}) method='post')
-                    button.btn.btn-block.btn-danger(type='submit' name='_method' value='delete') Delete task
+            +editButton({target: 'task', id: task.id, label: 'Edit task'})
+            +deleteButton({target: 'task', id: task.id, label: 'Delete task'})
 
     form(action=urlFor('tasks#update', {id: task.id}), method='post')
         - const value = f.object[property] === undefined ? '' : f.object[property]
