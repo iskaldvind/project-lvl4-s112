@@ -14,9 +14,9 @@ html(lang="en")
             a.navbar-brand(href="/") Task Manager
             .collapse.navbar-collapse
                 if isSignedIn()
-                    ul.nav
+                    ul.nav.mr-auto
                         li.nav-item
-                            a.nav-link(href=urlFor('users#show', { id: signedId() })) Profile
+                            a.nav-link.active(href=urlFor('users#show', { id: signedId() })) Profile
                         li.nav-item
                             a.nav-link(href=urlFor('users#index')) Users
                         li.nav-item
