@@ -38,5 +38,10 @@ html(lang="en")
         if msg
             .alert.alert-success.col-md-5.text-nowrap(style='position: absolute; top: 3px; margin: 0 auto; left: 0; right:0; z-index: 2000')= msg
             script.
-              hideAlert()
+              window.setTimeout(function () {
+                $(".alert-success").fadeTo(500, 0)
+                  .slideUp(500, function () {
+                    $(this).remove();
+                  });
+              }, 5000);
         block content
