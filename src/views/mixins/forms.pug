@@ -18,7 +18,6 @@ mixin input(f, property, options = { as: "text", label: "", valueFormatter: null
 mixin confirmButton(f, button_label = 'Ok', options = { method: 'get' })
     .col-4
         button.btn.btn-block.btn-success(type='submit' name='_method' value=`${options['method']}`)= button_label
-        // input(class=`btn btn-block btn-success text-nowrap` name='_method' type='submit' value=`${button_label}`)
 
 mixin editButton(options = { target: '', id: 0, label: '' })
     .col-4
@@ -30,11 +29,14 @@ mixin deleteButton(options = { target: '', id: 0, label: '' })
         form(action=urlFor(`${options['target']}s#destroy`, {id: options['id']}) method='post')
             button.btn.btn-block.btn-danger(type='submit' name='_method' value='delete')= options['label']
 
-mixin returnButton(options = { path: '', id: null, label: '' })
+mixin returnButton(options = { path: '', id: null, label: '', isOverride: false })
     .col-4
         - const link = options['id'] ? urlFor(options['path'], {id: options['id']}) : urlFor(options['path'])
         form(action=link method='get')
-            button.btn.btn-block.btn-primary(type='submit' name='_method' value='get')= options['label']
+            if options['isOverride']
+                button.btn.btn-block.btn-primary(type='submit' name='_method' value='get')= options['label']
+            else
+                button.btn.btn-block.btn-primary(type='submit')= options['label']
 
 mixin textarea(f, property, options = { label: "" })
     - const value = f.object[property] === undefined ? '' : f.object[property]
