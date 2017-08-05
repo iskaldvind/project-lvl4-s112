@@ -42,7 +42,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       if (!isExist(requestedTask)) {
         ctx.redirect(router.url('404'));
       } else {
-        // HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         const task = await getTaskData(requestedTask);
         const tags = task.tags;
         const statuses = await TaskStatus.findAll();
@@ -55,7 +55,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       if (!isExist(requestedTask)) {
         ctx.redirect(router.url('404'));
       } else {
-        // HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         const task = await getTaskData(requestedTask);
         const tags = (task.tags).filter(tag => tag !== '-').join(' ');
         const users = await User.findAll();
