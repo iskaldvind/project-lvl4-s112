@@ -15,10 +15,10 @@ mixin input(f, property, options = { as: "text", label: "", valueFormatter: null
             if f.errors[property]
                 .form-control-feedback.has-danger= f.errors[property].map(({ message }) => message).join('. ')
 
-mixin confirmButton(f, button_label = 'Ok', options: { override: null })
+mixin confirmButton(f, button_label = 'Ok', options: { method: 'get' })
     .col-4
-        - const newMethod = options['override'] ? options['override'] : 'get'
-        input(class=`btn btn-block btn-success text-nowrap` data-method=`${newMethod}` type='submit' value=`${button_label}`)
+        button.btn.btn-block.btn-success(type='submit' name='_method' value=`${options['method']}`)= button_label
+        // input(class=`btn btn-block btn-success text-nowrap` name='_method' type='submit' value=`${button_label}`)
 
 mixin editButton(options = { target: '', id: 0, label: '' })
     .col-4

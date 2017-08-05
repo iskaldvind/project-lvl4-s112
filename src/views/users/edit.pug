@@ -11,4 +11,4 @@ block content
             // input(type='hidden', name='_method' value='patch')
             .row.form-group.mt-5
                 +returnButton({ path: 'users#show', id, label: 'Cancel' })
-                +confirmButton(f, 'Save', { override: 'patch' })
+                +confirmButton(f, 'Save', { method: 'patch' })
