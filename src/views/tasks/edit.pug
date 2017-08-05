@@ -5,7 +5,7 @@ block content
         h2.form-signin-heading.py-4.text-center Edit Task
         +formFor(f, 'form-signin', { url: urlFor('tasks#update', { id }), method: 'post' })
             +input(f, 'name', { label: 'Title' })
-            +input(f, 'tags', { label: 'Tags'})
+            +input(f, 'tags', { label: 'Tags', valueFormatter: formatTags })
             +textarea(f, 'description', { label: 'Description' })
             +select(f, 'assignedToId', { collection: users, defaultOption: f.object.assignedTo, defaultId: f.object.assignedToId, label: 'Assigned to', property: 'fullName' })
             input(type='hidden', name='_method' value='patch')
