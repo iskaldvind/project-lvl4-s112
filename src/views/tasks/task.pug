@@ -7,37 +7,37 @@ block content
                 h2.text-center Task details
         .container.col-4.mt-4
             .row.p-3
-                .col-6.text-nowrap
+                .col-4.text-nowrap
                     b Task ID
-                .col-6.text-nowrap= formatId(task.id)
+                .col-8.text-nowrap.border-right-0= formatId(task.id)
             .row.p-3
-                .col-6.text-nowrap
+                .col-4.text-nowrap
                     b Status
-                .col-6.text-nowrap= task.status
+                .col-8.text-nowrap= task.status
             .row.p-3
-                .col-6.text-nowrap
+                .col-4.text-nowrap
                     b Title
-                .col-6.text-nowrap= task.name
+                .col-8.text-nowrap= task.name
             .row.p-3
-                .col-6.text-nowrap
+                .col-4.text-nowrap
                     b Tags
-                .col-6.text-nowrap= task.tags
+                .col-8.text-nowrap= task.tags
             .row.p-3
-                .col-6.text-nowrap
+                .col-4.text-nowrap
                     b Created at
-                .col-6.text-nowrap= formatDate(task.createdAt)
+                .col-8.text-nowrap= formatDate(task.createdAt)
             .row.p-3
-                .col-6.text-nowrap
+                .col-4.text-nowrap
                     b Created by
-                .col-6.text-nowrap= task.creator
+                .col-8.text-nowrap= task.creator
             .row.p-3
-                .col-6.text-nowrap
+                .col-4.text-nowrap
                     b Assigned to
-                .col-6.text-nowrap= task.assignedTo
+                .col-8.text-nowrap= task.assignedTo
             .row.p-3
-                .col-6.text-nowrap
+                .col-4.text-nowrap
                     b Description
-                .col-6.text-nowrap= task.description
+                .col-8.text-nowrap= task.description
 
 
             .row.form-group.mt-5
