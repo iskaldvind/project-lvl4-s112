@@ -15,19 +15,25 @@ mixin input(f, property, options = { as: "text", label: "", valueFormatter: null
             if f.errors[property]
                 .form-control-feedback.has-danger= f.errors[property].map(({ message }) => message).join('. ')
 
-mixin confirmButton(f, button_label = 'Ok')
-    .col-6
-        input(class=`btn btn-block btn-success text-nowrap` type='submit' value=`${button_label}`)
+mixin confirmButton(f, button_label = 'Ok', options: { override: null })
+    .col-4
+        input(class=`btn btn-block btn-success text-nowrap` data-method=options['override'] type='submit' value=`${button_label}`)
 
 mixin editButton(options = { target: '', id: 0, label: '' })
-    .col-6
+    .col-4
         form(action=urlFor(`${options['target']}s#edit`, {id: options['id']}) method='get')
             button.btn.btn-block.btn-warning(type='submit')= options['label']
 
 mixin deleteButton(options = { target: '', id: 0, label: '' })
-    .col-6
+    .col-4
         form(action=urlFor(`${options['target']}s#destroy`, {id: options['id']}) method='post')
             button.btn.btn-block.btn-danger(type='submit' name='_method' value='delete')= options['label']
+
+mixin returnButton(options = { path: '', id: null, label: '' })
+    .col-4
+        - const link = options['id'] ? urlFor(options['path'], {id: options['id']}) : urlFor(options['path'])
+        form(action=link method='get')
+            button.btn.btn-block.btn-primary(type='submit')= options['label']
 
 mixin textarea(f, property, options = { label: "" })
     - const value = f.object[property] === undefined ? '' : f.object[property]
