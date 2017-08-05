@@ -2,29 +2,30 @@ extends /layouts/application.pug
 
 block content
     .container.col-lg-10.mb-5
-        .py-1.mt-5
-            .form-group.row
-                label.col-md-1.col-form-label.text-nowrap.text-muted
-                    b My tasks
-                .col-md-2
-                    form(action=urlFor('tasks#new') method='get')
-                        button.btn.btn-block.btn-primary(type='submit') New task
-                .col-md-2
-                    form(action=urlFor('tasks#index') method='get')
-                        button.btn.btn-block.btn-warning(type='submit' name='creatorId' value=signedId()) Opened by me
-                .col-md-2
-                    form(action=urlFor('tasks#index') method='get')
-                        button.btn.btn-block.btn-warning(type='submit' name='assignedToId' value=signedId()) Assigned to me
-        .py-1.mt-2
-            form(action=urlFor('tasks#index') method='get')
+        .jumbotron
+            .py-1.mt-5
                 .form-group.row
                     label.col-md-1.col-form-label.text-nowrap.text-muted
-                        b Filter by
-                    +filterSelect({ name: 'tagId', defaultLabel: 'All tags', collection: tags, property: 'name' })
-                    +filterSelect({ name: 'statusId', defaultLabel: 'All statuses', collection: statuses, property: 'name' })
-                    +filterSelect({ name: 'assignedToId', defaultLabel: 'All assignee', collection: users, property: 'fullName' })
+                        b My tasks
                     .col-md-2
-                        button.btn.btn-block.btn-warning.text-nowrap(type='submit') Filter
+                        form(action=urlFor('tasks#new') method='get')
+                            button.btn.btn-block.btn-primary(type='submit') New task
+                    .col-md-2
+                        form(action=urlFor('tasks#index') method='get')
+                            button.btn.btn-block.btn-warning(type='submit' name='creatorId' value=signedId()) Opened by me
+                    .col-md-2
+                        form(action=urlFor('tasks#index') method='get')
+                            button.btn.btn-block.btn-warning(type='submit' name='assignedToId' value=signedId()) Assigned to me
+            .py-1.mt-2
+                form(action=urlFor('tasks#index') method='get')
+                    .form-group.row
+                        label.col-md-1.col-form-label.text-nowrap.text-muted
+                            b Filter by
+                        +filterSelect({ name: 'tagId', defaultLabel: 'All tags', collection: tags, property: 'name' })
+                        +filterSelect({ name: 'statusId', defaultLabel: 'All statuses', collection: statuses, property: 'name' })
+                        +filterSelect({ name: 'assignedToId', defaultLabel: 'All assignee', collection: users, property: 'fullName' })
+                        .col-md-2
+                            button.btn.btn-block.btn-warning.text-nowrap(type='submit') Filter
 
     .container.col-lg-10
         .my-2
