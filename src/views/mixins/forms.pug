@@ -17,7 +17,8 @@ mixin input(f, property, options = { as: "text", label: "", valueFormatter: null
 
 mixin confirmButton(f, button_label = 'Ok', options: { override: null })
     .col-4
-        input(class=`btn btn-block btn-success text-nowrap` data-method=options['override'] type='submit' value=`${button_label}`)
+        - const newMethod = options['override'] ? options['override'] : 'get'
+        input(class=`btn btn-block btn-success text-nowrap` data-method=`${newMethod}` type='submit' value=`${button_label}`)
 
 mixin editButton(options = { target: '', id: 0, label: '' })
     .col-4
