@@ -14,8 +14,8 @@ html(lang="en")
             a.navbar-brand(href="/") Task Manager
             .collapse.navbar-collapse
                 if isSignedIn()
-                    ul.navbar-nav
-                        li.nav-item.active
+                    ul.navbar-nav.active
+                        li.nav-item
                             a.nav-link(href=urlFor('users#show', { id: signedId() })) Profile
                     ul.navbar-nav
                         li.nav-item
@@ -36,17 +36,5 @@ html(lang="en")
 
         - const msg = flash.get()
         if msg
-            .alert.alert-success.alert-dismissable.col-md-5.text-nowrap(id='cool' style='position: absolute; top: 3px; margin: 0 auto; left: 0; right:0; z-index: 2000')= msg
-            script.
-                console.log('@@@@@@@@@@@@@@@');
-                window.onload = function () {
-                    console.log('AAAAAAAAAAAAAAAAAAAA!!!!');
-                    window.setTimeout(function () {
-                        console.log('OOOOOOOOOOOOOOOOO!!!!!');
-                        $('#cool').fadeTo(500, 0).slideUp(500, function () {
-                            console.log('UUUUUUUUUUUUUU!!!!!!');
-                            $(this).remove();
-                        });
-                    }, 5000);
-                }
+            .alert.alert-success.col-md-5.text-nowrap(style='position: absolute; top: 3px; margin: 0 auto; left: 0; right:0; z-index: 2000')= msg
         block content
