@@ -46,7 +46,9 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         const tags = await task.getTags().map(tag => tag.name);
         const status = await task.getStatus().name;
         console.log('1111111111111');
-        console.log(await task.getStatus());
+        const l = await task.getStatus();
+        console.log(l);
+        console.log(l.name);
         const creator = await task.getCreator().fullName;
         const assignee = await task.getAssignedTo().fullName;
         ctx.render('tasks/task', { task, tags, status, creator, assignee });
