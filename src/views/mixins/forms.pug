@@ -19,14 +19,20 @@ mixin confirmButton(f, button_label = 'Ok')
         input(class=`btn col-md-3 btn-success text-nowrap` type='submit' value=`${button_label}`)
 
 mixin editButton(options = { target: '', id: 0, label: '' })
-    .col-6
+    .col-4
         form(action=urlFor(`${options['target']}s#edit`, {id: options['id']}) method='get')
             button.btn.btn-block.btn-warning(type='submit')= options['label']
 
 mixin deleteButton(options = { target: '', id: 0, label: '' })
-    .col-6
+    .col-4
         form(action=urlFor(`${options['target']}s#destroy`, {id: options['id']}) method='post')
             button.btn.btn-block.btn-danger(type='submit' name='_method' value='delete')= options['label']
+
+mixin returnButton(options = { path: '', id: null, label: '' })
+    .col-4
+        - const link = options['id'] ? urlFor(options['path'], {id: options['id']}) : urlFor(options['path'])
+        form(action=link method='get')
+            button.btn.btn-block.btn-primary(type='submit')= options['label']
 
 mixin textarea(f, property, options = { label: "" })
     - const value = f.object[property] === undefined ? '' : f.object[property]
