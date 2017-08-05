@@ -12,6 +12,9 @@ block content
             +smallField({ label: 'ID', value: formatId(user.id, 3) })
             if isOwner
                 .row.form-group.mt-5
+                    +editButton({ target: 'user', id: user.id, label: 'Edit profile' })
+                    +deleteButton({ target: 'user', id: user.id, label: 'Edit profile' })
+                .row.form-group.mt-5
                     .col-md-6
                         form(action=urlFor('users#edit', { id: user.id }) method='get')
                             button.btn.btn-block.btn-warning(type='submit') Edit profile
