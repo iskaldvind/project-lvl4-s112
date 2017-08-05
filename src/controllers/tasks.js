@@ -44,7 +44,10 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         ctx.render('errors/notFound');
       } else {
         const tags = await task.getTags().map(tag => tag.name);
-        ctx.render('tasks/task', { task, tags });
+        const status = await task.getStatus().name;
+        const creator = await task.getCreator().fullName;
+        const assignee = await task.getAssignedTo().fullName;
+        ctx.render('tasks/task', { task, tags, status, creator, assignee });
       }
     })
     .get('tasks#edit', '/tasks/:id/edit', async (ctx) => {
