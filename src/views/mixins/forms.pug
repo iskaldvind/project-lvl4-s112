@@ -17,7 +17,7 @@ mixin input(f, property, options = { as: "text", label: "", valueFormatter: null
 
 mixin confirmButton(f, button_label = 'Ok')
     .col-4
-        input(class=`btn col-md-4 btn-success text-nowrap` type='submit' value=`${button_label}`)
+        input(class=`btn btn-success text-nowrap` type='submit' value=`${button_label}`)
 
 mixin editButton(options = { target: '', id: 0, label: '' })
     .col-4
@@ -38,7 +38,8 @@ mixin returnButton(options = { path: '', id: null, label: '' })
 mixin textarea(f, property, options = { label: "" })
     - const value = f.object[property] === undefined ? '' : f.object[property]
     .form-group.row
-        label.col-3.col-form-label.text-nowrap(for=options['label'])= options['label']
+        label.col-3.col-form-label.text-nowrap.text-muted(for=options['label'])
+            b= options['label']
         .col-9(class=(f.errors[property] && 'has-danger'))
             textarea(name=getInputName(f, property) id=options['label'] class='form-control' type='text')= value
             if f.errors[property]
@@ -47,11 +48,9 @@ mixin textarea(f, property, options = { label: "" })
 mixin select(f, property, options = { collection: [], defaultOption: "", defaultId: "", label: "", property: ""})
     - const value = f.object[property] === undefined ? '' : f.object[property]
     .form-group.row
-        label.col-3.col-form-label.text-nowrap(for=options['label'])= options['label']
+        label.col-3.col-form-label.text-nowrap.text-muted(for=options['label'])
+            b= options['label']
         .col-9
-            - console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-            - console.log(options['defaultId'])
-            - console.log(options['defaultOption'])
             select(name=getInputName(f, property) id=options['label'] class='form-control' value=`${value}`)
                 option(value=options['defaultId'] selected='selected')= options['defaultOption'][options['property']]
                 each item in options['collection']
