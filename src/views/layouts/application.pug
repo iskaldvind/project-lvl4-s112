@@ -14,16 +14,14 @@ html(lang="en")
             a.navbar-brand(href="/") Task Manager
             .collapse.navbar-collapse
                 if isSignedIn()
-                    ul.navbar-nav.active
+                    ul.nav
                         li.nav-item
                             a.nav-link(href=urlFor('users#show', { id: signedId() })) Profile
-                    ul.navbar-nav
                         li.nav-item
                             a.nav-link(href=urlFor('users#index')) Users
-                    ul.navbar-nav.mr-auto
                         li.nav-item
                             a.nav-link(href=urlFor('tasks#index')) Tasks
-                    ul.navbar-nav
+                    ul.nav.justify-content-end
                         li.nav-item
                             a.nav-link(href=urlFor('sessions#destroy') data-method='delete' rel='nofollow') Sign Out
                 else

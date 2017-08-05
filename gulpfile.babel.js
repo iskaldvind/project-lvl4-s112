@@ -7,8 +7,6 @@ import container from './src/container';
 import init from './src/init';
 import getServer from './src';
 
-// gulp.task('default', console.log('hello!'));
-
 gulp.task('console', () => {
   gutil.log = gutil.noop;
   const replServer = repl.start({
