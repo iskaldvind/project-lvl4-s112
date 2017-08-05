@@ -64,7 +64,7 @@ block content
                 each task in tasks
                     tr
                         td.small
-                                a(href=urlFor('tasks#show', { id: task.id }))= task.formattedId
+                                a(href=urlFor('tasks#show', { id: task.id }))= formatId(task.id, 6)
                         td.small.text-nowrap= formatDate(task.createdAt)
                         td.small= task.status
                         td.small= task.name

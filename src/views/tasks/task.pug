@@ -2,6 +2,52 @@ extends /layouts/application.pug
 
 block content
     if isSignedIn()
+        .container.align-content-center.justify-content-center
+            .py-4
+                h2.text-center Task details
+        .container.col-4.mt-4
+            .row.p-3
+                .col-6.text-nowrap
+                    b Task ID
+                .col-6.text-nowrap= formatId(task.id)
+            .row.p-3
+                .col-6.text-nowrap
+                    b Status
+                .col-6.text-nowrap= task.status
+            .row.p-3
+                .col-6.text-nowrap
+                    b Title
+                .col-6.text-nowrap= task.name
+            .row.p-3
+                .col-6.text-nowrap
+                    b Tags
+                .col-6.text-nowrap= task.tags
+            .row.p-3
+                .col-6.text-nowrap
+                    b Created at
+                .col-6.text-nowrap= formatDate(task.createdAt)
+            .row.p-3
+                .col-6.text-nowrap
+                    b Created by
+                .col-6.text-nowrap= task.creator
+            .row.p-3
+                .col-6.text-nowrap
+                    b Assigned to
+                .col-6.text-nowrap= task.assignedTo
+            .row.p-3
+                .col-6.text-nowrap
+                    b Description
+                .col-6.text-nowrap= task.description
+
+
+            .row.form-group.mt-5
+                .col-md-6
+                    form(action=urlFor('task#edit', {id: task.id}) method='get')
+                        button.btn.btn-block.btn-warning(type='submit') Edit task
+                .col-md-6
+                    form(action=urlFor('task#destroy', {id: task.id}) method='post')
+                        button.btn.btn-block.btn-danger(type='submit' name='_method' value='delete') Delete task
+    if isSignedIn()
         .container
             table.table
                 thead.thead-bordered
