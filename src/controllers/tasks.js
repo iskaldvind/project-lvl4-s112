@@ -46,7 +46,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         const task = await getTaskData(requestedTask);
         const tags = task.tags;
         // const statuses = await TaskStatus.findAll();
-        ctx.render('tasks/task', { f: buildFormObj(task), task, tags, statuses });
+        ctx.render('tasks/task', { f: buildFormObj(task), task, tags });
       }
     })
     .get('tasks#edit', '/tasks/:id/edit', async (ctx) => {
