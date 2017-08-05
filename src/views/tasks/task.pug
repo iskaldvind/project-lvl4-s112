@@ -16,14 +16,4 @@ block content
         .row.form-group.mt-5
             +editButton({target: 'task', id: task.id, label: 'Edit task'})
             +deleteButton({target: 'task', id: task.id, label: 'Delete task'})
-
-    // form(action=urlFor('tasks#update', {id: task.id}), method='post')
-        - const value = f.object[property] === undefined ? '' : f.object[property]
-        .form-group(class=(f.errors[property] && 'has-danger'))
-            select(name='statusId' class='form-control' value=`${value}`)
-                option(selected= 1) Change status
-                each status in statuses
-                    option(value= status.id)= status.name
-            input(type='hidden' name='_method' value='PATCH')
-            input(type='hidden' name='taskId' value= task.id)
-            button.btn.btn-block Update Status
+            
