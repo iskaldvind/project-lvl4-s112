@@ -38,9 +38,11 @@ html(lang="en")
         if msg
             .alert.alert-success.alert-dismissable.col-md-5.text-nowrap(style='position: absolute; top: 3px; margin: 0 auto; left: 0; right:0; z-index: 2000')= msg
             script.
-              window.setTimeout(function () {
-                $('.alert-dismissable').fadeTo(500, 0).slideUp(500, function () {
-                  $(this).remove();
-                });
-              }, 5000);
+              window.onload = function () {
+                window.setTimeout(function () {
+                    $('.alert-dismissable').fadeTo(500, 0).slideUp(500, function () {
+                        $(this).remove();
+                    });
+                }, 5000);
+              }
         block content
