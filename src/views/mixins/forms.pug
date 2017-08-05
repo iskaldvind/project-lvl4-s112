@@ -44,6 +44,7 @@ mixin select(f, property, options = { collection: [], defaultOption: "", default
         .col-9
             - console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
             - console.log(options['defaultId'])
+            - console.log(options['defaultOption'])
             select(name=getInputName(f, property) id=options['label'] class='form-control' value=`${value}`)
                 option(value=options['defaultId'] selected='selected')= options['defaultOption'][options['property']]
                 each item in options['collection']
