@@ -9,4 +9,6 @@ block content
             +input(f, 'lastName', { label: 'Last name' })
             +input(f, 'password', { as: 'password', label: 'Password' })
             input(type='hidden', name='_method' value='patch')
-            +confirmButton(f, 'Save')
+            .row
+                +returnButton({ path: 'users#show', id })
+                +confirmButton(f, 'Save')

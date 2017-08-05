@@ -6,7 +6,7 @@ block content
             .py-4
                 - const usersProfileTitle = `${user.fullName}'s profile`
                 h2.text-center= usersProfileTitle
-        .container.col-4.mt-4
+        .container.col-4
             +smallField({ label: 'Full name', value: user.fullName })
             +smallField({ label: 'E-mail', value: user.email })
             +smallField({ label: 'ID', value: formatId(user.id, 3) })
