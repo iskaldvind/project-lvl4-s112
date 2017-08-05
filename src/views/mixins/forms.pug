@@ -15,7 +15,7 @@ mixin input(f, property, options = { as: "text", label: "", valueFormatter: null
             if f.errors[property]
                 .form-control-feedback.has-danger= f.errors[property].map(({ message }) => message).join('. ')
 
-mixin confirmButton(f, button_label = 'Ok', options: { method: 'get' })
+mixin confirmButton(f, button_label = 'Ok', options = { method: 'get' })
     .col-4
         button.btn.btn-block.btn-success(type='submit' name='_method' value=`${options['method']}`)= button_label
         // input(class=`btn btn-block btn-success text-nowrap` name='_method' type='submit' value=`${button_label}`)
