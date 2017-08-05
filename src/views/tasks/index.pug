@@ -4,7 +4,7 @@ block content
     .container.col-lg-10.mb-5
         .py-1.mt-5
             .form-group.row
-                label.col-md-1.col-form-label.text-nowrap
+                label.col-md-1.col-form-label.text-nowrap.text-muted
                     b My tasks
                 .col-md-2
                     form(action=urlFor('tasks#new') method='get')
@@ -18,7 +18,7 @@ block content
         .py-1.mt-2
             form(action=urlFor('tasks#index') method='get')
                 .form-group.row
-                    label.col-md-1.col-form-label.text-nowrap
+                    label.col-md-1.col-form-label.text-nowrap.text-muted
                         b Filter by
                     +filterSelect({ name: 'tagId', defaultLabel: 'All tags', collection: tags, property: 'name' })
                     +filterSelect({ name: 'statusId', defaultLabel: 'All statuses', collection: statuses, property: 'name' })
