@@ -7,7 +7,7 @@ block content
             +input(f, 'name', { label: 'Title' })
             +input(f, 'tags', { label: 'Tags', valueFormatter: formatTags })
             +textarea(f, 'description', { label: 'Description' })
-            +select(f, 'assignedToId', { collection: users, defaultOption: f.object.assignedTo, defaultId: f.object.assignedToId, label: 'Assigned to', property: 'fullName' })
+            +select(f, 'assignedToId', { collection: users, defaultOption: f.object.assignee, defaultId: f.object.assignedToId, label: 'Assigned to', property: 'fullName' })
             input(type='hidden', name='_method' value='patch')
             input(type='hidden' name='taskId' value= f.object.id)
             input(type='hidden' name='statusId' value= f.object.statusId)

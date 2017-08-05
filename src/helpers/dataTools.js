@@ -34,6 +34,7 @@ export const getTaskData = async (task) => {
     creatorId,
     assignedToId,
     assignedTo,
+    assignee,
   };
 };
 

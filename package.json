@@ -1,6 +1,6 @@
 {
   "name": "task-manager-ultimate",
-  "version": "0.0.503",
+  "version": "0.0.504",
   "description": "project-lvl4-s112",
   "main": "dist/index.js",
   "bin": {
