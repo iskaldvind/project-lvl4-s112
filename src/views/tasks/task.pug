@@ -5,38 +5,47 @@ block content
         .py-4
             h2.text-center Task details
     .container.col-6.mt-4
+        +smallField({ label: 'Task ID', value: formatId(task.id, 6) })
+        +smallField({ label: 'Status', value: task.status })
+        +smallField({ label: 'Title', value: task.name })
+        +smallField({ label: 'Tags', value: task.tags })
+        +smallField({ label: 'Created at', value: formatDate(task.createdAt) })
+        +smallField({ label: 'Created by', value: task.creator })
+        +smallField({ label: 'Assigned to', value: task.assignedTo })
+        +bigField({ label: 'Description', value: task.description })
+        
         .row
-            .col-4.text-nowrap.p-2
+            .col-4.text-nowrap.py-2
                 b Task ID
-            .col-8.text-nowrap.card.card-outline-secondary.p-2= formatId(task.id, 6)
-        .row.p-2
-            .col-4.text-nowrap
+            .col-8.text-nowrap.card.card-outline-secondary.py-2= formatId(task.id, 6)
+        .row
+            .col-4.text-nowrap.py-2
                 b Status
-            .col-8.text-nowrap.well-white= task.status
-        .row.p-2
-            .col-4.text-nowrap
+            .col-8.text-nowrap.card.card-outline-secondary.py-2= task.status
+        .row
+            .col-4.text-nowrap.py-2
                 b Title
-            .col-8.text-nowrap.well-white= task.name
-        .row.p-2
-            .col-4.text-nowrap
+            .col-8.text-nowrap.card.card-outline-secondary.py-2= task.name
+        .row
+            .col-4.text-nowrap.py-2
                 b Tags
-            .col-8.text-nowrap.well-white= task.tags
-        .row.p-2
-            .col-4.text-nowrap
+            .col-8.text-nowrap.card.card-outline-secondary.py-2= task.tags
+        .row
+            .col-4.text-nowrap.py-2
                 b Created at
-            .col-8.text-nowrap.well-white= formatDate(task.createdAt)
-        .row.p-2
-            .col-4.text-nowrap
+            .col-8.text-nowrap.card.card-outline-secondary.py-2= formatDate(task.createdAt)
+        .row
+            .col-4.text-nowrap.py-2
                 b Created by
-            .col-8.text-nowrap.well-white= task.creator
-        .row.p-2
-            .col-4.text-nowrap
+            .col-8.text-nowrap.card.card-outline-secondary.py-2= task.creator
+        .row
+            .col-4.text-nowrap.py-2
                 b Assigned to
-            .col-8.text-nowrap.well-white= task.assignedTo
-        .row.p-2
-            .col-4.text-nowrap
+            .col-8.text-nowrap.card.card-outline-secondary.py-2= task.assignedTo
+        .row
+            .col-4.text-nowrap.py-2
                 b Description
-            .col-8.well-white= task.description
+            .col-8.card.card-outline-secondary.py-2= task.description
 
 
         .row.form-group.mt-5
