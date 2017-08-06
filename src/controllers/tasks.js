@@ -59,12 +59,12 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         ctx.status = 404;
         ctx.render('errors/notFound');
       } else {
-        const tags = await task.getTags();
+        const tags = await task.getTags().map(tag => tag.name);
         console.log('99999999999999999999999999');
         console.log(tags);
         const users = await User.findAll();
         const statuses = await TaskStatus.findAll();
-        ctx.render('tasks/edit', { f: buildFormObj(task), task, tags: tags.map(tag => tag.name), users, id, statuses });
+        ctx.render('tasks/edit', { f: buildFormObj(task), task, tags, users, id, statuses });
       }
     })
     .patch('tasks#update', '/tasks/:id', async (ctx) => {
