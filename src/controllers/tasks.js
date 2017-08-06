@@ -53,7 +53,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     .get('tasks#edit', '/tasks/:id/edit', async (ctx) => {
       const id = Number(ctx.params.id);
       const task = await Task.findById(id);
-      if (!isExist(requestedTask)) {
+      if (!isExist(task)) {
         ctx.status = 404;
         ctx.render('errors/notFound');
       } else {
