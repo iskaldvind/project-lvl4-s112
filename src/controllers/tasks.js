@@ -52,23 +52,25 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       }
     })
     .get('tasks#show', '/tasks/:id', async (ctx) => {
-        const taskId = Number(ctx.params.id);
-        const task = await Task.findById(taskId);
-        if (!isExist(task)) {
-          ctx.status = 404;
-          ctx.render('errors/notFound');
+      const taskId = Number(ctx.params.id);
+      const task = await Task.findById(taskId);
+      if (!isExist(task)) {
+        ctx.status = 404;
+        ctx.render('errors/notFound');
+      } else {
+        /* eslint-disable no-lonely-if*/
+        if (ctx.state.isSignedIn()) {
+          const tags = await task.getTags().map(tag => tag.name);
+          const status = await task.getStatus();
+          const creator = await task.getCreator();
+          const assignee = await task.getAssignedTo();
+          ctx.render('tasks/task', { task, tags, status, creator, assignee });
         } else {
-          if (ctx.state.isSignedIn()) {
-            const tags = await task.getTags().map(tag => tag.name);
-            const status = await task.getStatus();
-            const creator = await task.getCreator();
-            const assignee = await task.getAssignedTo();
-            ctx.render('tasks/task', { task, tags, status, creator, assignee });
-          } else {
-            ctx.flash.set('You must be logged in to access this page');
-            ctx.redirect(router.url('sessions#new'));
-          }
+          ctx.flash.set('You must be logged in to access this page');
+          ctx.redirect(router.url('sessions#new'));
         }
+        /* eslint-enable no-lonely-if*/
+      }
     })
     .get('tasks#edit', '/tasks/:id/edit', async (ctx) => {
       const id = Number(ctx.params.id);
@@ -77,6 +79,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         ctx.status = 404;
         ctx.render('errors/notFound');
       } else {
+        /* eslint-disable no-lonely-if*/
         if (ctx.state.isSignedIn()) {
           const tags = await task.getTags().map(tag => tag.name);
           const users = await User.findAll();
@@ -88,6 +91,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
           ctx.flash.set('You must be logged in to access this page');
           ctx.redirect(router.url('sessions#new'));
         }
+        /* eslint-enable no-lonely-if*/
       }
     })
     .patch('tasks#update', '/tasks/:id', async (ctx) => {

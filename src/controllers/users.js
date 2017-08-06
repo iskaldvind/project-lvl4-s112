@@ -34,12 +34,14 @@ export default (router, { User }) => {
         ctx.render('errors/notFound');
         ctx.status = 404;
       } else {
+        /* eslint-disable no-lonely-if*/
         if (ctx.state.isSignedIn()) {
           ctx.render('users/profile', { user, isOwner });
         } else {
           ctx.flash.set('You must be logged in to access this page');
           ctx.redirect(router.url('sessions#new'));
         }
+        /* eslint-enable no-lonely-if*/
       }
     })
     .get('users#edit', '/users/:id/edit', async (ctx) => {
@@ -81,7 +83,7 @@ export default (router, { User }) => {
       }
     })
     .delete('users#destroy', '/users/:id', async (ctx) => {
-       if (ctx.state.isSignedIn()) {
+      if (ctx.state.isSignedIn()) {
         const id = Number(ctx.params.id);
         if (ctx.state.isSignedIn() && ctx.state.signedId() === id) {
           User.destroy({
@@ -94,9 +96,9 @@ export default (router, { User }) => {
           ctx.flash.set('You are not allowed to delete other\'s profiles');
           ctx.redirect(router.url('users#show', id));
         }
-       } else {
-         ctx.render('errors/forbidden');
-         ctx.status = 403;
-       }
+      } else {
+        ctx.render('errors/forbidden');
+        ctx.status = 403;
+      }
     });
 };

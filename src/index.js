@@ -30,7 +30,7 @@ export default () => {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
       /* eslint-disable no-alert, no-underscore-dangle*/
       return req.body._method;
-      /* eslint-disable no-alert, no-underscore-dangle*/
+      /* eslint-enable no-alert, no-underscore-dangle*/
     }
     return '';
   }));
