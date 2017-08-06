@@ -41,7 +41,6 @@ const getFilterParams = query =>
     return acc;
   }, { where: {}, tag: {} });
 
-/*
 const filterByTag = (tasks, tagId) =>
   tasks.filter(task => task.tagsIds.indexOf(tagId) !== -1);
 
@@ -54,23 +53,6 @@ export const filterTasks = async (Task, query = {}) => {
     formattedTasksData :
     filterByTag(formattedTasksData, tag.tagId);
 };
-*/
-
-
-const filterByTag = (tasks, tagId) =>
-  tasks.filter(async (task) => {
-    const taskTagsIds = await task.getTags().map(tag => tag.id);
-    return taskTagsIds.indexOf(tagId) !== -1;
-  });
-
-export const filterTasks = async (Task, query = {}) => {
-  const { where, tag } = getFilterParams(query);
-  const tasksFilteredByWhere = await Task.findAll({ where });
-  return Object.keys(tag).length === 0 ?
-    tasksFilteredByWhere :
-    filterByTag(tasksFilteredByWhere, tag.tagId);
-};
-
 
 export const updateTags = async (newTagsNames, Tag, taskObj) => {
   const oldTags = await taskObj.getTags();
