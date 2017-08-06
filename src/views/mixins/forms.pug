@@ -4,9 +4,9 @@ mixin formFor(f, form_class, options = {})
     form(action=_.get(options, 'url') class=`${form_class}` method=_.get(options, 'method', 'get'))
         block
 
-mixin input(f, property, options = { as: "text", label: "", valueFormatter: null, forcedValue: null})
-    if options['forcedValue']
-        - const value = options['valueFormatter'] ? options['valueFormatter'](options['forcedValue']) : options['forcedValue']
+mixin input(f, property, options = { as: "text", label: "", valueFormatter: null, value: null})
+    if options['value']
+        - const value = options['valueFormatter'] ? options['valueFormatter'](options['value']) : options['value']
         .form-group.row
             label.col-3.col-form-label.text-nowrap.text-muted(for=options['label'])
                 b= options['label']

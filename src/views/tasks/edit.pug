@@ -5,18 +5,18 @@ block content
         h2.form-signin-heading.py-4.text-center Edit Task
         +formFor(f, 'form-signin', { url: urlFor('tasks#update', { id }), method: 'post' })
             +input(f, 'name', { label: 'Title' })
-            +input(f, 'tags', { label: 'Tags', valueFormatter: formatTags, forcedValue: tags })
+            +input(f, 'tags', { label: 'Tags', valueFormatter: formatTags, value: tags })
             +select(f, 'statusId', {
               collection: statuses,
-              defaultOption: f.object.statusO,
-              defaultId: f.object.statusId,
+              defaultOption: status,
+              defaultId: status.id,
               label: 'Status',
               property: 'name'
             })
             +select(f, 'assignedToId', {
               collection: users,
-              defaultOption: f.object.assignee,
-              defaultId: f.object.assignedToId,
+              defaultOption: assignee,
+              defaultId: assignee.id,
               label: 'Assigned to',
               property: 'fullName'
             })
