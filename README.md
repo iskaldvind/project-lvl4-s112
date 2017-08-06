@@ -10,7 +10,5 @@ make install
 https://murmuring-earth-80718.herokuapp.com/
 
 ### To Do:
-- Check for unnecesarry data passed in routes
-- Switch to pure objects in routes
 - Write tests
 - Write log in condition to all routes
