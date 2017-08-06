@@ -65,7 +65,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         const users = await User.findAll();
         const statuses = await TaskStatus.findAll();
         const status = await task.getStatus();
-        const assignee = await task.getAssignedto();
+        const assignee = await task.getAssignedTo();
         ctx.render('tasks/edit', { f: buildFormObj(task), task, tags, users, id, statuses, status, assignee });
       }
     })
