@@ -44,6 +44,8 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         ctx.render('errors/notFound');
       } else {
         const tags = await task.getTags().map(tag => tag.name);
+        console.log('---___----____----___');
+        console.log(tags);
         const status = await task.getStatus();
         const creator = await task.getCreator();
         const assignee = await task.getAssignedTo();
