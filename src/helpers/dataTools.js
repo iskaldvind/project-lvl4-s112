@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export const addZeroTag = form => form.tags !== '' ? form : { ...form, tags: '-' };
+export const addZeroTag = form => (form.tags !== '' ? form : { ...form, tags: '-' });
 
 export const buildFormObj = (object, error = { errors: [] }) => ({
   name: 'form',
@@ -10,15 +10,9 @@ export const buildFormObj = (object, error = { errors: [] }) => ({
 
 export const getTaskData = async (task) => {
   const creator = await task.getCreator();
-  const creatorId = creator.id;
   const assignee = await task.getAssignedTo();
-  const assignedTo = assignee.fullName;
-  const assignedToId = assignee.id;
   const status = await task.getStatus();
   const tags = await task.getTags();
-  const tagsNames = tags.map(tag => tag.name);
-  const tagsIds = tags.map(tag => tag.id);
-  const createdAt = task.createdAt;
   return {
     id: task.dataValues.id,
     name: task.dataValues.name,
@@ -26,12 +20,12 @@ export const getTaskData = async (task) => {
     creator: creator.fullName,
     status: status.name,
     statusId: status.id,
-    tags: tagsNames,
-    tagsIds,
-    createdAt,
-    creatorId,
-    assignedToId,
-    assignedTo,
+    tags: tags.map(tag => tag.name),
+    tagsIds: tags.map(tag => tag.id),
+    createdAt: task.createdAt,
+    creatorId: creator.id,
+    assignedToId: assignee.id,
+    assignedTo: assignee.fullName,
     assignee,
   };
 };
