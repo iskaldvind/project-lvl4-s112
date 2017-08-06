@@ -64,7 +64,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         console.log(tags);
         const users = await User.findAll();
         const statuses = await TaskStatus.findAll();
-        ctx.render('tasks/edit', { f: buildFormObj(task), task, tags, users, id, statuses });
+        ctx.render('tasks/edit', { f: buildFormObj(task), task, tags: tags.map(tag => tag.name), users, id, statuses });
       }
     })
     .patch('tasks#update', '/tasks/:id', async (ctx) => {
