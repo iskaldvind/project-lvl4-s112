@@ -33,9 +33,10 @@ describe('requests', () => {
   });
 });
 
-describe('requests 2', () => {
+describe('Registration', () => {
   let server;
   const email = faker.internet.email();
+  const emailUpdated = faker.internet.email();
   const firstName = faker.name.firstName();
   const lastName = faker.name.lastName();
   const password = faker.internet.password();
@@ -48,7 +49,7 @@ describe('requests 2', () => {
     server = app().listen();
   });
 
-  it('Register', async () => {
+  it('Register-Login-Logout', async () => {
     const res = await request.agent(server)
       .post('/users')
       .type('form')
@@ -69,9 +70,44 @@ describe('requests 2', () => {
       .set('user-agent', faker.internet.userAgent)
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
-    // console.log(res);
     expect(res).toHaveHTTPStatus(302);
-    expect(res.headers.location).toBe('/sessions/new');
+    expect(res.headers.location).toBe('/');
+  });
+
+  it('Log out', async () => {
+    const res = await request.agent(server)
+      .delete('/sessions')
+      .send('')
+      .set('user-agent', faker.internet.userAgent)
+      .set('content-type', 'application/x-www-form-urlencoded')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+    expect(res).toHaveHTTPStatus(302);
+    expect(res.headers.location).toBe('/');
+  });
+
+  it('Log in again', async () => {
+    const res = await request.agent(server)
+      .post('/sessions')
+      .type('form')
+      .send({ form: { email, password } })
+      .set('user-agent', faker.internet.userAgent)
+      .set('content-type', 'application/x-www-form-urlencoded')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+    expect(res).toHaveHTTPStatus(302);
+    expect(res.headers.location).toBe('/');
+  });
+
+  it('Get users', async () => {
+    const res = await request.agent(server)
+      .get('/users')
+      .type('form')
+      .send('')
+      .set('user-agent', faker.internet.userAgent)
+      .set('content-type', 'application/x-www-form-urlencoded')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+    console.log(res.body);
+    expect(res).toHaveHTTPStatus(302);
+    expect(res.headers.location).toBe('/users');
   });
 
   afterEach((done) => {
