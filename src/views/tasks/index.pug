@@ -50,6 +50,7 @@ block content
                         b Description
             tbody
                 each task in tasks
+                    - console.log(task);
                     tr
                         td.small
                                 a(href=urlFor('tasks#show', { id: task.id }))= formatId(task.id, 6)
