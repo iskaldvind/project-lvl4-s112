@@ -35,15 +35,13 @@ describe('requests', () => {
 
 describe('requests 2', () => {
   let server;
-  const fantom = {};
+  const email = faker.internet.email();
+  const firstName = faker.name.firstName();
+  const lastName = faker.name.lastName();
+  const password = faker.internet.password();
 
   beforeAll(() => {
     jasmine.addMatchers(matchers);
-
-    fantom.email = faker.internet.email();
-    fantom.firstName = faker.name.firstName();
-    fantom.lastName = faker.name.lastName();
-    fantom.password = faker.internet.password();
   });
 
   beforeEach(() => {
@@ -54,12 +52,7 @@ describe('requests 2', () => {
     const res = await request.agent(server)
       .post('/users')
       .type('form')
-      .send({
-        email: fantom.email,
-        firstName: fantom.firstName,
-        lastName: fantom.lastName,
-        password: fantom.password,
-      })
+      .send({ email, firstName, lastName, password })
       .set('user-agent', faker.internet.userAgent)
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html');
@@ -71,10 +64,7 @@ describe('requests 2', () => {
     const res = await request.agent(server)
       .post('/sessions')
       .type('form')
-      .send({
-        email: fantom.email,
-        password: fantom.password,
-      })
+      .send({ email, password })
       .set('user-agent', faker.internet.userAgent)
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html');
