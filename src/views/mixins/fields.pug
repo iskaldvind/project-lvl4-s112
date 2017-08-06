@@ -1,8 +1,5 @@
 mixin smallField(options = { label: "", value: "" })
     .row.my-3
-        - console.log('OOOOOOOOOOOOOO');
-        - console.log(options['label']);
-        - console.log(options['value']);
         .col-3.text-nowrap.py-1
             b.text-muted=options['label']
         .col-9.text-nowrap.card.card-outline-secondary.py-1= options['value']

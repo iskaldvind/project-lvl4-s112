@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const formatId = id => `${'0'.repeat(6 - id.toString().length)}${id}`;
+export const addZeroTag = form => form.tags !== '' ? form : { ...form, tags: '-' };
 
 export const buildFormObj = (object, error = { errors: [] }) => ({
   name: 'form',
@@ -21,15 +21,12 @@ export const getTaskData = async (task) => {
   const createdAt = task.createdAt;
   return {
     id: task.dataValues.id,
-    formattedId: formatId(task.dataValues.id),
     name: task.dataValues.name,
     description: task.dataValues.description,
     creator: creator.fullName,
     status: status.name,
-    statusO: status,
     statusId: status.id,
     tags: tagsNames,
-    // make tags as string option
     tagsIds,
     createdAt,
     creatorId,

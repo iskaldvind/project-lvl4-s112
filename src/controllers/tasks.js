@@ -1,5 +1,5 @@
 import url from 'url';
-import { buildFormObj, getTaskData, filterTasks, updateTags, isExist } from '../helpers/dataTools';
+import { buildFormObj, filterTasks, updateTags, isExist, addZeroTag } from '../helpers/dataTools';
 
 export default (router, { Task, User, Tag, TaskStatus }) => {
   router
@@ -9,7 +9,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const tags = await Tag.findAll();
       const statuses = await TaskStatus.findAll();
       const users = await User.findAll();
-      ctx.render('tasks', { users, tasks, statuses, tags, f: buildFormObj(tasks) });
+      ctx.render('tasks', { users, tasks, statuses, tags });
     })
     .get('tasks#new', '/tasks/new', async (ctx) => {
       const task = Task.build();
@@ -24,7 +24,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const creator = await User.findById(creatorId);
       const formWithCreatorId = { ...requestForm, creatorId };
       const users = await User.findAll();
-      const form = formWithCreatorId.tags !== '' ? formWithCreatorId : { ...formWithCreatorId, tags: '-' };
+      const form = addZeroTag(formWithCreatorId);
       const tags = form.tags.split(' ');
       const task = Task.build(form);
       try {
@@ -44,12 +44,10 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         ctx.render('errors/notFound');
       } else {
         const tags = await task.getTags().map(tag => tag.name);
-        console.log('---___----____----___');
-        console.log(tags);
         const status = await task.getStatus();
         const creator = await task.getCreator();
         const assignee = await task.getAssignedTo();
-        ctx.render('tasks/task', { task, tags, status: status.name, creator: creator.fullName, assignee: assignee.fullName });
+        ctx.render('tasks/task', { task, tags, status, creator, assignee });
       }
     })
     .get('tasks#edit', '/tasks/:id/edit', async (ctx) => {
@@ -60,8 +58,6 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         ctx.render('errors/notFound');
       } else {
         const tags = await task.getTags().map(tag => tag.name);
-        console.log('99999999999999999999999999');
-        console.log(tags);
         const users = await User.findAll();
         const statuses = await TaskStatus.findAll();
         const status = await task.getStatus();
@@ -75,7 +71,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
       const id = ctx.params.id;
       try {
         task.setStatus(Number(statusId));
-        const updatedForm = form.tags !== '' ? form : { ...form, tags: '-' };
+        const updatedForm = addZeroTag(form);
         await task.update(updatedForm);
         const tags = updatedForm.tags.split(' ');
         await updateTags(tags, Tag, task);

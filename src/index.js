@@ -72,11 +72,7 @@ export default () => {
       { urlFor: (...args) => router.url(...args) },
       { formatDate: date => dateFormat(date, 'isoUtcDateTime').replace(/[T]/, ' ').slice(0, -1) },
       { formatId: (id, digits = 0) => `${'0'.repeat(digits - id.toString().length)}${id}` },
-      { formatTags: tags => {
-        console.log('DDDDDDDDDD');
-        console.log(tags);
-        return tags.filter(tag => tag !== '-').join(' '); }
-      },
+      { formatTags: tags => tags.filter(tag => tag !== '-').join(' ') },
     ],
   });
   pug.use(app);
