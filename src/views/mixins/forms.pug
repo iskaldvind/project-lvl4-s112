@@ -6,6 +6,8 @@ mixin formFor(f, form_class, options = {})
 
 mixin input(f, property, options = { as: "text", label: "", valueFormatter: null })
     - const rawValue = f.object[property] === undefined ? '' : f.object[property]
+    - console.log('????????????????????');
+    - console.log(rawValue);
     - const value = options['valueFormatter'] ? options['valueFormatter'](rawValue) : rawValue
     .form-group.row
         label.col-3.col-form-label.text-nowrap.text-muted(for=options['label'])
