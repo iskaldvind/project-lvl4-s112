@@ -9,17 +9,15 @@ export default (router, { User }) => {
     })
     .post('sessions#create', '/sessions', async (ctx) => {
       const { email, password } = ctx.request.body.form;
-      /*
-      console.log('-------------------------------');
+      console.log('sessions#create:ctx-------------------------------');
       console.log(ctx);
-      console.log('===============================');
+      console.log('sessions#create:ctx.reqquest======================');
       console.log(ctx.request);
-      console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      console.log('sessions#create:ctx.request.body!!!!!!!!!!!!!!!!!!');
       console.log(ctx.request.body);
-      console.log('###############################');
+      console.log('sessions#create:ctx.request.body.form#############');
       console.log(ctx.request.body.form);
-      console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
-      */
+      console.log('sessions#create:end@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
       const user = await User.findOne({
         where: {
           email,
