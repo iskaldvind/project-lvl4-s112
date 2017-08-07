@@ -35,6 +35,7 @@ describe('requests', () => {
 */
 describe('Registration', () => {
   let server;
+  let superagent;
   const email = faker.internet.email();
   const emailUpdated = faker.internet.email();
   const firstName = faker.name.firstName();
@@ -44,10 +45,11 @@ describe('Registration', () => {
   beforeAll(() => {
     jasmine.addMatchers(matchers);
     server = app().listen();
+    superagent = request.agent(server);
   });
 
   it('Register', async () => {
-    await request.agent(server)
+    await superagent
       .post('/users')
       .type('form')
       .send({ form: { email: 'no@no.no', firstName: 'no', lastName: 'no', password: 'nono' } })
@@ -59,28 +61,27 @@ describe('Registration', () => {
   });
 
   it('Log in', async () => {
-    const res = await request.agent(server)
+    await superagent
       .post('/sessions')
       .type('form')
       .send({ form: { email: 'no@no.no', password: 'nono' } })
       .set('user-agent', faker.internet.userAgent)
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      .set('cookie', 'koa.sid=LSg6TJrCGOwtxV3GnAsmtu94JNcj5ITh; koa.sid.sig=fiF4QN6nxuiIIvngsQVoogtPRsA; _ga=GA1.3.2006899796.1500299175; _gid=GA1.3.1190983512.1502095434');
-    expect(res).toHaveHTTPStatus(302);
-    expect(res.headers.location).toBe('/');
+      .set('cookie', 'koa.sid=LSg6TJrCGOwtxV3GnAsmtu94JNcj5ITh; koa.sid.sig=fiF4QN6nxuiIIvngsQVoogtPRsA; _ga=GA1.3.2006899796.1500299175; _gid=GA1.3.1190983512.1502095434')
+      .expect(302);
   });
 
-  it('Get users', async () => {
-    const res = await request.agent(server)
+  it('Get user', async () => {
+    await superagent
       .get('/users/1')
       .type('form')
       .send('')
       .set('user-agent', faker.internet.userAgent)
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      .set('cookie', 'koa.sid=LSg6TJrCGOwtxV3GnAsmtu94JNcj5ITh; koa.sid.sig=fiF4QN6nxuiIIvngsQVoogtPRsA; _ga=GA1.3.2006899796.1500299175; _gid=GA1.3.1998091839.1502095444');
-    expect(res).toHaveHTTPStatus(200);
+      .set('cookie', 'koa.sid=LSg6TJrCGOwtxV3GnAsmtu94JNcj5ITh; koa.sid.sig=fiF4QN6nxuiIIvngsQVoogtPRsA; _ga=GA1.3.2006899796.1500299175; _gid=GA1.3.1998091839.1502095444')
+      .expect(200);
   });
 
   afterAll((done) => {
