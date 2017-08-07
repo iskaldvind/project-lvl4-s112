@@ -54,7 +54,7 @@ describe('Registration', () => {
       .set('user-agent', faker.internet.userAgent)
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      .set('cookie', 'koa.sid.sig=bxxo_gXO0RiyrTySOMpEQE15vdE; _ga=GA1.3.2006899796.1500299175; _gid=GA1.3.1901385496.1502093093');
+      .set('cookie', 'koa.sid.sig=LHIYxkYS8LBHnP5USwZiExMwSaI; _ga=GA1.3.2006899796.1500299175; _gid=GA1.3.712511141.1502095427');
     expect(res).toHaveHTTPStatus(302);
     expect(res.headers.location).toBe('/sessions/new');
   });
@@ -67,7 +67,7 @@ describe('Registration', () => {
       .set('user-agent', faker.internet.userAgent)
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      .set('cookie', 'koa.sid=ZM25OX4n40Sk4m7ZdeFyM_j-cISdm1S7; koa.sid.sig=LHIYxkYS8LBHnP5USwZiExMwSaI; _ga=GA1.3.2006899796.1500299175; _gid=GA1.3.1720813920.1502093100');
+      .set('cookie', 'koa.sid=LSg6TJrCGOwtxV3GnAsmtu94JNcj5ITh; koa.sid.sig=fiF4QN6nxuiIIvngsQVoogtPRsA; _ga=GA1.3.2006899796.1500299175; _gid=GA1.3.1190983512.1502095434');
     expect(res).toHaveHTTPStatus(302);
     expect(res.headers.location).toBe('/');
   });
@@ -81,7 +81,7 @@ describe('Registration', () => {
       .set('user-agent', faker.internet.userAgent)
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      .set('cookie', 'koa.sid=ZM25OX4n40Sk4m7ZdeFyM_j-cISdm1S7; koa.sid.sig=LHIYxkYS8LBHnP5USwZiExMwSaI; _ga=GA1.3.2006899796.1500299175; _gid=GA1.3.1720813920.1502093100');
+      .set('cookie', 'koa.sid=LSg6TJrCGOwtxV3GnAsmtu94JNcj5ITh; koa.sid.sig=fiF4QN6nxuiIIvngsQVoogtPRsA; _ga=GA1.3.2006899796.1500299175; _gid=GA1.3.1998091839.1502095444');
     console.log(res.body);
     expect(res).toHaveHTTPStatus(200);
   });
