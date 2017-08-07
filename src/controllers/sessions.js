@@ -18,6 +18,7 @@ export default (router, { User }) => {
       console.log('sessions#create:ctx.request.body.form#############');
       console.log(ctx.request.body.form);
       console.log('sessions#create:end@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+      console.log(ctx.session);
       const user = await User.findOne({
         where: {
           email,

@@ -14,6 +14,7 @@ export default (router, { User }) => {
       console.log('Users#index:ctx.request.body.form#############');
       console.log(ctx.request.body.form);
       console.log('Users#index:end@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+      console.log(ctx.session);
       if (ctx.state.isSignedIn()) {
         console.log('====> is signed in');
         const users = await User.findAll();
@@ -39,6 +40,7 @@ export default (router, { User }) => {
       console.log('Users#create:ctx.request.body.form#############');
       console.log(ctx.request.body.form);
       console.log('Users#create:end@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+      console.log(ctx.session);
       const user = User.build(form);
       try {
         await user.save();
