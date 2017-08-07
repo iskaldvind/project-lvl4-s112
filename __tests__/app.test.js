@@ -75,7 +75,7 @@ describe('Registration', () => {
   it('Get users', async () => {
     console.log('**********************************');
     const res = await request.agent(server)
-      .get('/users')
+      .get('/')
       .type('form')
       .send('')
       .set('user-agent', faker.internet.userAgent)

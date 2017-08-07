@@ -1,8 +1,8 @@
 export default (router) => {
   router.get('root', '/', (ctx) => {
-    console.log('ROOOOOOOOT');
-    console.log(ctx.state);
-    console.log(ctx.state.isSignedIn());
+    console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
+    console.log(ctx.session);
+    console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
     ctx.render('welcome/index');
   });
 };
