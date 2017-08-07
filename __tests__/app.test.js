@@ -34,8 +34,9 @@ describe('requests', () => {
 });
 */
 describe('Registration', () => {
-  let server;
-  let superagent;
+  let server = app().listen();
+  jasmine.addMatchers(matchers);
+  let superagent = request.agent(server);
   const email = faker.internet.email();
   const emailUpdated = faker.internet.email();
   const firstName = faker.name.firstName();
@@ -43,9 +44,8 @@ describe('Registration', () => {
   const password = faker.internet.password();
 
   beforeAll(() => {
-    jasmine.addMatchers(matchers);
-    server = app().listen();
-    superagent = request.agent(server);
+    //server = app().listen();
+    //
   });
 
   it('Register', async () => {
