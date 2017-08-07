@@ -5,6 +5,15 @@ export default (router, { User }) => {
     .get('users#index', '/users', async (ctx) => {
       console.log(`====> ctx state issignedin => ${ctx.state.isSignedIn()}`);
       console.log(`====> ctx session userid => ${ctx.session.userId}`);
+      console.log('Users#index:ctx-------------------------------');
+      console.log(ctx);
+      console.log('Users#index:ctx.request=======================');
+      console.log(ctx.request);
+      console.log('Users#index:ctx.request.body!!!!!!!!!!!!!!!!!!');
+      console.log(ctx.request.body);
+      console.log('Users#index:ctx.request.body.form#############');
+      console.log(ctx.request.body.form);
+      console.log('Users#index:end@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
       if (ctx.state.isSignedIn()) {
         console.log('====> is signed in');
         const users = await User.findAll();

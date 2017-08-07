@@ -54,7 +54,7 @@ describe('Registration', () => {
       .set('user-agent', faker.internet.userAgent)
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      .then();
+      .set('cookie', 'koa.sid.sig=vOSTdao470mOIPdxOTprcUwveNo;_ga=GA1.3.2006899796.1500299175;_gid=GA1.3.1583824197.1502089485');
     expect(res).toHaveHTTPStatus(302);
     expect(res.headers.location).toBe('/sessions/new');
   });
@@ -66,30 +66,8 @@ describe('Registration', () => {
       .send({ form: { email, password } })
       .set('user-agent', faker.internet.userAgent)
       .set('content-type', 'application/x-www-form-urlencoded')
-      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
-    expect(res).toHaveHTTPStatus(302);
-    expect(res.headers.location).toBe('/');
-  });
-
-  it('Log out', async () => {
-    const res = await request.agent(server)
-      .delete('/sessions')
-      .send('')
-      .set('user-agent', faker.internet.userAgent)
-      .set('content-type', 'application/x-www-form-urlencoded')
-      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
-    expect(res).toHaveHTTPStatus(302);
-    expect(res.headers.location).toBe('/');
-  });
-
-  it('Log in again', async () => {
-    const res = await request.agent(server)
-      .post('/sessions')
-      .type('form')
-      .send({ form: { email, password } })
-      .set('user-agent', faker.internet.userAgent)
-      .set('content-type', 'application/x-www-form-urlencoded')
-      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
+      .set('cookie', 'koa.sid.sig=vOSTdao470mOIPdxOTprcUwveNo;_ga=GA1.3.2006899796.1500299175;_gid=GA1.3.1583824197.1502089485');
     expect(res).toHaveHTTPStatus(302);
     expect(res.headers.location).toBe('/');
   });
