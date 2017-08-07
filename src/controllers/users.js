@@ -3,18 +3,6 @@ import { buildFormObj, isExist } from '../helpers/dataTools';
 export default (router, { User }) => {
   router
     .get('users#index', '/users', async (ctx) => {
-      console.log(`====> ctx state issignedin => ${ctx.state.isSignedIn()}`);
-      console.log(`====> ctx session userid => ${ctx.session.userId}`);
-      console.log('Users#index:ctx-------------------------------');
-      console.log(ctx);
-      console.log('Users#index:ctx.request=======================');
-      console.log(ctx.request);
-      console.log('Users#index:ctx.request.body!!!!!!!!!!!!!!!!!!');
-      console.log(ctx.request.body);
-      console.log('Users#index:ctx.request.body.form#############');
-      console.log(ctx.request.body.form);
-      console.log('Users#index:end@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
-      console.log(ctx.session);
       if (ctx.state.isSignedIn()) {
         console.log('====> is signed in');
         const users = await User.findAll();
@@ -31,16 +19,6 @@ export default (router, { User }) => {
     })
     .post('users#create', '/users', async (ctx) => {
       const form = ctx.request.body.form;
-      console.log('Users#create:ctx-------------------------------');
-      console.log(ctx);
-      console.log('Users#create:ctx.request=======================');
-      console.log(ctx.request);
-      console.log('Users#create:ctx.request.body!!!!!!!!!!!!!!!!!!');
-      console.log(ctx.request.body);
-      console.log('Users#create:ctx.request.body.form#############');
-      console.log(ctx.request.body.form);
-      console.log('Users#create:end@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
-      console.log(ctx.session);
       const user = User.build(form);
       try {
         await user.save();

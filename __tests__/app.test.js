@@ -47,16 +47,15 @@ describe('Registration', () => {
   });
 
   it('Register', async () => {
-    const res = await request.agent(server)
+    await request.agent(server)
       .post('/users')
       .type('form')
       .send({ form: { email: 'no@no.no', firstName: 'no', lastName: 'no', password: 'nono' } })
       .set('user-agent', faker.internet.userAgent)
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      .set('cookie', 'koa.sid.sig=LHIYxkYS8LBHnP5USwZiExMwSaI; _ga=GA1.3.2006899796.1500299175; _gid=GA1.3.712511141.1502095427');
-    expect(res).toHaveHTTPStatus(302);
-    expect(res.headers.location).toBe('/sessions/new');
+      .set('cookie', 'koa.sid.sig=LHIYxkYS8LBHnP5USwZiExMwSaI; _ga=GA1.3.2006899796.1500299175; _gid=GA1.3.712511141.1502095427')
+      .expect(302);
   });
 
   it('Log in', async () => {
@@ -73,7 +72,6 @@ describe('Registration', () => {
   });
 
   it('Get users', async () => {
-    console.log('**********************************');
     const res = await request.agent(server)
       .get('/users/1')
       .type('form')
@@ -82,8 +80,6 @@ describe('Registration', () => {
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
       .set('cookie', 'koa.sid=LSg6TJrCGOwtxV3GnAsmtu94JNcj5ITh; koa.sid.sig=fiF4QN6nxuiIIvngsQVoogtPRsA; _ga=GA1.3.2006899796.1500299175; _gid=GA1.3.1998091839.1502095444');
-    console.log('::::::::::::::::');
-    console.log(res);
     expect(res).toHaveHTTPStatus(200);
   });
 

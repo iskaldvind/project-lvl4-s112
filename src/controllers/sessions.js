@@ -9,16 +9,6 @@ export default (router, { User }) => {
     })
     .post('sessions#create', '/sessions', async (ctx) => {
       const { email, password } = ctx.request.body.form;
-      console.log('sessions#create:ctx-------------------------------');
-      console.log(ctx);
-      console.log('sessions#create:ctx.reqquest======================');
-      console.log(ctx.request);
-      console.log('sessions#create:ctx.request.body!!!!!!!!!!!!!!!!!!');
-      console.log(ctx.request.body);
-      console.log('sessions#create:ctx.request.body.form#############');
-      console.log(ctx.request.body.form);
-      console.log('sessions#create:end@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
-      console.log(ctx.session);
       const user = await User.findOne({
         where: {
           email,
@@ -27,11 +17,6 @@ export default (router, { User }) => {
       if (user && user.passwordDigest === encrypt(password)) {
         ctx.session.userId = user.id;
         ctx.session.userName = user.fullName;
-        console.log('your id is: ');
-        console.log(ctx.session.userId);
-        console.log('your name is: ');
-        console.log(ctx.session.userName);
-        console.log(ctx.state.isSignedIn());
         ctx.redirect(router.url('root'));
       } else {
         ctx.flash.set('email or password were wrong');
