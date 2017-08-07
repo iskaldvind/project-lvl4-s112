@@ -43,21 +43,18 @@ describe('Registration', () => {
 
   beforeAll(() => {
     jasmine.addMatchers(matchers);
-  });
-
-  beforeEach(() => {
     server = app().listen();
   });
 
-  it('Register-Login-Logout', async () => {
+  it('Register', async () => {
     const res = await request.agent(server)
       .post('/users')
       .type('form')
       .send({ form: { email, firstName, lastName, password } })
       .set('user-agent', faker.internet.userAgent)
       .set('content-type', 'application/x-www-form-urlencoded')
-      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
-    // console.log(res);
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
+      .then();
     expect(res).toHaveHTTPStatus(302);
     expect(res.headers.location).toBe('/sessions/new');
   });
@@ -106,11 +103,10 @@ describe('Registration', () => {
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
     console.log(res.body);
-    expect(res).toHaveHTTPStatus(302);
-    expect(res.headers.location).toBe('/users');
+    expect(res).toHaveHTTPStatus(200);
   });
 
-  afterEach((done) => {
+  afterAll((done) => {
     server.close();
     done();
   });
