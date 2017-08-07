@@ -3,7 +3,7 @@ import matchers from 'jest-supertest-matchers';
 import faker from 'faker';
 
 import app from '../src';
-
+/*
 describe('requests', () => {
   let server;
 
@@ -32,7 +32,7 @@ describe('requests', () => {
     done();
   });
 });
-
+*/
 describe('Registration', () => {
   let server;
   const email = faker.internet.email();
@@ -75,14 +75,15 @@ describe('Registration', () => {
   it('Get users', async () => {
     console.log('**********************************');
     const res = await request.agent(server)
-      .get('/')
+      .get('/users/1')
       .type('form')
       .send('')
       .set('user-agent', faker.internet.userAgent)
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
       .set('cookie', 'koa.sid=LSg6TJrCGOwtxV3GnAsmtu94JNcj5ITh; koa.sid.sig=fiF4QN6nxuiIIvngsQVoogtPRsA; _ga=GA1.3.2006899796.1500299175; _gid=GA1.3.1998091839.1502095444');
-    console.log(res.body);
+    console.log('::::::::::::::::');
+    console.log(res);
     expect(res).toHaveHTTPStatus(200);
   });
 

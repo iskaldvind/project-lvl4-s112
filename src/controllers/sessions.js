@@ -29,6 +29,8 @@ export default (router, { User }) => {
         ctx.session.userName = user.fullName;
         console.log('your id is: ');
         console.log(ctx.session.userId);
+        console.log('your name is: ');
+        console.log(ctx.session.userName);
         console.log(ctx.state.isSignedIn());
         ctx.redirect(router.url('root'));
       } else {
