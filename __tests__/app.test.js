@@ -13,7 +13,7 @@ const fake = () => ({
 });
 
 jasmine.addMatchers(matchers);
-/*
+
 describe('Simple requests', () => {
   const server = app().listen();
 
@@ -38,7 +38,7 @@ describe('Simple requests', () => {
     done();
   });
 });
-*/
+
 describe('Registration', () => {
   const { email, firstName, lastName, password, userAgent } = fake();
   const server = app().listen();
