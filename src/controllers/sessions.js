@@ -6,7 +6,6 @@ export default (router, { User }) => {
     .get('sessions#new', '/sessions/new', async (ctx) => {
       const data = {};
       console.log('sessions#new');
-      console.log(Object.keys(ctx));
       console.log(ctx.session);
       ctx.render('sessions/new', { f: buildFormObj(data) });
     })
@@ -21,7 +20,6 @@ export default (router, { User }) => {
         ctx.session.userId = user.id;
         ctx.session.userName = user.fullName;
         console.log('sessions#create');
-        console.log(Object.keys(ctx));
         console.log(ctx.session);
         ctx.redirect(router.url('root'));
       } else {

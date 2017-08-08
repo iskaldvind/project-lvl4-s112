@@ -9,7 +9,7 @@ const fake = () => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   password: faker.internet.password(),
-  userAgent: faker.internet.userAgent,
+  userAgent: faker.internet.userAgent(),
 });
 
 jasmine.addMatchers(matchers);
@@ -113,20 +113,24 @@ describe('Get data', () => {
       .type('form')
       .send({ form: { email, firstName, lastName, password } })
       .set('user-agent', userAgent)
+      .set('Connection', 'keep-alive')
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      .then(async () => {
+      .then(async (ctx) => {
+        console.log(ctx);
         await superagent
           .post('/sessions')
           .type('form')
           .send({ form: { email, password } })
           .set('user-agent', userAgent)
+          .set('Connection', 'keep-alive')
           .set('content-type', 'application/x-www-form-urlencoded')
           .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
           .then(async () => {
             await superagent
               .get('/users/1')
               .set('user-agent', userAgent)
+              .set('Connection', 'keep-alive')
               .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
               .expect(200);
           });

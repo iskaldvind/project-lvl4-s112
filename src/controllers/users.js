@@ -4,7 +4,6 @@ export default (router, { User }) => {
   router
     .get('users#index', '/users', async (ctx) => {
       console.log('users#index');
-      console.log(ctx);
       console.log(ctx.session);
       if (ctx.state.isSignedIn()) {
         const users = await User.findAll();
@@ -16,7 +15,6 @@ export default (router, { User }) => {
     })
     .get('users#new', '/users/new', async (ctx) => {
       console.log('users#new');
-      console.log(Object.keys(ctx));
       console.log(ctx.session);
       const user = User.build();
       ctx.render('users/new', { f: buildFormObj(user) });
@@ -28,9 +26,7 @@ export default (router, { User }) => {
         await user.save();
         ctx.flash.set('You have been successfully registered');
         console.log('users#create');
-        console.log(Object.keys(ctx));
         console.log(ctx.session);
-        console.log(ctx.sessionStore);
         ctx.redirect(router.url('sessions#new'));
       } catch (e) {
         ctx.render('users/new', { f: buildFormObj(user, e) });
@@ -38,7 +34,6 @@ export default (router, { User }) => {
     })
     .get('users#show', '/users/:id', async (ctx) => {
       console.log('users#show');
-      console.log(Object.keys(ctx));
       console.log(ctx.session);
       const id = Number(ctx.params.id);
       const isOwner = id === ctx.state.signedId();
