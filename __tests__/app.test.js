@@ -33,19 +33,33 @@ describe('requests', () => {
   });
 });
 */
+let server = app().listen();
+jasmine.addMatchers(matchers);
+let superagent = request.agent(server);
+let cookie;
+
 describe('Registration', () => {
-  let server = app().listen();
-  jasmine.addMatchers(matchers);
-  let superagent = request.agent(server);
   const email = faker.internet.email();
   const emailUpdated = faker.internet.email();
   const firstName = faker.name.firstName();
   const lastName = faker.name.lastName();
   const password = faker.internet.password();
 
-  beforeAll(() => {
-    //server = app().listen();
-    //
+  beforeEach((done) => {
+    superagent
+      .post('/sessions')
+      .type('form')
+      .send({ form: { email: 'no@no.no', password: 'nono' } })
+      .set('user-agent', faker.internet.userAgent)
+      .set('content-type', 'application/x-www-form-urlencoded')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
+      // .set('cookie', 'blah')
+      .expect(302)
+      .end((err,res) => {
+        cookie = res.headers['set-cookie'];
+        console.log(cookie);
+        done();
+      });
   });
 
   it('Register', async () => {
@@ -56,7 +70,7 @@ describe('Registration', () => {
       .set('user-agent', faker.internet.userAgent)
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      .set('cookie', 'koa.sid.sig=LHIYxkYS8LBHnP5USwZiExMwSaI; _ga=GA1.3.2006899796.1500299175; _gid=GA1.3.712511141.1502095427')
+      .set('cookie', cookie)
       .expect(302);
   });
 
@@ -68,19 +82,19 @@ describe('Registration', () => {
       .set('user-agent', faker.internet.userAgent)
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      .set('cookie', 'koa.sid=LSg6TJrCGOwtxV3GnAsmtu94JNcj5ITh; koa.sid.sig=fiF4QN6nxuiIIvngsQVoogtPRsA; _ga=GA1.3.2006899796.1500299175; _gid=GA1.3.1190983512.1502095434')
+      .set('cookie', cookie)
       .expect(302);
   });
 
   it('Get user', async () => {
     await superagent
       .get('/users/1')
-      .type('form')
-      .send('')
+      //.type('form')
+      //.send('')
       .set('user-agent', faker.internet.userAgent)
-      .set('content-type', 'application/x-www-form-urlencoded')
+      //.set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      .set('cookie', 'koa.sid=LSg6TJrCGOwtxV3GnAsmtu94JNcj5ITh; koa.sid.sig=fiF4QN6nxuiIIvngsQVoogtPRsA; _ga=GA1.3.2006899796.1500299175; _gid=GA1.3.1998091839.1502095444')
+      .set('cookie', cookie)
       .expect(200);
   });
 

@@ -22,7 +22,7 @@ import container from './container';
 export default () => {
   const app = new Koa();
 
-  app.keys = ['some secret hurr'];
+  app.keys = ['cookie'];
   app.use(bodyParser());
   app.use(koaLogger());
 
