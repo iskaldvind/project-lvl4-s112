@@ -14,6 +14,7 @@ const fake = () => ({
 
 jasmine.addMatchers(matchers);
 
+const c1 = `
 describe('Simple requests', () => {
   const server = app().listen();
 
@@ -99,6 +100,7 @@ describe('Authentication', () => {
     done();
   });
 });
+`;
 
 describe('Get data', () => {
   const { email, firstName, lastName, password, userAgent } = fake();
@@ -136,3 +138,40 @@ describe('Get data', () => {
     done();
   });
 });
+
+const c2 = `
+describe('Get data 2', () => {
+  const { email, firstName, lastName, password, userAgent } = fake();
+  const server = app().listen();
+  const superagent = request.agent(server);
+
+  it('Get user', async () => {
+    const res = await superagent
+      .post('/users')
+      .type('form')
+      .send({ form: { email, firstName, lastName, password } })
+      .set('user-agent', userAgent)
+      .set('content-type', 'application/x-www-form-urlencoded')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+    expect(res).toHaveHTTPStatus(302);
+    const res2 = await superagent
+      .post('/sessions')
+      .type('form')
+      .send({ form: { email, password } })
+      .set('user-agent', userAgent)
+      .set('content-type', 'application/x-www-form-urlencoded')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+    expect(res2).toHaveHTTPStatus(302);
+    const res3 = await superagent
+      .get('/users/1')
+      .set('user-agent', userAgent)
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+    expect(res3).toHaveHTTPStatus(200);
+  });
+
+  afterAll((done) => {
+    server.close();
+    done();
+  });
+});
+`;

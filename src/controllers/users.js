@@ -3,17 +3,21 @@ import { buildFormObj, isExist } from '../helpers/dataTools';
 export default (router, { User }) => {
   router
     .get('users#index', '/users', async (ctx) => {
+      console.log('users#index');
+      console.log(ctx);
+      console.log(ctx.session);
       if (ctx.state.isSignedIn()) {
-        console.log('====> is signed in');
         const users = await User.findAll();
         ctx.render('users', { users });
       } else {
-        console.log('====> is not signed in');
         ctx.flash.set('You must be logged in to access this page');
         ctx.redirect(router.url('sessions#new'));
       }
     })
     .get('users#new', '/users/new', async (ctx) => {
+      console.log('users#new');
+      console.log(Object.keys(ctx));
+      console.log(ctx.session);
       const user = User.build();
       ctx.render('users/new', { f: buildFormObj(user) });
     })
@@ -23,12 +27,18 @@ export default (router, { User }) => {
       try {
         await user.save();
         ctx.flash.set('You have been successfully registered');
+        console.log('users#create');
+        console.log(Object.keys(ctx));
+        console.log(ctx.session);
+        console.log(ctx.sessionStore);
         ctx.redirect(router.url('sessions#new'));
       } catch (e) {
         ctx.render('users/new', { f: buildFormObj(user, e) });
       }
     })
     .get('users#show', '/users/:id', async (ctx) => {
+      console.log('users#show');
+      console.log(Object.keys(ctx));
       console.log(ctx.session);
       const id = Number(ctx.params.id);
       const isOwner = id === ctx.state.signedId();
