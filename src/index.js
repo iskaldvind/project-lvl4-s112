@@ -9,7 +9,6 @@ import serve from 'koa-static';
 import middleware from 'koa-webpack';
 import bodyParser from 'koa-bodyparser';
 import session from 'koa-generic-session';
-import redisStore from 'koa-redis';
 import flash from 'koa-flash-simple';
 import _ from 'lodash';
 import methodOverride from 'koa-methodoverride';
@@ -43,7 +42,7 @@ export default () => {
     }));
   }
 
-  app.use(session({ store: redisStore() }));
+  app.use(session(app));
   app.use(flash());
 
   app.use(async (ctx, next) => {
