@@ -3,6 +3,8 @@ import matchers from 'jest-supertest-matchers';
 import faker from 'faker';
 
 import app from '../src';
+
+jasmine.addMatchers(matchers);
 /*
 describe('requests', () => {
   let server;
@@ -33,10 +35,6 @@ describe('requests', () => {
   });
 });
 */
-let server = app().listen();
-jasmine.addMatchers(matchers);
-let superagent = request.agent(server);
-let cookie;
 
 describe('Registration', () => {
   const email = faker.internet.email();
@@ -45,22 +43,8 @@ describe('Registration', () => {
   const lastName = faker.name.lastName();
   const password = faker.internet.password();
 
-  beforeEach((done) => {
-    superagent
-      .post('/sessions')
-      .type('form')
-      .send({ form: { email: 'no@no.no', password: 'nono' } })
-      .set('user-agent', faker.internet.userAgent)
-      .set('content-type', 'application/x-www-form-urlencoded')
-      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      // .set('cookie', 'blah')
-      .expect(302)
-      .end((err,res) => {
-        cookie = res.headers['set-cookie'];
-        console.log(cookie);
-        done();
-      });
-  });
+  const server = app().listen();
+  const superagent = request.agent(server);
 
   it('Register', async () => {
     await superagent
@@ -70,7 +54,6 @@ describe('Registration', () => {
       .set('user-agent', faker.internet.userAgent)
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      .set('cookie', cookie)
       .expect(302);
   });
 
@@ -82,20 +65,53 @@ describe('Registration', () => {
       .set('user-agent', faker.internet.userAgent)
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      .set('cookie', cookie)
       .expect(302);
   });
 
+  it('Log out', async () => {
+    await superagent
+      .delete('/sessions')
+      .set('user-agent', faker.internet.userAgent)
+      .set('content-type', 'application/x-www-form-urlencoded')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
+      .expect(302);
+  });
+
+  afterAll((done) => {
+    server.close();
+    done();
+  });
+});
+
+describe('Get data', () => {
+
+  const server = app().listen();
+  const superagent = request.agent(server);
+
   it('Get user', async () => {
     await superagent
-      .get('/users/1')
-      //.type('form')
-      //.send('')
+      .post('/users')
+      .type('form')
+      .send({ form: { email: 'no@no.no', firstName: 'no', lastName: 'no', password: 'nono' } })
       .set('user-agent', faker.internet.userAgent)
-      //.set('content-type', 'application/x-www-form-urlencoded')
+      .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      .set('cookie', cookie)
-      .expect(200);
+      .then(async () => {
+        await superagent
+          .post('/sessions')
+          .type('form')
+          .send({ form: { email: 'no@no.no', password: 'nono' } })
+          .set('user-agent', faker.internet.userAgent)
+          .set('content-type', 'application/x-www-form-urlencoded')
+          .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
+          .then(async () => {
+            await superagent
+              .get('/users/1')
+              .set('user-agent', faker.internet.userAgent)
+              .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
+              .expect(200);
+          });
+      });
   });
 
   afterAll((done) => {

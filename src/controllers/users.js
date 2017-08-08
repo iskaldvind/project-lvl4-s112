@@ -29,7 +29,7 @@ export default (router, { User }) => {
       }
     })
     .get('users#show', '/users/:id', async (ctx) => {
-      console.log(ctx.session.cookie);
+      console.log(ctx.session);
       const id = Number(ctx.params.id);
       const isOwner = id === ctx.state.signedId();
       const user = await User.findById(id);
