@@ -27,7 +27,8 @@ export default (router, { User }) => {
         ctx.flash.set('You have been successfully registered');
         console.log('users#create');
         console.log(ctx.session);
-        ctx.redirect(router.url('sessions#new'));
+        ctx.render('welcome/index');
+        //ctx.redirect(router.url('sessions#new'));
       } catch (e) {
         ctx.render('users/new', { f: buildFormObj(user, e) });
       }
