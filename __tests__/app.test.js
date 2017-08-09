@@ -101,10 +101,11 @@ describe('Authentication', () => {
   });
 });
 `;
-
+//const c3 = `
 describe('Get data', () => {
   const { email, firstName, lastName, password, userAgent } = fake();
-  const server = app().listen();
+  let server = app().listen();
+  let cookie;
   const superagent = request.agent(server);
 
   it('Get user', async () => {
@@ -116,14 +117,18 @@ describe('Get data', () => {
       .set('Connection', 'keep-alive')
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      .then(async (ctx) => {
+      .then(async (res) => {
+        cookie = res.headers['set-cookie'];
+        console.log(cookie);
         await superagent
           .post('/sessions')
           .type('form')
           .send({ form: { email, password } })
           .set('user-agent', userAgent)
+          .set('x-test-auth-token', email)
           .set('Connection', 'keep-alive')
           .set('content-type', 'application/x-www-form-urlencoded')
+          .set('cookie', cookie)
           .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
           .then(async () => {
             await superagent
@@ -131,6 +136,7 @@ describe('Get data', () => {
               .set('user-agent', userAgent)
               .set('Connection', 'keep-alive')
               .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
+              .set('cookie', cookie)
               .expect(200);
           });
       });
@@ -141,8 +147,9 @@ describe('Get data', () => {
     done();
   });
 });
-
+//`;
 const c2 = `
+
 describe('Get data 2', () => {
   const { email, firstName, lastName, password, userAgent } = fake();
   const server = app().listen();
@@ -164,15 +171,20 @@ describe('Get data 2', () => {
       .set('user-agent', userAgent)
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+    i++;
     expect(res2).toHaveHTTPStatus(302);
+    expect(i).toBe(2);
     const res3 = await superagent
       .get('/users/1')
       .set('user-agent', userAgent)
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+    i++;
     expect(res3).toHaveHTTPStatus(200);
+    expect(i).toBe(3);
   });
 
   afterAll((done) => {
+    console.log(i);
     server.close();
     done();
   });

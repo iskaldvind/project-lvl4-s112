@@ -21,7 +21,8 @@ export default (router, { User }) => {
         ctx.session.userName = user.fullName;
         console.log('sessions#create');
         console.log(ctx.session);
-        ctx.redirect(router.url('root'));
+        ctx.render('welcome/index');
+        //ctx.redirect(router.url('root'));
       } else {
         ctx.flash.set('email or password were wrong');
         ctx.redirect(router.url('sessions#new'));
