@@ -5,8 +5,6 @@ export default (router, { User }) => {
   router
     .get('sessions#new', '/sessions/new', async (ctx) => {
       const data = {};
-      console.log('sessions#new');
-      console.log(ctx.session);
       ctx.render('sessions/new', { f: buildFormObj(data) });
     })
     .post('sessions#create', '/sessions', async (ctx) => {
@@ -19,8 +17,6 @@ export default (router, { User }) => {
       if (user && user.passwordDigest === encrypt(password)) {
         ctx.session.userId = user.id;
         ctx.session.userName = user.fullName;
-        console.log('sessions#create');
-        console.log(ctx.session);
         ctx.redirect(router.url('root'));
       } else {
         ctx.flash.set('email or password were wrong');

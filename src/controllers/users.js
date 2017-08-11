@@ -3,8 +3,6 @@ import { buildFormObj, isExist } from '../helpers/dataTools';
 export default (router, { User }) => {
   router
     .get('users#index', '/users', async (ctx) => {
-      console.log('users#index');
-      console.log(ctx.session);
       if (ctx.state.isSignedIn()) {
         const users = await User.findAll();
         ctx.render('users', { users });
@@ -14,8 +12,6 @@ export default (router, { User }) => {
       }
     })
     .get('users#new', '/users/new', async (ctx) => {
-      console.log('users#new');
-      console.log(ctx.session);
       const user = User.build();
       ctx.render('users/new', { f: buildFormObj(user) });
     })
@@ -25,17 +21,12 @@ export default (router, { User }) => {
       try {
         await user.save();
         ctx.flash.set('You have been successfully registered');
-        console.log('users#create');
-        console.log(ctx.session);
-        ctx.render('welcome/index');
-        //ctx.redirect(router.url('sessions#new'));
+        ctx.redirect(router.url('sessions#new'));
       } catch (e) {
         ctx.render('users/new', { f: buildFormObj(user, e) });
       }
     })
     .get('users#show', '/users/:id', async (ctx) => {
-      console.log('users#show');
-      console.log(ctx.session);
       const id = Number(ctx.params.id);
       const isOwner = id === ctx.state.signedId();
       const user = await User.findById(id);

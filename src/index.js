@@ -18,7 +18,7 @@ import dateFormat from 'dateformat';
 import getWebpackConfig from '../webpack.config.babel';
 import addRoutes from './controllers';
 import container from './container';
-// import getIdName from './helpers/supertestUser';
+import getIdName from './helpers/supertestSession';
 
 export default () => {
   const app = new Koa();
@@ -45,20 +45,18 @@ export default () => {
 
   app.use(session(app));
   app.use(flash());
-  /*
+
   if (process.env.NODE_ENV === 'test') {
     app.use(async (ctx, next) => {
-      console.log('=================================================>');
-      console.log(ctx.request.header['x--test-auth-token']);
-      const token = ctx.request.header['x--test-auth-token'];
-      console.log('==================================================');
-      const [userId, userName] = token ? getIdName(token) : [null, null];
-      console.log(userId);
-      console.log(userName);
+      const token = ctx.request.header['x-test-auth-token'];
+      const testUser = await getIdName(token);
+      if (testUser.id !== null) {
+        ctx.session.userId = testUser.id;
+        ctx.session.userName = testUser.name;
+      }
       await next();
     });
   }
-  */
   app.use(async (ctx, next) => {
     ctx.state = {
       flash: ctx.flash,
