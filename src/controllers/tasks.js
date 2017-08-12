@@ -99,6 +99,7 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
         const { statusId, taskId, form } = ctx.request.body;
         console.log('====');
         console.log(ctx.request.body);
+        console.log(statusId);
         console.log('====');
         const task = await Task.findById(Number(taskId));
         const id = ctx.params.id;
