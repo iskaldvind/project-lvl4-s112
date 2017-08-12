@@ -31,7 +31,9 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     .post('tasks#create', '/tasks', async (ctx) => {
       if (ctx.state.isSignedIn()) {
         const requestForm = ctx.request.body.form;
+        console.log('====');
         console.log(requestForm);
+        console.log('====');
         const creatorId = ctx.state.signedId();
         const creator = await User.findById(creatorId);
         const formWithCreatorId = { ...requestForm, creatorId };
