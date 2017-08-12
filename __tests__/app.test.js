@@ -4,12 +4,17 @@ import faker from 'faker';
 
 import app from '../src';
 
-const fake = () => ({
+const fakeUser = () => ({
   email: faker.internet.email(),
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   password: faker.internet.password(),
   userAgent: faker.internet.userAgent(),
+});
+
+const fakeTask = () => ({
+  name: faker.random.word(),
+  description: faker.random.words(10),
 });
 
 jasmine.addMatchers(matchers);
@@ -40,7 +45,7 @@ describe('Simple requests', () => {
 });
 
 describe('Registration', () => {
-  const { email, firstName, lastName, password, userAgent } = fake();
+  const { email, firstName, lastName, password, userAgent } = fakeUser();
   const server = app().listen();
   const superagent = request.agent(server);
 
@@ -62,7 +67,7 @@ describe('Registration', () => {
 });
 
 describe('Authentication', () => {
-  const { email, firstName, lastName, password, userAgent } = fake();
+  const { email, firstName, lastName, password, userAgent } = fakeUser();
   const server = app().listen();
   const superagent = request.agent(server);
 
@@ -101,10 +106,10 @@ describe('Authentication', () => {
 });
 
 describe('Users CRUD', () => {
-  const user3 = fake();
-  const user3Edited = fake();
-  const user4 = fake();
-  const user5 = fake();
+  const user3 = fakeUser();
+  const user3Edited = fakeUser();
+  const user4 = fakeUser();
+  const user5 = fakeUser();
   const server = app().listen();
   const superagent = request.agent(server);
 
@@ -312,8 +317,13 @@ describe('Users CRUD', () => {
 });
 
 describe('Tasks CRUD', () => {
-  const user6 = fake();
-  const user7 = fake();
+  const user6 = fakeUser();
+  const user7 = fakeUser();
+  const task1 = fakeTask();
+  const task1Edited = fakeTask();
+  const task2 = fakeTask();
+  const task3 = fakeTask();
+  const task4 = fakeTask();
   const server = app().listen();
   const superagent = request.agent(server);
 
@@ -364,30 +374,68 @@ describe('Tasks CRUD', () => {
   it('Read tasks list while not loged in - Fail', async () => {
     const response = await superagent
       .get('/tasks')
-      .set('user-agent', user7.userAgent)
+      .set('user-agent', user6.userAgent)
       .set('Connection', 'keep-alive')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
     expect(response).toHaveHTTPStatus(302);
   });
 
   it('Create task - Success', async () => {
-    const response = await superagent
+   await superagent
       .post('/tasks')
       .type('form')
       .send({ form:
         {
-          email: user3.email,
-          firstName: user3Edited.firstName,
-          lastName: user3.lastName,
-          password: user3.password,
+          name: task1.name,
+          tags: 'xxx',
+          description: task1.description,
+          assignedToId: '6',
         },
       })
-      .set('user-agent', user3.userAgent)
-      .set('x-test-auth-token', user3.email)
+      .set('user-agent', user6.userAgent)
+      .set('x-test-auth-token', user6.email)
       .set('Connection', 'keep-alive')
-      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
-    expect(response).toHaveHTTPStatus(200);
-    expect(response.text.includes(user3.firstName)).toBeTruthy();
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
+      .expect(302)
+      .then(async () => {
+        const response = await superagent
+          .get('/tasks/1')
+          .set('user-agent', user6.userAgent)
+          .set('x-test-auth-token', user6.email)
+          .set('Connection', 'keep-alive')
+          .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+        expect(response).toHaveHTTPStatus(200);
+        expect(response.text.includes(task1.name)).toBeTruthy();
+      });
+  });
+
+  it('Edit task - Success', async () => {
+    await superagent
+      .patch('/tasks/1')
+      .type('form')
+      .send({ form:
+        {
+          name: task1Edited.name,
+          tags: 'xxx',
+          description: task1.description,
+          assignedToId: '6',
+        },
+      })
+      .set('user-agent', user6.userAgent)
+      .set('x-test-auth-token', user6.email)
+      .set('Connection', 'keep-alive')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
+      .expect(302)
+      .then(async () => {
+        const response = await superagent
+          .get('/tasks')
+          .set('user-agent', user6.userAgent)
+          .set('x-test-auth-token', user6.email)
+          .set('Connection', 'keep-alive')
+          .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+        expect(response).toHaveHTTPStatus(200);
+        expect(response.text.includes(task1Edited.name)).toBeTruthy();
+      });
   });
 const o = `
   it('Edit own profile - Success', async () => {

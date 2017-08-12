@@ -31,9 +31,6 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     .post('tasks#create', '/tasks', async (ctx) => {
       if (ctx.state.isSignedIn()) {
         const requestForm = ctx.request.body.form;
-        console.log('====');
-        console.log(requestForm);
-        console.log('====');
         const creatorId = ctx.state.signedId();
         const creator = await User.findById(creatorId);
         const formWithCreatorId = { ...requestForm, creatorId };
@@ -100,6 +97,9 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     .patch('tasks#update', '/tasks/:id', async (ctx) => {
       if (ctx.state.isSignedIn()) {
         const { statusId, taskId, form } = ctx.request.body;
+        console.log('====');
+        console.log(ctx.request.body);
+        console.log('====');
         const task = await Task.findById(Number(taskId));
         const id = ctx.params.id;
         try {
