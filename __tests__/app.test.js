@@ -22,10 +22,6 @@ jasmine.addMatchers(matchers);
 describe('Simple requests', () => {
   const server = app().listen();
 
-  beforeAll(() => {
-    jasmine.addMatchers(matchers);
-  });
-
   it('GET 200', async () => {
     const res = await request.agent(server)
       .get('/');
