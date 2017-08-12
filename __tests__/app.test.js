@@ -321,9 +321,6 @@ describe('Tasks CRUD', () => {
   const user7 = fakeUser();
   const task1 = fakeTask();
   const task1Edited = fakeTask();
-  const task2 = fakeTask();
-  const task3 = fakeTask();
-  const task4 = fakeTask();
   const server = app().listen();
   const superagent = request.agent(server);
 
@@ -413,14 +410,101 @@ describe('Tasks CRUD', () => {
     await superagent
       .patch('/tasks/1')
       .type('form')
-      .send({ form:
-        {
-          name: task1Edited.name,
-          tags: 'xxx',
-          description: task1.description,
-          assignedToId: '6',
-        },
+      .send({
+        form:
+          {
+            name: task1Edited.name,
+            tags: 'xxx',
+            description: task1.description,
+            assignedToId: '6',
+            statusId: 1,
+          },
+        taskId: 1,
       })
+      .set('user-agent', user6.userAgent)
+      .set('x-test-auth-token', user6.email)
+      .set('Connection', 'keep-alive')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
+      .expect(302)
+      .then(async () => {
+        const response = await superagent
+          .get('/tasks/1')
+          .set('user-agent', user6.userAgent)
+          .set('x-test-auth-token', user6.email)
+          .set('Connection', 'keep-alive')
+          .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+        expect(response).toHaveHTTPStatus(200);
+        expect(response.text.includes(task1Edited.name)).toBeTruthy();
+      });
+  });
+
+  it('Update task status - Success', async () => {
+    await superagent
+      .patch('/tasks/1')
+      .type('form')
+      .send({
+        form:
+          {
+            name: task1Edited.name,
+            tags: 'xxx',
+            description: task1.description,
+            assignedToId: '6',
+            statusId: 2,
+          },
+        taskId: 1,
+      })
+      .set('user-agent', user6.userAgent)
+      .set('x-test-auth-token', user6.email)
+      .set('Connection', 'keep-alive')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
+      .expect(302)
+      .then(async () => {
+        const response = await superagent
+          .get('/tasks/1')
+          .set('user-agent', user6.userAgent)
+          .set('x-test-auth-token', user6.email)
+          .set('Connection', 'keep-alive')
+          .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+        expect(response).toHaveHTTPStatus(200);
+        expect(response.text.includes('in work')).toBeTruthy();
+      });
+  });
+
+  it('Reassign task - Success', async () => {
+    await superagent
+      .patch('/tasks/1')
+      .type('form')
+      .send({
+        form:
+          {
+            name: task1Edited.name,
+            tags: 'xxx',
+            description: task1.description,
+            assignedToId: '7',
+            statusId: 1,
+          },
+        taskId: 1,
+      })
+      .set('user-agent', user6.userAgent)
+      .set('x-test-auth-token', user6.email)
+      .set('Connection', 'keep-alive')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
+      .expect(302)
+      .then(async () => {
+        const response = await superagent
+          .get('/tasks/1')
+          .set('user-agent', user6.userAgent)
+          .set('x-test-auth-token', user6.email)
+          .set('Connection', 'keep-alive')
+          .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+        expect(response).toHaveHTTPStatus(200);
+        expect(response.text.includes(user7.firstName)).toBeTruthy();
+      });
+  });
+
+  it('Delete task - Success', async () => {
+    await superagent
+      .delete('/tasks/1')
       .set('user-agent', user6.userAgent)
       .set('x-test-auth-token', user6.email)
       .set('Connection', 'keep-alive')
@@ -434,128 +518,137 @@ describe('Tasks CRUD', () => {
           .set('Connection', 'keep-alive')
           .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
         expect(response).toHaveHTTPStatus(200);
-        expect(response.text.includes(task1Edited.name)).toBeTruthy();
+        expect(response.text.includes('000001')).toBeFalsy();
       });
   });
-const o = `
-  it('Edit own profile - Success', async () => {
+
+  afterAll((done) => {
+    server.close();
+    done();
+  });
+});
+
+
+describe('Tasks Filtration', () => {
+  const user8 = fakeUser();
+  const user9 = fakeUser();
+  const task2 = fakeTask();
+  const task3 = fakeTask();
+  const task4 = fakeTask();
+  const server = app().listen();
+  const superagent = request.agent(server);
+
+  beforeAll(async () => {
     await superagent
-      .patch('/users/3')
+      .post('/users')
       .type('form')
       .send({ form:
         {
-          email: user3.email,
-          firstName: user3Edited.firstName,
-          lastName: user3.lastName,
-          password: user3.password,
+          email: user8.email,
+          firstName: user8.firstName,
+          lastName: user8.lastName,
+          password: user8.password,
         },
       })
-      .set('user-agent', user3.userAgent)
-      .set('x-test-auth-token', user3.email)
+      .set('user-agent', user8.userAgent)
       .set('Connection', 'keep-alive')
-      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      .expect(302)
-      .then(async () => {
-        const response = await superagent
-          .get('/users/3')
-          .set('user-agent', user3.userAgent)
-          .set('x-test-auth-token', user3.email)
-          .set('Connection', 'keep-alive')
-          .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
-        expect(response).toHaveHTTPStatus(200);
-        expect(response.text.includes(user3Edited.firstName)).toBeTruthy();
-      });
-  });
-
-  it('Delete own profile - Success', async () => {
+      .set('content-type', 'application/x-www-form-urlencoded')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
     await superagent
-      .delete('/users/3')
-      .set('user-agent', user3.userAgent)
-      .set('x-test-auth-token', user3.email)
+      .post('/users')
+      .type('form')
+      .send({ form:
+        {
+          email: user9.email,
+          firstName: user9.firstName,
+          lastName: user9.lastName,
+          password: user9.password,
+        },
+      })
+      .set('user-agent', user9.userAgent)
+      .set('Connection', 'keep-alive')
+      .set('content-type', 'application/x-www-form-urlencoded')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+    await superagent
+      .post('/tasks')
+      .type('form')
+      .send({ form:
+        {
+          name: task2.name,
+          tags: 'aaa bbb',
+          description: task2.description,
+          assignedToId: '8',
+        },
+      })
+      .set('user-agent', user8.userAgent)
+      .set('x-test-auth-token', user8.email)
+      .set('Connection', 'keep-alive')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+    await superagent
+      .post('/tasks')
+      .type('form')
+      .send({ form:
+        {
+          name: task3.name,
+          tags: 'bbb ccc',
+          description: task3.description,
+          assignedToId: '9',
+        },
+      })
+      .set('user-agent', user8.userAgent)
+      .set('x-test-auth-token', user8.email)
+      .set('Connection', 'keep-alive')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+    await superagent
+      .post('/tasks')
+      .type('form')
+      .send({ form:
+        {
+          name: task4.name,
+          tags: 'ddd',
+          description: task4.description,
+          assignedToId: '9',
+        },
+      })
+      .set('user-agent', user9.userAgent)
+      .set('x-test-auth-token', user9.email)
       .set('Connection', 'keep-alive')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      .expect(302)
       .then(async () => {
-        const response = await superagent
-          .get('/users')
-          .set('user-agent', user4.userAgent)
-          .set('x-test-auth-token', user4.email)
+        await superagent
+          .patch('/tasks/4')
+          .type('form')
+          .send({
+            form:
+              {
+                name: task4.name,
+                tags: 'ddd',
+                description: task4.description,
+                assignedToId: '9',
+                statusId: 3,
+              },
+            taskId: 4,
+          })
+          .set('user-agent', user9.userAgent)
+          .set('x-test-auth-token', user9.email)
           .set('Connection', 'keep-alive')
           .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
-        expect(response).toHaveHTTPStatus(200);
-        expect(response.text.includes(user3Edited.firstName)).toBeFalsy();
       });
   });
 
-  it('Read other\'s profile while loged in - Success', async () => {
+  it('Read tasks list while loged in - Success', async () => {
     const response = await superagent
-      .get('/users/5')
-      .set('user-agent', user4.userAgent)
-      .set('x-test-auth-token', user4.email)
+      .get('/tasks')
+      .set('user-agent', user6.userAgent)
+      .set('x-test-auth-token', user6.email)
       .set('Connection', 'keep-alive')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
     expect(response).toHaveHTTPStatus(200);
-    expect(response.text.includes(user5.firstName)).toBeTruthy();
+    expect(response.text.includes('Task')).toBeTruthy();
   });
 
-  it('Read other\'s profile while not loged in - Fail', async () => {
-    const response = await superagent
-      .get('/users/5')
-      .set('user-agent', user4.userAgent)
-      .set('Connection', 'keep-alive')
-      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
-    expect(response).toHaveHTTPStatus(302);
-  });
 
-  it('Edit other\'s profile - Fail', async () => {
-    await superagent
-      .patch('/users/5')
-      .type('form')
-      .send({ form:
-        {
-          email: user5.email,
-          firstName: user3Edited.firstName,
-          lastName: user5.lastName,
-          password: user5.password,
-        },
-      })
-      .set('user-agent', user4.userAgent)
-      .set('x-test-auth-token', user4.email)
-      .set('Connection', 'keep-alive')
-      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      .expect(302)
-      .then(async () => {
-        const response = await superagent
-          .get('/users/5')
-          .set('user-agent', user4.userAgent)
-          .set('x-test-auth-token', user4.email)
-          .set('Connection', 'keep-alive')
-          .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
-        expect(response).toHaveHTTPStatus(200);
-        expect(response.text.includes(user3Edited.firstName)).toBeFalsy();
-      });
-  });
 
-  it('Delete other\'s profile - Fail', async () => {
-    await superagent
-      .delete('/users/5')
-      .set('user-agent', user4.userAgent)
-      .set('x-test-auth-token', user4.email)
-      .set('Connection', 'keep-alive')
-      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-      .expect(302)
-      .then(async () => {
-        const response = await superagent
-          .get('/users/5')
-          .set('user-agent', user4.userAgent)
-          .set('x-test-auth-token', user4.email)
-          .set('Connection', 'keep-alive')
-          .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
-        expect(response).toHaveHTTPStatus(200);
-        expect(response.text.includes(user5.firstName)).toBeTruthy();
-      });
-  });
-`;
   afterAll((done) => {
     server.close();
     done();
