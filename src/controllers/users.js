@@ -75,7 +75,7 @@ export default (router, { User }) => {
           }
         } else {
           ctx.flash.set('You must log in as specified user to update account');
-          ctx.render('users/profile', { f: buildFormObj(user) });
+          ctx.redirect('users/profile', { f: buildFormObj(user) });
         }
       } else {
         ctx.render('errors/forbidden');
