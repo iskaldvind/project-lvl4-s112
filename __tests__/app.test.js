@@ -378,7 +378,7 @@ describe('Tasks CRUD', () => {
   });
 
   it('Create task - Success', async () => {
-   await superagent
+    await superagent
       .post('/tasks')
       .type('form')
       .send({ form:
@@ -636,18 +636,96 @@ describe('Tasks Filtration', () => {
       });
   });
 
-  it('Read tasks list while loged in - Success', async () => {
+  it('Filter: "Opened by me"', async () => {
     const response = await superagent
-      .get('/tasks')
-      .set('user-agent', user6.userAgent)
-      .set('x-test-auth-token', user6.email)
+      .get('/tasks?creatorId=8')
+      .set('user-agent', user8.userAgent)
+      .set('x-test-auth-token', user8.email)
       .set('Connection', 'keep-alive')
       .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
     expect(response).toHaveHTTPStatus(200);
-    expect(response.text.includes('Task')).toBeTruthy();
+    expect(response.text.includes('000002')).toBeTruthy();
+    expect(response.text.includes('000003')).toBeTruthy();
+    expect(response.text.includes('000004')).toBeFalsy();
   });
 
+  it('Filter: "Assigned to me"', async () => {
+    const response = await superagent
+      .get('/tasks?assignedToId=8')
+      .set('user-agent', user8.userAgent)
+      .set('x-test-auth-token', user8.email)
+      .set('Connection', 'keep-alive')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+    expect(response).toHaveHTTPStatus(200);
+    expect(response.text.includes('000002')).toBeTruthy();
+    expect(response.text.includes('000003')).toBeFalsy();
+    expect(response.text.includes('000004')).toBeFalsy();
+  });
 
+  it('Filter: by tag', async () => {
+    const response = await superagent
+      .get('/tasks?tagId=3&statusId=All+statuses&assignedToId=All+assignee')
+      .set('user-agent', user8.userAgent)
+      .set('x-test-auth-token', user8.email)
+      .set('Connection', 'keep-alive')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+    expect(response).toHaveHTTPStatus(200);
+    expect(response.text.includes('000002')).toBeTruthy();
+    expect(response.text.includes('000003')).toBeTruthy();
+    expect(response.text.includes('000004')).toBeFalsy();
+  });
+
+  it('Filter: by status', async () => {
+    const response = await superagent
+      .get('/tasks?tagId=All+tags&statusId=3&assignedToId=All+assignee')
+      .set('user-agent', user8.userAgent)
+      .set('x-test-auth-token', user8.email)
+      .set('Connection', 'keep-alive')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+    expect(response).toHaveHTTPStatus(200);
+    expect(response.text.includes('000002')).toBeFalsy();
+    expect(response.text.includes('000003')).toBeFalsy();
+    expect(response.text.includes('000004')).toBeTruthy();
+  });
+
+  it('Filter: by assignee', async () => {
+    const response = await superagent
+      .get('/tasks?tagId=All+tags&statusId=All+statuses&assignedToId=9')
+      .set('user-agent', user8.userAgent)
+      .set('x-test-auth-token', user8.email)
+      .set('Connection', 'keep-alive')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+    expect(response).toHaveHTTPStatus(200);
+    expect(response.text.includes('000002')).toBeFalsy();
+    expect(response.text.includes('000003')).toBeTruthy();
+    expect(response.text.includes('000004')).toBeTruthy();
+  });
+
+  it('Filter contradictory', async () => {
+    const response = await superagent
+      .get('/tasks?tagId=2&statusId=4&assignedToId=9')
+      .set('user-agent', user8.userAgent)
+      .set('x-test-auth-token', user8.email)
+      .set('Connection', 'keep-alive')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+    expect(response).toHaveHTTPStatus(200);
+    expect(response.text.includes('000002')).toBeFalsy();
+    expect(response.text.includes('000003')).toBeFalsy();
+    expect(response.text.includes('000004')).toBeFalsy();
+  });
+
+  it('Filter all', async () => {
+    const response = await superagent
+      .get('/tasks?tagId=All+tags&statusId=All+statuses&assignedToId=All+assignee')
+      .set('user-agent', user8.userAgent)
+      .set('x-test-auth-token', user8.email)
+      .set('Connection', 'keep-alive')
+      .set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+    expect(response).toHaveHTTPStatus(200);
+    expect(response.text.includes('000002')).toBeTruthy();
+    expect(response.text.includes('000003')).toBeTruthy();
+    expect(response.text.includes('000004')).toBeTruthy();
+  });
 
   afterAll((done) => {
     server.close();

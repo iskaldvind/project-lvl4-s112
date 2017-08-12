@@ -6,7 +6,6 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     .get('tasks#index', '/tasks', async (ctx) => {
       if (ctx.state.isSignedIn()) {
         const { query } = url.parse(ctx.request.url, true);
-        console.log(ctx.request);
         const tasks = await filterTasks(Task, query);
         const tags = await Tag.findAll();
         const statuses = await TaskStatus.findAll();
@@ -98,10 +97,6 @@ export default (router, { Task, User, Tag, TaskStatus }) => {
     .patch('tasks#update', '/tasks/:id', async (ctx) => {
       if (ctx.state.isSignedIn()) {
         const { statusId, taskId, form } = ctx.request.body;
-        console.log('====');
-        console.log(ctx.request.body);
-        console.log(statusId);
-        console.log('====');
         const task = await Task.findById(Number(taskId));
         const id = ctx.params.id;
         try {
