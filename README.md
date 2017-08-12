@@ -8,7 +8,3 @@ make install
 
 ## Project page:
 https://murmuring-earth-80718.herokuapp.com/
-
-### To Do:
-- Write tests
-- Write log in condition to all routes

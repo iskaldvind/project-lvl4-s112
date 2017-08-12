@@ -528,7 +528,6 @@ describe('Tasks CRUD', () => {
   });
 });
 
-
 describe('Tasks Filtration', () => {
   const user8 = fakeUser();
   const user9 = fakeUser();
