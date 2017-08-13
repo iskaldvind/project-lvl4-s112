@@ -65,5 +65,4 @@ block content
                                                 kbd.py-0.my-1= tag
                         td.small= task.creator
                         td.small= task.assignedTo
-                        - const description = task.description.length < 51 ? task.description : `${task.description.slice(0,47)}...`
-                        td.small= description
+                        td.small= truncate(task.description, 51)

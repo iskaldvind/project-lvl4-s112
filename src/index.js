@@ -85,6 +85,7 @@ export default () => {
       { formatDate: date => dateFormat(date, 'isoUtcDateTime').replace(/[T]/, ' ').slice(0, -1) },
       { formatId: (id, digits = 0) => `${'0'.repeat(digits - id.toString().length)}${id}` },
       { formatTags: tags => tags.filter(tag => tag !== '-').join(' ') },
+      { truncate: (str, maxLength) => (str.length < maxLength ? str : `${str.slice(0, maxLength - 3)}...`) },
     ],
   });
   pug.use(app);
