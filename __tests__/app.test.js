@@ -269,7 +269,7 @@ describe('Users CRUD', () => {
       .set('Connection', 'keep-alive')
       .expect(302);
     const response = await superagent
-      .get('/users/5')
+      .get(`/users/${user5.id}`)
       .set('user-agent', user4.userAgent)
       .set('x-test-auth-token', user4.email)
       .set('Connection', 'keep-alive');
