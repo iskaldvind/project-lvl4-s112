@@ -378,7 +378,7 @@ describe('Tasks CRUD', () => {
             assignedToId: user6.id,
             statusId: 1,
           },
-        taskId: 1,
+        taskId: task1.id,
       })
       .set('user-agent', user6.userAgent)
       .set('x-test-auth-token', user6.email)
@@ -406,7 +406,7 @@ describe('Tasks CRUD', () => {
             assignedToId: user6.id,
             statusId: 2,
           },
-        taskId: 1,
+        taskId: task1.id,
       })
       .set('user-agent', user6.userAgent)
       .set('x-test-auth-token', user6.email)
@@ -434,7 +434,7 @@ describe('Tasks CRUD', () => {
             assignedToId: user7.id,
             statusId: 1,
           },
-        taskId: 1,
+        taskId: task1.id,
       })
       .set('user-agent', user6.userAgent)
       .set('x-test-auth-token', user6.email)
@@ -563,7 +563,7 @@ describe('Tasks Filtration', () => {
             assignedToId: user9.id,
             statusId: 3,
           },
-        taskId: 4,
+        taskId: task4.id,
       })
       .set('user-agent', user9.userAgent)
       .set('x-test-auth-token', user9.email)
